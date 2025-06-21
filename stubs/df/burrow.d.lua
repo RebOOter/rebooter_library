@@ -1,0 +1,26 @@
+---@meta
+
+---@class df.burrow
+---@field id integer
+---@field name string
+---@field tile integer
+---@field fg_color integer
+---@field bg_color integer
+---@field block_x integer[]
+---@field block_y integer[]
+---@field block_z integer[]
+---@field units integer[]
+---@field flags df.burrow_flag
+---@field solid_texpos integer
+---@field blended_texpos integer
+---@field symbol_index integer
+---@field texture_r integer
+---@field texture_g integer
+---@field texture_b integer
+---@field texture_br integer
+---@field texture_bg integer
+---@field texture_bb integer
+
+---@class df.burrow_flag
+---@field limit_workshops boolean
+---@field suspended boolean

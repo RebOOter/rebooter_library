@@ -1,0 +1,6 @@
+---@meta
+
+---@class df.coord
+---@field x integer
+---@field y integer
+---@field z integer

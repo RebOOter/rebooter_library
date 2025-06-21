@@ -1,0 +1,7 @@
+---@meta
+
+---@class df.squad_infost
+---@field squad_id integer
+---@field squad_position integer
+---@field patrol_cooldown integer
+---@field patrol_timer integer

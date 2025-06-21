@@ -1,0 +1,22 @@
+---@meta
+
+---@class df.job_flags
+---@field repeat boolean
+---@field suspend boolean
+---@field working boolean # not for food, or store in sp
+---@field fetching boolean # Actually going out to bring; corresponds to items->is_fetching
+---@field special boolean # bay12: UNITSOURCE: Sleep/Drink/Eat/Clean; cannot be aborted via the ui
+---@field bringing boolean # bay12: RETURNING; When actually carrying non-last item to the workshop. If last, 'working' is used instead.
+---@field item_lost boolean # bay12: HITBYDELETION; set when a Hauled item is removed; causes cancel
+---@field noise1 boolean # bay12: SLEEP_DISTURBED; on the sleep job causes thoughts
+---@field noise2 boolean # bay12: SLEEP_DISTURBED; on the sleep job causes thoughts
+---@field by_manager boolean # bay12: QUOTASOURCE
+---@field store_item boolean # bay12: ITEMSOURCE
+---@field quality1 boolean # bay12: BONUS; set by improvement code
+---@field quality2 boolean # bay12: BONUS; set by improvement code
+---@field quality3 boolean # bay12: BONUS; set by improvement code
+---@field non_fluid boolean
+---@field could_not_find_building_use_1 boolean
+---@field on_break boolean # bay12: COUNTS_AS_BREAK; job displayed as On Break
+---@field dessource boolean # created from designation
+---@field do_now boolean # bay12: DO_ME_NOW

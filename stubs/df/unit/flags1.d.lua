@@ -1,0 +1,34 @@
+---@meta
+
+---@class df.unit.flags1
+---@field move_state boolean  -- (CANMOVE) Can the dwarf move or are they waiting for their movement timer
+---@field inactive boolean  -- (DEAD) Set for dead units and incoming/leaving critters that are alive but off-map
+---@field has_mood boolean  -- (MOOD) Currently in mood
+---@field had_mood boolean  -- (MOODSPENT) Had a mood already
+---@field marauder boolean  -- wide class of invader/inside creature attackers
+---@field drowning boolean  -- Is currently drowning
+---@field merchant boolean  -- An active merchant
+---@field forest boolean  -- used for units no longer linked to merchant/diplomacy, they just try to leave mostly
+---@field left boolean  -- left the map
+---@field rider boolean  -- Is riding an another creature
+---@field incoming boolean
+---@field diplomat boolean
+---@field temp_flag boolean  -- used as a temporary marker in certain places
+---@field check_active_heist boolean
+---@field can_swap boolean  -- (CANSWAP) Can swap tiles during movement (prevents multiple swaps)
+---@field on_ground boolean  -- (GROUNDED) The creature is laying on the floor, can be conscious
+---@field projectile boolean  -- Launched into the air? Funny.
+---@field active_invader boolean  -- (INVADER) Active invader (for organized ones)
+---@field hidden_in_ambush boolean  -- (AMBUSH)
+---@field invader_origin boolean  -- (INVADER_ORIG) Invader origin (could be inactive and fleeing)
+---@field coward boolean  -- (WILLFLEEUNDERLOSSES) Will flee if invasion turns around
+---@field hidden_ambusher boolean  -- (INVADERFORAY/MARAUDER_ACTIVE) Active marauder/invader moving inward?
+---@field invades boolean  -- (INVADERFORAY2/MARAUDER_RESIDENT) Marauder resident/invader moving in all the way
+---@field check_flows boolean  -- (FLOWCHECK) Check against flows next time you get a chance
+---@field ridden boolean
+---@field caged boolean
+---@field tame boolean
+---@field chained boolean
+---@field suppress_wield boolean  -- (WIELDSUPPRESS)
+---@field important_historical_figure boolean  -- (NEMESIS) Is an important historical figure
+

@@ -1,0 +1,25 @@
+﻿{
+  "diagnostics.globals": [
+    "reqscript",
+    "defclass",
+    "dfhack",
+    "df",
+    "dfhack_flags",
+    "qerror",
+    "COLOR_BLACK",
+    "COLOR_YELLOW",
+    "COLOR_GREEN",
+    "COLOR_RED",
+    "COLOR_WHITE",
+    "COLOR_BLUE",
+    "COLOR_CYAN",
+    "SC_MAP_UNLOADED",
+    "SC_MAP_LOADED",
+    "NEWLINE",
+    "DEFAULT_NIL",
+    "xyz2pos"
+  ],
+  "diagnostics.disable": [
+    "lowercase-global"
+  ]
+}

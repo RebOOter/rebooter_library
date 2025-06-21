@@ -1,0 +1,21 @@
+---@meta
+
+---@class df.unit.counters
+---@field think_counter integer # loaddelay
+---@field job_counter integer # movewait
+---@field swap_counter integer
+---@field death_cause df.death_type
+---@field death_id integer # incident ref
+---@field winded integer
+---@field stunned integer
+---@field unconscious integer
+---@field suffocation integer # counts up while winded, results in death
+---@field webbed integer
+---@field guts_trail1 df.coord
+---@field guts_trail2 df.coord
+---@field soldier_mood_countdown integer # plus a random amount, default 300
+---@field soldier_mood df.soldier_mood_type # default None
+---@field pain integer
+---@field nausea integer
+---@field dizziness integer
+

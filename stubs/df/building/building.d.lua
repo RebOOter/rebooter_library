@@ -1,0 +1,36 @@
+---@meta
+
+---@class df.building
+---@field x1 integer  -- top left
+---@field y1 integer
+---@field centerx integer  -- work location
+---@field x2 integer  -- bottom right
+---@field y2 integer
+---@field centery integer
+---@field z integer
+---@field flags building_flags
+---@field mat_type integer
+---@field mat_index integer
+---@field room building_room
+---@field age integer
+---@field race integer
+---@field id integer
+---@field jobs df.job[]
+---@field specific_refs specific_ref[]
+---@field general_refs general_ref[]
+---@field relations building_civzonest[]
+---@field job_claim_suppress job_restrictionst[]
+---@field name string
+---@field activities building_activity_infost[]
+---@field world_data_id integer
+---@field world_data_subid integer
+---@field creation_bld_num integer
+---@field site_id integer
+---@field location_id integer
+
+---@class building_room
+---@field extents building_extents_type[]
+---@field x integer
+---@field y integer
+---@field width integer
+---@field height integer

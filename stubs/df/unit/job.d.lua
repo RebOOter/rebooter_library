@@ -1,0 +1,22 @@
+---@meta
+
+---@class df.unit.job
+---@field account integer
+---@field satisfaction integer
+---@field random_appearance_number integer
+---@field hunt_target unit
+---@field target_flags unit_target_flags
+---@field destroy_target building
+---@field vision_x integer
+---@field vision_y integer
+---@field vision_z integer
+---@field vision_angle integer
+---@field move_momentum_dir integer
+---@field gait_buildup integer
+---@field climb_hold coord
+---@field hold_itid integer
+---@field current_job job
+---@field mood_skill integer
+---@field mood_timeout integer
+---@field attack_chance_modifier integer
+

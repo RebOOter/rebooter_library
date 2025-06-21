@@ -1,0 +1,40 @@
+---@meta
+
+---@class df.job: Class
+---@field id integer
+---@field new fun(self:Class):df.job
+---@field list_link job_list_link
+---@field posting_index integer
+---@field job_type df.job_type
+---@field job_subtype integer
+---@field pos coord
+---@field completion_timer integer
+---@field maxdur integer
+---@field flags df.job_flags
+---@field mat_type integer
+---@field mat_index integer
+---@field spell integer
+---@field item_type integer
+---@field item_subtype integer
+---@field specflag job_spec_flags
+---@field specdata job_spec_data
+---@field material_category job_material_category
+---@field reaction_name string
+---@field expire_timer integer
+---@field recheck_cntdn integer
+---@field aux_id integer
+---@field items job_item_ref[]
+---@field specific_refs specific_ref[]
+---@field general_refs general_ref[]
+---@field job_items job_reqst
+---@field guide_path coord_path
+---@field cur_path_index integer
+---@field spec_loc coord
+---@field art_spec job_art_spec
+---@field order_id integer
+
+---@class job_art_spec
+---@field type integer
+---@field id integer
+
+---@field subid integer
