@@ -2,6 +2,7 @@
 ---@field maps dfhack.maps
 ---@field job dfhack.job
 ---@field units dfhack.units
+---@field gui dfhack.gui
 dfhack = {}
 
 ---@method dfhack.printerr
