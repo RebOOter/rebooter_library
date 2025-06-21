@@ -3,6 +3,6 @@
 ---@class dfhack.gui
 gui = {}
 
----@param silent boolean
+---@param silent boolean | nil
 ---@return df.building
 function gui.getSelectedStockpile(silent) end
