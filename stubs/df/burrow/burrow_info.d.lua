@@ -1,0 +1,19 @@
+---@class df.burrow_info
+---@field list df.burrow[]
+---@field next_id integer
+---@field sel_index integer
+---@field sel_id integer
+---@field in_confirm_delete boolean
+---@field in_add_units_mode boolean
+---@field list_units df.unit[]
+---@field sel_units boolean[]
+---@field unit_cursor_pos integer
+---@field in_define_mode boolean
+---@field brush_erasing boolean
+---@field rect_start df.coord
+---@field brush_mode integer
+---@field in_edit_name_mode boolean
+---@field sym_selector integer
+---@field sym_tile integer
+---@field sym_fg_color integer
+---@field sym_bg_color integer

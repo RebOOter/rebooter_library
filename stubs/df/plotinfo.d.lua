@@ -1,0 +1,115 @@
+---@class df.plotinfo
+---@field game_state df.end_cause_type Game state (end cause type)
+---@field lost_to_siege_civ integer Reference to historical_entity
+---@field tax_collection df.plotinfo_taxinfost Tax collection information
+---@field nobles df.plotinfo_positionst Nobles information
+---@field caravans df.caravan_state[] Caravans/merchants
+---@field firstmerchant integer
+---@field fortress_rank integer outpost/hamlet/village/town/city/metropolis
+---@field progress_population integer
+---@field progress_trade integer
+---@field progress_production integer
+---@field king_arrived boolean
+---@field king_hasty boolean
+---@field economy_active boolean
+---@field ignore_labor_shortage boolean
+---@field justice_active boolean
+---@field hi_temp integer Initial value: 60001
+---@field lo_temp integer Initial value: 60001
+---@field manager_timer integer Quota check time
+---@field units_killed integer[] Array of killed units by profession (count: 152)
+---@field currency_value integer[] Values indexed by material ID
+---@field trees_removed integer
+---@field outdoor_irritation integer
+---@field adamantine_mandate_number integer
+---@field fortress_age integer Used in first 2 migrant waves etc
+---@field tasks df.entity_activity_statistics
+---@field meeting_requests integer[] References to units (guild complaints and diplomats)
+---@field activities df.activity_info[]
+---@field dip_meeting_info df.meeting_diplomat_info[]
+---@field aid_requesters integer[] References to units
+---@field game_over boolean
+---@field invasions df.plot_invasion_infost
+---@field punishments df.punishment[]
+---@field dipscripts df.dipscript_info[]
+---@field dipscript_texts df.dipscript_text[]
+---@field dipscript_popups df.dipscript_popup[] Cause viewscreen_meetingst to pop up
+---@field kitchen table Kitchen settings
+---@field kitchen.item_types df.item_type[]
+---@field kitchen.item_subtypes table[]
+---@field kitchen.mat_types table[]
+---@field kitchen.mat_indices integer[]
+---@field kitchen.exc_types df.kitchen_exc_type[]
+---@field economic_stone boolean[] Indexed by material ID
+---@field flags df.plotinfo_flag Flags as bitfield
+---@field mood_cooldown integer
+---@field civ_id integer Reference to historical_entity
+---@field site_id integer Reference to world_site
+---@field group_id integer Reference to historical_entity (fortress dwarves)
+---@field race_id integer Reference to creature_raw
+---@field usable_stockpile_race integer[] References to creature_raw (since v0.42.01)
+---@field farm_crops integer[] References to plant_raw
+---@field farm_seasons df.season[] Seasons as enum values
+---@field economy_prices table Economy prices
+---@field economy_prices.price_adjustment table Price adjustments
+---@field economy_prices.price_setter table Price setters (units)
+---@field stockpile table Stockpile settings
+---@field stockpile.reserved_bins integer
+---@field stockpile.reserved_barrels integer
+---@field stockpile.custom_settings df.stockpile_settings
+---@field border coord2d[][] Border coordinates (4x768)
+---@field wilderpop_enter df.coord_path
+---@field map_edge table Map edge information
+---@field no_fishing_feature_x integer[]
+---@field no_fishing_feature_y integer[]
+---@field no_fishing_feature_idx integer[]
+---@field no_fishing_feature_layer integer[] References to world_underground_region
+---@field event_collections integer[] References to history_event_collection
+---@field stone_mat_types integer[]
+---@field stone_mat_indexes integer[]
+---@field waypoints df.point_infost Waypoints information
+---@field burrows df.burrow_info Burrows information
+---@field alerts df.alert_state_infost Alerts information
+---@field equipment df.equip_infost Equipment information
+---@field training df.animal_training_infost Animal training information
+---@field hauling df.hauling_infost Hauling information (since v0.34.08)
+---@field labor_info df.labor_infost Labor information (since v0.50.01)
+---@field petitions integer[] References to unapproved agreements
+---@field continuing_agreement_id integer[] References to agreements (since v0.47.01)
+---@field artifact_hand_off df.artifact_hand_offst[] (since v0.44.01)
+---@field theft_intrigues df.fort_item_heistst[] Related to AcceptHeistItem job (since v0.47.01)
+---@field infiltrator_histfigs integer[] References to historical_figure (since v0.47.01)
+---@field infiltrator_years integer[] (since v0.47.01)
+---@field infiltrator_year_ticks integer[] (since v0.47.01)
+---@field tutorial_hide df.help_context_type[] (v0.50.01)
+---@field tutorial_seen df.help_context_type[] (v0.50.01)
+---@field food_warn_year integer
+---@field food_warn_year_tick integer
+---@field main table Main interface information
+---@field main.hotkeys df.ui_hotkey[] Fixed array of 16 hotkeys
+---@field main.custom_hotkeys df.ui_hotkey[] Custom hotkeys
+---@field main.traffic_cost_high integer
+---@field main.traffic_cost_normal integer
+---@field main.traffic_cost_low integer
+---@field main.traffic_cost_restricted integer
+---@field main.dead_citizens df.fort_death_profilest[]
+---@field main.custom_difficulty df.difficultyst
+---@field main.fortress_entity df.historical_entity Entity pointed to by group_id
+---@field main.fortress_site df.world_site
+---@field main.mode df.ui_sidebar_mode
+---@field main.viewmode_buildjob_mastering integer
+---@field main.viewmode_des_selected integer
+---@field main.autosave_request boolean
+---@field main.autosave_timer integer
+---@field main.file df.file_compressorst
+---@field main.save_progress df.saverst
+---@field main.do_unit_offload integer
+---@field main.offload_unit_info df.nemesis_offload
+---@field main.unit_offload_have_set_count boolean (since v0.44.12)
+---@field main.unit_offload_render_count integer
+---@field main.hotkey_interface df.hotkey_interfacest
+---@field squads df.interface_squad_modest
+---@field follow_unit integer Reference to unit
+---@field follow_item integer Reference to item
+---@field selected_farm_crops integer[] References to plant_raw (for currently queried farm plot)
+---@field available_seeds boolean[] Available seeds as bit vector

@@ -5,6 +5,7 @@
 ---@field job_role_type df.job_role_type
 ---@field job df.job
 ---@field squad df.squad
+---@field global df.global
 
 ---Find a squad by its id
 ---@param id integer
