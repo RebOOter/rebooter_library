@@ -11,3 +11,5 @@
 ---@return df.squad|nil
 function df.squad.find(id) end
 df = {}
+
+_G.df = df

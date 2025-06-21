@@ -7,3 +7,5 @@ dfhack = {}
 ---@method dfhack.printerr
 ---@param string string
 function dfhack.printerr(string) end
+
+_G.dfhack = dfhack
