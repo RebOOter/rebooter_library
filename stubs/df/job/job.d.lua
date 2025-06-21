@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.job: Class
 ---@field id integer
 ---@field new fun(self:Class):df.job

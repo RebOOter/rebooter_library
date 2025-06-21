@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.building
 ---@field x1 integer  -- top left
 ---@field y1 integer

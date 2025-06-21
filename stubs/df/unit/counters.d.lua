@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit.counters
 ---@field think_counter integer # loaddelay
 ---@field job_counter integer # movewait

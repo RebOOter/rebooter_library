@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit.job
 ---@field account integer
 ---@field satisfaction integer

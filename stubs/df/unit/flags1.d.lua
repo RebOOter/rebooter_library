@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit.flags1
 ---@field move_state boolean  -- (CANMOVE) Can the dwarf move or are they waiting for their movement timer
 ---@field inactive boolean  -- (DEAD) Set for dead units and incoming/leaving critters that are alive but off-map

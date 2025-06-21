@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.squad
 ---@field id integer
 ---@field name language_name

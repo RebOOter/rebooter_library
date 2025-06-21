@@ -1,4 +1,3 @@
----@meta
 
 ---@class df.item
 ---@field pos df.coord

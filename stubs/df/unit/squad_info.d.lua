@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.squad_infost
 ---@field squad_id integer
 ---@field squad_position integer

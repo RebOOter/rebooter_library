@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.job_type: integer
 ---@field NONE integer
 ---@field CarveFortification integer

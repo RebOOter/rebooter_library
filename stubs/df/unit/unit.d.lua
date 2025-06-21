@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit
 ---@field id integer
 ---@field name language_name

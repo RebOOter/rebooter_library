@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit_labor: integer
 ---@field NONE integer
 ---@field MINE integer

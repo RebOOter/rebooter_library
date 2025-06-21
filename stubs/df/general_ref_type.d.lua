@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.general_ref_type: integer
 ---@field NONE integer
 ---@field ARTIFACT integer

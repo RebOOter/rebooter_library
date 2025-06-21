@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.unit_path_goal: integer
 ---@field None integer
 ---@field ComeToJobBuilding integer

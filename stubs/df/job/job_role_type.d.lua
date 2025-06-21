@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.job_role_type: integer
 ---@field Other integer # MAIN; eat, drink, pickup equipment
 ---@field Reagent integer # MATERIAL

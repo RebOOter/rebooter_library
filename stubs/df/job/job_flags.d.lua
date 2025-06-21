@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.job_flags
 ---@field repeat boolean
 ---@field suspend boolean

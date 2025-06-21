@@ -1,5 +1,3 @@
----@meta
-
 ---@class df.burrow
 ---@field id integer
 ---@field name string
