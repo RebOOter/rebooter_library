@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-return
+
 ---@class df.squad
 ---@field id integer
 ---@field name language_name
@@ -26,3 +28,8 @@
 ---@field background_r integer
 ---@field background_g integer
 ---@field background_b integer
+squad = {}
+
+---@param id integer
+---@return df.squad
+function squad.find(id) end
