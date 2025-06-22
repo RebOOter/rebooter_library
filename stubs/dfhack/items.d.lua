@@ -2,6 +2,6 @@
 ---@class dfhack.items
 items = {}
 
----@oaram item df.item
+---@param item df.item
 ---@return string
-function items.getReadableDescription() end
+function items.getReadableDescription(item) end
