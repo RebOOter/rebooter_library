@@ -1,5 +1,5 @@
 ---@class df.building_stockpile : df.building
----@field settings stockpile_settings
+---@field settings df.stockpile_settings
 ---@field storage stockpile_storage_infost
 ---@field links stockpile_links
 ---@field stockpile_flag building_stockpile_flag
