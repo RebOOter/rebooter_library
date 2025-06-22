@@ -56,6 +56,7 @@ end
 ---@param job_type df.job_type
 ---@param building df.building
 ---@param item df.item
+---@return df.job
 function RL.createJobAndAssignUnit(job_type, building, burrow, item)
     local job = df.job:new()
     dfhack.job.linkIntoWorld(job, true)
@@ -71,6 +72,7 @@ function RL.createJobAndAssignUnit(job_type, building, burrow, item)
         job.items[0].flags.is_fetching = true
         job.flags.fetching = true
     end
+    return job
 end
 
 ----------------------
