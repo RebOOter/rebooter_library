@@ -1,0 +1,28 @@
+---@class df.map_block
+---@field flags df.block_flags
+---@field block_events df.block_square_event[]
+---@field block_burrows df.block_burrow_link[]
+---@field local_feature integer index into world_data.region_map
+---@field global_feature integer ref-target='world_underground_region'
+---@field global_feature_sq integer
+---@field layer_depth integer uninitialized depth compared to unit.animal.population.depth when necromancer searches for map edge
+---@field dsgn_check_cooldown integer
+---@field default_liquid df.tile_designation
+---@field items integer[] ref-target='item'
+---@field flows df.flow_info[]
+---@field flow_pool df.flow_reuse_pool actually inline
+---@field map_pos df.coord
+---@field region_pos df.coord2d
+---@field tiletype df.tiletype[][] 16x16 array, init-value='OpenSpace'
+---@field designation df.tile_designation[][] 16x16 array of bitfields
+---@field occupancy df.tile_occupancy[][] 16x16 array of bitfields
+---@field fog_of_war integer[][] 16x16 array of uint8_t for adventure mode
+---@field path_cost integer[][] 16x16 array, flood pathfinding, 256*cost for straight, 362*cost for diagonal
+---@field path_tag integer[][] 16x16 array of uint16_t, flood pathfinding sync to path_distance
+---@field walkable integer[][] 16x16 array, 0 = non-walkable, same nonzero at A and B = walkable from A to B
+---@field map_edge_distance integer[][] 16x16 array of int16_t, 1 at walkable map edge, +1 per 10 tiles, 0 in dug tunnels
+---@field temperature_1 integer[][] 16x16 array of uint16_t, current_temperature
+---@field temperature_2 integer[][] 16x16 array of uint16_t, normal_temperature
+---@field lighting integer[][] 16x16 array of uint16_t
+---@field liquid_flow df.tile_liquid_flow[][] 16x16 array of bitfields
+---@field region_offset integer[] array of 9 int8_t elements

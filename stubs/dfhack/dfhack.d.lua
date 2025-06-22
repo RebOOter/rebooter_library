@@ -3,6 +3,7 @@
 ---@field job dfhack.job
 ---@field units dfhack.units
 ---@field gui dfhack.gui
+---@field borrows dfhack.burrows
 dfhack = {}
 
 ---@method dfhack.printerr

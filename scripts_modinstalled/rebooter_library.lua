@@ -190,3 +190,5 @@ function RL.count_lines(text_chunk)
     end
     return count
 end
+
+return RL
