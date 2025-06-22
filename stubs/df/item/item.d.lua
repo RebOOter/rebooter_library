@@ -1,6 +1,6 @@
 ---@diagnostic disable: missing-return
 
----@class df.item
+---@class df.item: df.base_class
 ---@field pos df.coord
 ---@field flags item_flags
 ---@field flags2 item_flags2

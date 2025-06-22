@@ -5,6 +5,8 @@
 ---@field job_role_type df.job_role_type
 ---@field job df.job
 ---@field item df.item
+---@field item_actual df.item_actual
+---@field item_woodst df.item_wood
 ---@field squad df.squad
 ---@field global df.global
 df = {}
