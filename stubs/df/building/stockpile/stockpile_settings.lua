@@ -1,0 +1,293 @@
+---@class df.stockpile_settings
+---@field flags df.stockpile_group_set
+---@field animals df.stockpile_parameter_animal
+---@field food df.stockpile_parameter_food
+---@field furniture df.stockpile_parameter_furniture
+---@field corpses df.stockpile_parameter_graveyard
+---@field refuse df.stockpile_parameter_refuse
+---@field stone df.stockpile_parameter_stone
+---@field ore df.stockpile_parameter_ore
+---@field ammo df.stockpile_parameter_ammo
+---@field coins df.stockpile_parameter_coins
+---@field bars_blocks df.stockpile_parameter_barblock
+---@field gems df.stockpile_parameter_gem
+---@field finished_goods df.stockpile_parameter_finished
+---@field leather df.stockpile_parameter_leather
+---@field cloth df.stockpile_parameter_cloth
+---@field wood df.stockpile_parameter_wood
+---@field weapons df.stockpile_parameter_weapon
+---@field armor df.stockpile_parameter_armor
+---@field sheet df.stockpile_parameter_sheet
+---@field misc df.stockpile_parameter_misc
+
+---@class df.stockpile_parameter_wood
+---@field mats boolean[] # Index refers to plant raw
+
+---@class df.stockpile_group_set
+---@field animals boolean
+---@field food boolean
+---@field furniture boolean
+---@field corpses boolean
+---@field refuse boolean
+---@field stone boolean
+---@field ammo boolean
+---@field coins boolean
+---@field bars_blocks boolean
+---@field gems boolean
+---@field finished_goods boolean
+---@field leather boolean
+---@field cloth boolean
+---@field wood boolean
+---@field weapons boolean
+---@field armor boolean
+---@field sheet boolean
+
+---@class df.stockpile_parameter_animal
+---@field empty_cages boolean
+---@field empty_traps boolean
+---@field enabled boolean[] # Index refers to creature
+
+---@class df.stockpile_parameter_food
+---@field meat boolean[] # Index refers to food-mat-by-idx Meat
+---@field fish boolean[] # Index refers to food-mat-by-idx Fish
+---@field unprepared_fish boolean[] # Index refers to food-mat-by-idx UnpreparedFish
+---@field egg boolean[] # Index refers to food-mat-by-idx Eggs
+---@field plants boolean[] # Index refers to food-mat-by-idx Plants
+---@field drink_plant boolean[] # Index refers to food-mat-by-idx PlantDrink
+---@field drink_animal boolean[] # Index refers to food-mat-by-idx CreatureDrink
+---@field cheese_plant boolean[] # Index refers to food-mat-by-idx PlantCheese
+---@field cheese_animal boolean[] # Index refers to food-mat-by-idx CreatureCheese
+---@field seeds boolean[] # Index refers to food-mat-by-idx Seed
+---@field leaves boolean[] # Index refers to food-mat-by-idx PlantGrowth
+---@field powder_plant boolean[] # Index refers to food-mat-by-idx PlantPowder
+---@field powder_creature boolean[] # Index refers to food-mat-by-idx CreaturePowder
+---@field glob boolean[] # Index refers to food-mat-by-idx Glob
+---@field glob_paste boolean[] # Index refers to food-mat-by-idx Paste
+---@field glob_pressed boolean[] # Index refers to food-mat-by-idx Pressed
+---@field liquid_plant boolean[] # Index refers to food-mat-by-idx PlantLiquid
+---@field liquid_animal boolean[] # Index refers to food-mat-by-idx CreatureLiquid
+---@field liquid_misc boolean[] # Index refers to food-mat-by-idx MiscLiquid
+---@field prepared_meals boolean
+
+---@class df.stockpile_furniture_mat
+---@field None integer # -1
+---@field Wood integer
+---@field Plant integer
+---@field Bone integer
+---@field Tooth integer
+---@field Horn integer
+---@field Pearl integer
+---@field Shell integer
+---@field Leather integer
+---@field Silk integer
+---@field Amber integer
+---@field Coral integer
+---@field GlassGreen integer
+---@field GlassClear integer
+---@field GlassCrystal integer
+---@field Yarn integer
+
+---@class df.furniture_type
+---@field NONE integer # -1
+---@field FLOODGATE integer
+---@field HATCH_COVER integer
+---@field GRATE integer
+---@field DOOR integer
+---@field CATAPULTPARTS integer
+---@field BALLISTAPARTS integer
+---@field TRAPPARTS integer
+---@field BED integer
+---@field TRACTION_BENCH integer
+---@field WINDOW integer
+---@field CHAIR integer
+---@field TABLE integer
+---@field COFFIN integer
+---@field STATUE integer
+---@field SLAB integer
+---@field QUERN integer
+---@field MILLSTONE integer
+---@field ARMORSTAND integer
+---@field WEAPONRACK integer
+---@field CABINET integer
+---@field ANVIL integer
+---@field BUCKET integer
+---@field BIN integer
+---@field BOX integer
+---@field BAG integer
+---@field SIEGEAMMO integer
+---@field BARREL integer
+---@field BALLISTAARROWHEAD integer
+---@field PIPE_SECTION integer
+---@field FOOD_STORAGE integer
+---@field MINECART integer
+---@field WHEELBARROW integer
+---@field OTHER_LARGE_TOOLS integer
+---@field SAND_BAG integer
+
+---@class df.stockpile_parameter_furniture
+---@field type df.furniture_type 
+---@field other_mats df.stockpile_furniture_mat
+---@field mats boolean[] # Index refers to material-by-id
+---@field quality_core boolean[7] # Index refers to item_quality enum
+---@field quality_total boolean[7] # Index refers to item_quality enum
+
+---@class df.stockpile_parameter_graveyard
+---@field corpses boolean[] # Index refers to find-creature
+
+---@class df.stockpile_parameter_refuse
+---@field type boolean[] # Index refers to item_type
+---@field corpses boolean[] # Index refers to find-creature
+---@field body_parts boolean[] # Index refers to find-creature
+---@field skulls boolean[] # Index refers to find-creature
+---@field bones boolean[] # Index refers to find-creature
+---@field hair boolean[] # Index refers to find-creature
+---@field shells boolean[] # Index refers to find-creature
+---@field teeth boolean[] # Index refers to find-creature
+---@field horns boolean[] # Index refers to find-creature
+---@field fresh_raw_hide boolean
+---@field rotten_raw_hide boolean
+
+---@class df.stockpile_parameter_stone
+---@field mats boolean[] # Index refers to material-by-id
+
+---@class df.stockpile_parameter_ore
+---@field mats boolean[] # unused
+
+---@class df.stockpile_ammo_mat
+---@field None integer # -1
+---@field Wood integer
+---@field Bone integer
+
+---@class df.stockpile_parameter_ammo
+---@field type boolean[] # Index refers to world.raws.itemdefs.ammo
+---@field other_mats boolean[] # Index refers to stockpile_ammo_mat
+---@field mats boolean[] # Index refers to material-by-id
+---@field quality_core boolean[7] # Index refers to item_quality
+---@field quality_total boolean[7] # Index refers to item_quality
+
+---@class df.stockpile_parameter_misc
+---@field allow_organic boolean
+---@field allow_inorganic boolean
+
+---@class df.stockpile_parameter_coins
+---@field mats boolean[] # Index refers to material-by-id
+
+---@class df.stockpile_bar_mat
+---@field None integer # -1
+---@field Coal integer
+---@field Potash integer
+---@field Ash integer
+---@field Pearlash integer
+---@field Soap integer
+
+---@class df.stockpile_block_mat
+---@field None integer # -1
+---@field GlassGreen integer
+---@field GlassClear integer
+---@field GlassCrystal integer
+---@field Wood integer
+
+---@class df.stockpile_parameter_barblock
+---@field bars_other_mats boolean[] # Index refers to stockpile_bar_mat
+---@field blocks_other_mats boolean[] # Index refers to stockpile_block_mat
+---@field bars_mats boolean[] # Index refers to material-by-id
+---@field blocks_mats boolean[] # Index refers to material-by-id
+
+---@class df.stockpile_parameter_gem
+---@field rough_other_mats boolean[] # Index refers to material-by-id with -1 offset
+---@field cut_other_mats boolean[] # Index refers to material-by-id with -1 offset
+---@field rough_mats boolean[] # Index refers to material-by-id
+---@field cut_mats boolean[] # Index refers to material-by-id
+
+---@class df.stockpile_finished_mat
+---@field None integer # -1
+---@field Wood integer
+---@field Plant integer
+---@field Bone integer
+---@field Tooth integer
+---@field Horn integer
+---@field Pearl integer
+---@field Shell integer
+---@field Leather integer
+---@field Silk integer
+---@field Amber integer
+---@field Coral integer
+---@field GlassGreen integer
+---@field GlassClear integer
+---@field GlassCrystal integer
+---@field Yarn integer
+---@field Wax integer
+
+---@class df.stockpile_parameter_finished
+---@field type boolean[] # Index refers to item_type
+---@field other_mats boolean[] # Index refers to stockpile_finished_mat
+---@field mats boolean[] # Index refers to material-by-id
+---@field quality_core boolean[7] # Index refers to item_quality
+---@field quality_total boolean[7] # Index refers to item_quality
+
+---@class df.stockpile_parameter_leather
+---@field mats boolean[] # Index refers to food-mat-by-idx Leather
+
+---@class df.stockpile_parameter_cloth
+---@field thread_silk boolean[] # Index refers to food-mat-by-idx Silk
+---@field thread_plant boolean[] # Index refers to food-mat-by-idx PlantFiber
+---@field thread_yarn boolean[] # Index refers to food-mat-by-idx Yarn
+---@field thread_metal boolean[] # Index refers to food-mat-by-idx MetalThread
+---@field cloth_silk boolean[] # Index refers to food-mat-by-idx Silk
+---@field cloth_plant boolean[] # Index refers to food-mat-by-idx PlantFiber
+---@field cloth_yarn boolean[] # Index refers to food-mat-by-idx Yarn
+---@field cloth_metal boolean[] # Index refers to food-mat-by-idx MetalThread
+
+---@class df.stockpile_parameter_sheet
+---@field paper boolean[]
+---@field parchment boolean[]
+
+---@class df.stockpile_weapon_mat
+---@field None integer # -1
+---@field Wood integer
+---@field Plant integer
+---@field Bone integer
+---@field Shell integer
+---@field Leather integer
+---@field Silk integer
+---@field GlassGreen integer
+---@field GlassClear integer
+---@field GlassCrystal integer
+---@field Yarn integer
+
+---@class df.stockpile_parameter_weapon
+---@field weapon_type boolean[] # Index refers to world.raws.itemdefs.weapons
+---@field trapcomp_type boolean[] # Index refers to world.raws.itemdefs.trapcomps
+---@field other_mats boolean[] # Index refers to stockpile_weapon_mat
+---@field mats boolean[] # Index refers to material-by-id
+---@field quality_core boolean[7] # Index refers to item_quality
+---@field quality_total boolean[7] # Index refers to item_quality
+---@field usable boolean
+---@field unusable boolean
+
+---@class df.stockpile_armor_mat
+---@field None integer # -1
+---@field Wood integer
+---@field Plant integer
+---@field Bone integer
+---@field Shell integer
+---@field Leather integer
+---@field Silk integer
+---@field GlassGreen integer
+---@field GlassClear integer
+---@field GlassCrystal integer
+---@field Yarn integer
+
+---@class df.stockpile_parameter_armor
+---@field body boolean[] # Index refers to world.raws.itemdefs.armor
+---@field head boolean[] # Index refers to world.raws.itemdefs.helms
+---@field feet boolean[] # Index refers to world.raws.itemdefs.shoes
+---@field hands boolean[] # Index refers to world.raws.itemdefs.gloves
+---@field legs boolean[] # Index refers to world.raws.itemdefs.pants
+---@field shield boolean[] # Index refers to world.raws.itemdefs.shields
+---@field other_mats boolean[] # Index refers to stockpile_armor_mat
+---@field mats boolean[] # Index refers to material-by-id
+---@field quality_core boolean[7] # Index refers to item_quality
+---@field quality_total boolean[7] # Index refers to item_quality
+---@field usable boolean
+---@field unusable boolean
