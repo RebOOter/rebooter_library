@@ -25,5 +25,5 @@
 item = {}
 
 ---@param id integer
----@return df.item
+---@return df.item|nil
 function item.find(id) end

@@ -1,0 +1,42 @@
+---@diagnostic disable: missing-return
+
+---@class df.incident
+---@field id integer
+---@field type df.incident_type
+---@field witnesses integer[] @ ref-target='unit'
+---@field last_witness_year integer
+---@field last_witness_year_tick integer
+---@field victim integer @ ref-target='unit'
+---@field victim_hf df.incident_hfid
+---@field victim_race integer @ ref-target='creature_raw', since='v0.40.01'
+---@field victim_caste integer @ ref-target='caste_raw', aux-value='victim_race', since='v0.40.01'
+---@field victim_entity integer @ ref-target='historical_entity', since='v0.40.01', comment="Seen with Crime"
+---@field victim_item integer @ ref-target='item', since='v0.40.01'
+---@field criminal integer @ ref-target='unit'
+---@field criminal_hf df.incident_hfid
+---@field criminal_race integer @ ref-target='creature_raw', since='v0.40.01'
+---@field criminal_caste integer @ ref-target='caste_raw', aux-value='killer_race', since='v0.40.01'
+---@field criminal_entity integer @ ref-target='historical_entity', since='v0.40.01'
+---@field facilitator df.incident_hfid
+---@field crime_id integer @ ref-target='crime'
+---@field site integer @ ref-target='world_site'
+---@field subregion integer @ ref-target='world_region', since='v0.40.01'
+---@field layer integer @ ref-target='world_underground_region', since='v0.40.01'
+---@field entity integer @ ref-target='historical_entity'
+---@field event_year integer
+---@field event_time integer
+---@field flags df.incident_flag
+---@field death_cause df.death_type
+---@field conflict_level df.conflict_level @ since='v0.40.01'
+---@field activity_id integer @ ref-target='activity_entry', since='v0.40.01'
+---@field world_x integer @ location in in-game tiles world wide, since='v0.40.01'
+---@field world_y integer @ since='v0.40.01'
+---@field world_z integer @ since='v0.40.01'
+---@field eventcol integer @ ref-target='history_event_collection', since='v0.40.01'
+---@field implied_incident_id integer @ ref-target='incident', since='v0.40.01'
+---@field data table @ Union containing one of: incident_data_performance, incident_data_artifact, incident_data_writing, incident_data_identity, incident_data_refused_identify
+incident = {}
+
+---@param id integer
+---@return df.incident|nil
+function incident.find(id) end

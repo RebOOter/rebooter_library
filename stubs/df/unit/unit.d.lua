@@ -101,5 +101,8 @@
 ---@field portrait_texpos integer
 ---@field cache unit_cache_vars
 ---@field dungeon_control integer
+unit = {}
 
-
+---@param id integer
+---@return df.unit|nil
+function unit.find(id) end

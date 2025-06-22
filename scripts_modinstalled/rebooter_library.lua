@@ -4,11 +4,6 @@
 -- Jobs processing --
 ---------------------
 
-if not dfhack_flags.module then
-    print('This mod cannot be used directly. It is just a library :)')
-    return
-end
-
 ---@class RebooterLibrary
 RL = {}
 
