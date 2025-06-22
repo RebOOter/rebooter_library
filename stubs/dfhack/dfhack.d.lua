@@ -2,6 +2,7 @@
 ---@field maps dfhack.maps
 ---@field job dfhack.job
 ---@field units dfhack.units
+---@field items dfhack.items
 ---@field gui dfhack.gui
 ---@field burrows dfhack.burrows
 dfhack = {}
