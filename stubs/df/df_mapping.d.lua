@@ -1,5 +1,6 @@
 ---@class df
 ---@field general_ref_type df.general_ref_type
+---@field specific_ref_type df.specific_ref_type
 ---@field unit df.unit
 ---@field unit_labor df.unit_labor
 ---@field unit_path_goal df.unit_path_goal

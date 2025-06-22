@@ -6,7 +6,7 @@
 ---@field flags2 item_flags2
 ---@field age integer
 ---@field id integer
----@field specific_refs specific_ref[]
+---@field specific_refs df.specific_ref[]
 ---@field general_refs df.general_ref[]
 ---@field world_data_id integer
 ---@field world_data_subid integer

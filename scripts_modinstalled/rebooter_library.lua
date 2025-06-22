@@ -48,6 +48,19 @@ function RL.findAvailableLaborer(workshop, burrow)
     end
 end
 
+---@param item df.item
+---@return boolean
+function RL.itemHasJob(item)
+    if #item.specific_refs > 0 then
+        for _, ref in ipairs(item.specific_refs) do
+            if ref.type == df.specific_ref_type.JOB then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 ---@param job_type df.job_type
 ---@param building df.building
 ---@param item df.item
