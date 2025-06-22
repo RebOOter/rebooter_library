@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-return
 
 ---@class df.item
 ---@field pos df.coord
@@ -21,3 +22,8 @@
 ---@field melting_point integer
 ---@field fixed_temp integer
 ---@field weight massst
+item = {}
+
+---@param id integer
+---@return df.item
+function item.find(id) end

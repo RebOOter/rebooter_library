@@ -4,6 +4,7 @@
 ---@field unit_path_goal df.unit_path_goal
 ---@field job_role_type df.job_role_type
 ---@field job df.job
+---@field item df.item
 ---@field squad df.squad
 ---@field global df.global
 df = {}
