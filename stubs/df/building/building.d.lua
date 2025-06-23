@@ -1,5 +1,5 @@
 ---@diagnostic disable: missing-return
----@class df.building
+---@class df.building: df.base_class
 ---@field x1 integer  -- top left
 ---@field y1 integer
 ---@field centerx integer  -- work location
