@@ -10,11 +10,22 @@ RL = {}
 ---@param tbl table
 ---@return string[]
 function get_keys_as_strings(tbl)
-  local result = {}
-  for k, _ in pairs(tbl) do
-    table.insert(result, tostring(k))
-  end
-  return result
+    local result = {}
+    for k, _ in pairs(tbl) do
+        table.insert(result, tostring(k))
+    end
+    return result
+end
+
+-----------------------
+-- Logging Utilities --
+-----------------------
+
+---@param key string
+---@param message string
+function print_log_mod(key, message)
+    local result = '[' .. key .. '] ' .. message
+    print(result)
 end
 
 ---------------------
