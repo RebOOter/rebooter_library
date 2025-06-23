@@ -151,6 +151,7 @@
 ---@field building_stockpilest df.building_stockpilest
 ---@field global df.global
 ---@field main_interface df.main_interface
+---@field burrow df.burrow
 df = {}
 
 _G.df = df

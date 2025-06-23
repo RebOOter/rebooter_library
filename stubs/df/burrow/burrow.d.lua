@@ -1,4 +1,4 @@
----@class df.burrow
+---@class df.burrow: df.base_class
 ---@field id integer
 ---@field name string
 ---@field tile integer
@@ -18,6 +18,7 @@
 ---@field texture_br integer
 ---@field texture_bg integer
 ---@field texture_bb integer
+---@field find fun(id: integer):df.burrow|nil
 
 ---@class df.burrow_flag
 ---@field limit_workshops boolean
