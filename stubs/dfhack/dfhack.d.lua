@@ -16,4 +16,10 @@ dfhack = {}
 ---@param string string
 function dfhack.printerr(string) end
 
+---@param time integer
+---@param type string
+---@param func function
+---@return integer?
+function dfhack.timeout(time, type, func) end
+
 _G.dfhack = dfhack

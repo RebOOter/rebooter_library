@@ -1,5 +1,7 @@
 --@ module = true
 
+GLOBAL_KEY = 'rebooter_library'
+
 ---@class RebooterLibrary
 RL = {}
 
@@ -92,10 +94,10 @@ end
 -- Check if item could be stored in the stockpile
 -- Pay attention that it won't check quality filters of the stockpile
 function RL.isItemCouldBeStored(item, stockpile)
-    print('Started to check item if it could be stored...')
+    RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
-        print('Item is ammo')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is ammo')
         ---@cast item df.item_ammo
         local ammo_settings = stockpile.settings.ammo
         if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
@@ -106,7 +108,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     end
     -- Animal Category --
     if df.item_cagest:is_instance(item) then
-        print('Item is cage')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is cage')
         ---@cast item df.item_cagest
         local animals_settings = stockpile.settings.animals
         if #item.general_refs == 0 then
@@ -138,7 +140,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     end
     -- is it possible that caged small animal will be the same as creature?
     --if df.item_animaltrapst:is_instance(item) then
-    --    print('Item is animal trap')
+    --    RL.print_log_mod(GLOBAL_KEY, 'Item is animal trap')
     --    ---@cast item df.item_animaltrapst
     --    local animals_settings = stockpile.settings.animals
     --    if animals_settings.empty_traps then
@@ -152,7 +154,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Armor Category --
     local armor_settings = stockpile.settings.armor
     if (df.item_armorst:is_instance(item)) then
-        print('Item is armor')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is armor')
         ---@cast item df.item_armorst
         if checkComplexItem(item, armor_settings.body, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -161,7 +163,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if df.item_helmst:is_instance(item) then
-        print('Item is helm')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is helm')
         ---@cast item df.item_helmst
         if checkComplexItem(item, armor_settings.head, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -170,7 +172,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if df.item_shoesst:is_instance(item) then
-        print('Item is shoe')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is shoe')
         ---@cast item df.item_shoesst
         if checkComplexItem(item, armor_settings.feet, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -179,7 +181,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if df.item_glovesst:is_instance(item) then
-        print('Item is glove')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is glove')
         ---@cast item df.item_glovesst
         if checkComplexItem(item, armor_settings.hands, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -188,7 +190,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if (df.item_pantsst:is_instance(item)) then
-        print('Item is pants')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is pants')
         ---@cast item df.item_pantsst
         if checkComplexItem(item, armor_settings.legs, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -197,7 +199,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if df.item_shieldst:is_instance(item) then
-        print('Item is shield')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is shield')
         ---@cast item df.item_shieldst
         if checkComplexItem(item, armor_settings.shield, armor_settings.other_mats, armor_settings.mats) then
             return true
@@ -209,7 +211,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     local bars_blocks_settings = stockpile.settings.bars_blocks
     -- Bars/Blocks Category --
     if df.item_barst:is_instance(item) then
-        print('Item is bar')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is bar')
         ---@cast item df.item_barst
         if checkAllMaterials(item, bars_blocks_settings.bars_other_mats, bars_blocks_settings.bars_mats) then
             return true
@@ -218,7 +220,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     if df.item_blocksst:is_instance(item) then
-        print('Item is block')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is block')
         ---@cast item df.item_blocksst
         if checkAllMaterials(item, bars_blocks_settings.blocks_other_mats, bars_blocks_settings.blocks_mats) then
             return true
@@ -249,7 +251,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Stone Category --
     if df.item_boulderst:is_instance(item) then
-        print('Item is boulder')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
         ---@cast item df.item_boulder
         local mats = stockpile.settings.stone.mats
         if #mats == 0 then
@@ -266,7 +268,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Wood Category --
     if (df.item_woodst:is_instance(item)) then
-        print('Item is wood')
+        RL.print_log_mod(GLOBAL_KEY, 'Item is wood')
         ---@cast item df.item_woodst
         local mats = stockpile.settings.wood.mats
         if #mats == 0 then
@@ -279,7 +281,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
 
-    print('Unkown item or not implemented type of item. Stop processing...')
+    RL.print_log_mod(GLOBAL_KEY, 'Unkown item or not implemented type of item. Stop processing...')
     return false
 end
 
