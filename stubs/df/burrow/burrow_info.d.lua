@@ -1,5 +1,5 @@
 ---@class df.burrow_info
----@field list df.burrow[]
+---@field list df.base_vector<df.burrow>
 ---@field next_id integer
 ---@field sel_index integer
 ---@field sel_id integer

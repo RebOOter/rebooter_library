@@ -86,6 +86,7 @@
 ---@field pants_flags df.pants_flags
 ---@field food_flags df.food_flags
 ---@field armor_properties df.armor_properties
+---@field gamest df.gamest
 ---@field body_part_coverage df.body_part_coverage
 ---@field itemdef_flags df.itemdef_flags
 ---@field itemdef_type df.itemdef_type
@@ -149,6 +150,7 @@
 ---@field building df.building
 ---@field building_stockpilest df.building_stockpilest
 ---@field global df.global
+---@field main_interface df.main_interface
 df = {}
 
 _G.df = df

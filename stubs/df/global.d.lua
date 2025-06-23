@@ -1,3 +1,4 @@
 ---@class df.global
 ---@field world df.world
 ---@field plotinfo df.plotinfo
+---@field game df.gamest

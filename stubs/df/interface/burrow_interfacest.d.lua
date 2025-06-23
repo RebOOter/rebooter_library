@@ -1,0 +1,8 @@
+---@class df.burrow_interfacest
+---@field painting_burrow df.burrow
+---@field doing_rectangle boolean
+---@field erasing boolean
+---@field scroll_position integer
+---@field scrolling boolean
+---@field entering_name boolean
+---@field entering_name_index integer
