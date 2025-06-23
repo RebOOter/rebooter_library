@@ -23,7 +23,7 @@ end
 
 ---@param key string
 ---@param message string
-function print_log_mod(key, message)
+function RL.print_log_mod(key, message)
     local result = '[' .. key .. '] ' .. message
     print(result)
 end
