@@ -7,6 +7,8 @@
 ---@field burrows dfhack.burrows
 ---@field matinfo dfhack.matinfo
 ---@field buildings dfhack.building
+---@field onStateChange function[]
+---@field world dfhack.world
 dfhack = {}
 
 ---@method dfhack.printerr
