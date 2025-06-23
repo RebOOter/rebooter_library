@@ -1,0 +1,4 @@
+---@class df.item_meat: df.item_actual
+---@field mat_type integer @ reference to material
+---@field mat_index integer
+---@field rot_timer integer

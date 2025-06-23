@@ -1,0 +1,11 @@
+---@class df.statue_generic_event_type
+---@field NONE integer
+---@field BASE integer
+---@field DUEL integer
+---@field TRIUMPH integer
+---@field CIVILIZED integer
+---@field STRIKE_DOWN integer
+---@field SHOT integer
+---@field ITEM_CREATION integer
+---@field BATTLE integer
+---@field SITE integer

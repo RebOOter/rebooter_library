@@ -1,0 +1,4 @@
+---@class df.item_statue_graphics_type
+---@field overall df.item_statue_graphics_type_overall[4]
+---@field index_1 integer[13]
+---@field index_2 integer[14]

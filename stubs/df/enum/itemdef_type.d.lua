@@ -1,0 +1,16 @@
+---@class df.itemdef_type
+---@field NONE integer
+---@field WEAPON integer
+---@field TOY integer
+---@field TOOL integer
+---@field INSTRUMENT integer
+---@field TRAPCOMP integer
+---@field ARMOR integer
+---@field AMMO integer
+---@field SIEGEAMMO integer
+---@field GLOVES integer
+---@field SHOES integer
+---@field SHIELD integer
+---@field HELM integer
+---@field PANTS integer
+---@field FOOD integer

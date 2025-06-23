@@ -1,0 +1,4 @@
+---@class df.weapon_flags
+---@field CAN_STONE integer
+---@field HAS_EDGE_ATTACK integer
+---@field TRAINING integer

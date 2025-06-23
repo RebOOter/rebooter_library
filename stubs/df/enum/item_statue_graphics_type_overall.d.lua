@@ -1,0 +1,7 @@
+---@class df.item_statue_graphics_type_overall
+---@field SHAPE integer
+---@field ITEM integer
+---@field CREATURE integer
+---@field TREE integer
+---@field PLANT integer
+---@field GENERIC_EVENT integer

@@ -1,0 +1,10 @@
+---@class df.itemdef_toyst: df.itemdef
+---@field name string
+---@field name_plural string
+---@field flags df.toy_flags[]
+---@field texpos_item integer
+---@field texpos_item_wood integer
+---@field texpos_item_stone integer
+---@field texpos_item_metal integer
+---@field texpos_item_glass integer
+---@field graphics_info df.item_toy_graphics_infost[]

@@ -1,0 +1,8 @@
+---@class df.instrument_piecest
+---@field name string
+---@field name_plural string
+---@field flags df.instrument_piece_flags[]
+---@field size integer
+---@field value integer
+---@field material_size integer
+---@field minimum_size integer

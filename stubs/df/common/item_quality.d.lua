@@ -1,0 +1,8 @@
+---@class df.item_quality
+---@field Ordinary integer
+---@field WellCrafted integer
+---@field FinelyCrafted integer
+---@field Superior integer
+---@field Exceptional integer
+---@field Masterful integer
+---@field Artifact integer

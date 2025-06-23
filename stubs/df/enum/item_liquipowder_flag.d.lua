@@ -1,0 +1,1 @@
+---@class df.item_liquipowder_flag

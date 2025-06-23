@@ -1,0 +1,11 @@
+---@class df.item_food_container_graphics_contents_type
+---@field EMPTY integer
+---@field LIQUID integer
+---@field BAG integer
+---@field FISH integer
+---@field MEAT integer
+---@field FOOD integer
+---@field PLANT integer
+---@field PLANT_SUBTERRANEAN integer
+---@field CHEESE integer
+---@field GLOB integer

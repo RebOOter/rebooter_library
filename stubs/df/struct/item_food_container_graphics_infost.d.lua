@@ -1,0 +1,3 @@
+---@class df.item_food_container_graphics_infost
+---@field flags df.item_food_container_graphics_flag
+---@field texpos integer

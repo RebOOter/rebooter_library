@@ -1,0 +1,12 @@
+---@class df.itemdef_trapcompst: df.itemdef
+---@field name string
+---@field name_plural string
+---@field adjective string
+---@field size integer
+---@field value integer
+---@field hits integer
+---@field material_size integer
+---@field flags df.trapcomp_flags[]
+---@field attacks df.weapon_attack[]
+---@field texpos integer[22]
+---@field graphics_info df.itemdef_trapcomp_graphics_infost[]

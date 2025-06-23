@@ -1,0 +1,2 @@
+---@class df.toy_flags
+---@field HARD_MAT integer

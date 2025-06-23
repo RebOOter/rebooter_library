@@ -1,0 +1,23 @@
+---@class df.tool_flags
+---@field HARD_MAT integer
+---@field METAL_MAT integer
+---@field HAS_EDGE_ATTACK integer
+---@field METAL_WEAPON_MAT integer
+---@field UNIMPROVABLE integer
+---@field SOFT_MAT integer
+---@field WOOD_MAT integer
+---@field INVERTED_TILE integer
+---@field FURNITURE integer
+---@field LEATHER_MAT integer
+---@field SILK_MAT integer
+---@field THREAD_PLANT_MAT integer
+---@field GLASS_MAT integer
+---@field CERAMIC_MAT integer
+---@field STONE_MAT integer
+---@field SHELL_MAT integer
+---@field BONE_MAT integer
+---@field NO_DEFAULT_JOB integer
+---@field INCOMPLETE_ITEM integer
+---@field SHEET_MAT integer
+---@field NO_DEFAULT_IMPROVEMENTS integer
+---@field USES_FACE_IMAGE_SET integer

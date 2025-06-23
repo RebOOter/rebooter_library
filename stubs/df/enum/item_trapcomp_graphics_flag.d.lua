@@ -1,0 +1,5 @@
+---@class df.item_trapcomp_graphics_flag
+---@field material_color_index integer[8]
+---@field type df.item_trapcomp_graphics_type[6]
+---@field wood boolean
+---@field wood_grown boolean

@@ -1,0 +1,12 @@
+---@class df.gloves_flags
+---@field SHAPED integer
+---@field SOFT_MAT integer
+---@field METAL integer
+---@field LEATHER integer
+---@field CHAIN integer
+---@field PLATE integer
+---@field SEGMENTED_PLATE integer
+---@field SCALED integer
+---@field STRUCTURAL_ELASTICITY_WOVEN_THREAD integer
+---@field STRUCTURAL_ELASTICITY_CHAIN_METAL integer
+---@field STRUCTURAL_ELASTICITY_PLATE_METAL integer

@@ -1,0 +1,5 @@
+---@class df.item_statue_graphics_flag_material
+---@field WOOD integer
+---@field STONE integer
+---@field METAL integer
+---@field GLASS integer

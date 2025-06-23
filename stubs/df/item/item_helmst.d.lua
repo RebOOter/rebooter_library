@@ -1,0 +1,2 @@
+---@class df.item_helmst: df.item_constructed
+---@field subtype df.itemdef_helmst

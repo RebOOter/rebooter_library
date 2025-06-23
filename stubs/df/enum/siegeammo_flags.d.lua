@@ -1,0 +1,5 @@
+---@class df.siegeammo_flags
+---@field STONE integer
+---@field METAL integer
+---@field FIRE integer
+---@field SHARP integer

@@ -1,0 +1,9 @@
+---@class df.itemdef
+---@field id string
+---@field subtype integer
+---@field base_flags df.itemdef_flags[]
+---@field source_hfid integer @ reference to historical_figure
+---@field source_enid integer @ reference to historical_entity
+---@field raw_strings string[]
+---@field statue_texpos_top integer
+---@field statue_texpos_bottom integer

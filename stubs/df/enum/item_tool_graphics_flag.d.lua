@@ -1,0 +1,16 @@
+---@class df.item_tool_graphics_flag
+---@field material df.item_tool_graphics_flag_material[2]
+---@field quality integer[3]
+---@field variant integer[2]
+---@field spikes boolean
+---@field rings boolean
+---@field studs boolean
+---@field engraved boolean
+---@field bands boolean
+---@field damage_level integer[2]
+---@field blood boolean
+---@field vomit boolean
+---@field water boolean
+---@field dirt boolean
+---@field color_index integer[8]
+---@field localdef_shape_index integer[5]

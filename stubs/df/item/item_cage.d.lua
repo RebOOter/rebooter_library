@@ -1,0 +1,1 @@
+---@class df.item_cage: df.item_constructed

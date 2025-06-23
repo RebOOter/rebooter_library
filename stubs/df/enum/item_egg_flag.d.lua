@@ -1,0 +1,3 @@
+---@class df.item_egg_flag
+---@field fertile boolean @ allows the incubation_counter to be checked/incremented
+---@field make_nemesis boolean

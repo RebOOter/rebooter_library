@@ -1,0 +1,2 @@
+---@class df.item_clothst: df.item_constructed
+---@field dimension integer @ init-value='10000'

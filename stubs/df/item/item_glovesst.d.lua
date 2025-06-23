@@ -1,0 +1,3 @@
+---@class df.item_glovesst: df.item_constructed
+---@field subtype df.itemdef_glovesst
+---@field handedness df.glove_handedness

@@ -1,0 +1,8 @@
+---@class df.item_crafted: df.item_actual
+---@field mat_type integer @ reference to material
+---@field mat_index integer
+---@field maker_race integer @ reference to creature_raw
+---@field quality df.item_quality
+---@field skill_rating df.skill_rating @ at the moment of creation
+---@field maker integer @ reference to historical_figure
+---@field masterpiece_event integer @ reference to history_event

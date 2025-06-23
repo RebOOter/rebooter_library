@@ -1,0 +1,77 @@
+---@class df.plant_raw
+---@field id string
+---@field index integer -- since v0.40.01
+---@field raws string[] -- since v0.40.01
+---@field flags df.plant_raw_flags[]
+---@field name string
+---@field name_plural string
+---@field adj string
+---@field seed_singular string
+---@field seed_plural string
+---@field leaves_singular string -- unused
+---@field leaves_plural string -- unused
+---@field source_hfid integer -- reference to historical_figure
+---@field source_enid integer -- reference to historical_entity, since v0.42.01
+---@field mill_dye_color integer -- reference to descriptor_color
+---@field picked_tile integer
+---@field dead_picked_tile integer
+---@field shrub_tile integer
+---@field dead_shrub_tile integer
+---@field tree_tile integer -- unused
+---@field dead_tree_tile integer -- unused
+---@field sapling_tile integer
+---@field dead_sapling_tile integer
+---@field grass_tiles integer[] -- count 16
+---@field alt_grass_tiles integer[] -- count 12
+---@field tree_tiles integer[] -- count 104
+---@field texpos integer[] -- count 18
+---@field tree_texture_info df.pmd_tree_texture_infost
+---@field growdur integer
+---@field value integer
+---@field picked_color integer[] -- count 3
+---@field dead_picked_color integer[] -- count 3
+---@field shrub_color integer[] -- count 3
+---@field dead_shrub_color integer[] -- count 3
+---@field seed_color integer[] -- count 3
+---@field tree_color integer[] -- count 3
+---@field dead_tree_color integer[] -- count 3
+---@field sapling_color integer[] -- count 3
+---@field dead_sapling_color integer[] -- count 3
+---@field grass_colors_f integer[] -- count 20
+---@field grass_colors_b integer[] -- count 20
+---@field grass_colors_br integer[] -- count 20
+---@field alt_period integer[] -- count 2
+---@field shrub_drown_level integer
+---@field tree_drown_level integer
+---@field sapling_drown_level integer
+---@field frequency integer
+---@field clustersize integer
+---@field prefstring string[]
+---@field material df.material[]
+---@field material_defs_type integer[] -- indexed by plant_material_def, references to material
+---@field material_defs_idx integer[] -- indexed by plant_material_def
+---@field material_defs_str string[][] -- indexed by plant_material_def, each with count 3
+---@field underground_depth_min integer
+---@field underground_depth_max integer
+---@field growths df.plant_growth[]
+---@field root_name string
+---@field trunk_name string
+---@field heavy_branch_name string
+---@field light_branch_name string
+---@field twig_name string
+---@field cap_name string
+---@field trunk_period integer
+---@field heavy_branch_density integer
+---@field light_branch_density integer
+---@field max_trunk_height integer
+---@field heavy_branch_radius integer
+---@field light_branch_radius integer
+---@field trunk_branching integer
+---@field max_trunk_diameter integer
+---@field trunk_width_period integer
+---@field cap_period integer
+---@field cap_radius integer
+---@field root_density integer
+---@field root_radius integer
+---@field stockpile_growths integer[] -- indices of edible growths that are marked with STOCKPILE_PLANT_GROWTH
+---@field stockpile_growth_flags df.plant_growth_flags[] -- indexed to stockpile_growths

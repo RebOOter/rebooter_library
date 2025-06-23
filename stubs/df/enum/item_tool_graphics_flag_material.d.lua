@@ -1,0 +1,5 @@
+---@class df.item_tool_graphics_flag_material
+---@field WOOD integer
+---@field STONE integer
+---@field METAL integer
+---@field GLASS integer

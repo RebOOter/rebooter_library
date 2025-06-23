@@ -1,0 +1,72 @@
+---@class df.material
+---@field id string
+---@field gem_name1 string
+---@field gem_name2 string
+---@field stone_name string
+---@field spec_heat integer
+---@field heatdam_point integer
+---@field colddam_point integer
+---@field ignite_point integer
+---@field melting_point integer
+---@field boiling_point integer
+---@field mat_fixed_temp integer
+---@field solid_density integer
+---@field liquid_density integer
+---@field molar_mass integer
+---@field state_color integer[] -- indexed by matter_state
+---@field state_name string[] -- indexed by matter_state
+---@field state_adj string[] -- indexed by matter_state
+---@field absorption integer
+---@field yield integer[] -- indexed by strain_type
+---@field fracture integer[] -- indexed by strain_type
+---@field strain_at_yield integer[] -- indexed by strain_type
+---@field max_edge integer
+---@field material_value integer
+---@field flags df.material_flags[]
+---@field extract_storage df.item_type
+---@field butcher_special_type df.item_type
+---@field butcher_special_subtype integer
+---@field meat_name string[]
+---@field meat_organ df.meat_category_type -- used for texture selection
+---@field block_name string[]
+---@field reaction_product_id string[]
+---@field reaction_product_item_type df.item_type[]
+---@field reaction_product_item_subtype integer[]
+---@field reaction_product_material df.material_vec_ref
+---@field reaction_product_str string[][]
+---@field hardens_with_water_mat_type integer
+---@field hardens_with_water_mat_index integer
+---@field hardens_with_water_str string[]
+---@field reaction_class string[]
+---@field tile integer
+---@field basic_color integer[]
+---@field build_color integer[]
+---@field tile_color integer[]
+---@field item_symbol integer
+---@field mat_rgb number[] -- s-float
+---@field powder_dye integer -- color token index
+---@field temp_diet_info df.temp_diet_info_type
+---@field syndrome df.creature_interactionst
+---@field soap_level integer
+---@field sphere df.sphere_type[] -- since v0.40.01
+---@field prefix string
+---@field food_mat_index integer[] -- indexed by organic_mat_category
+---@field powder_dye_str string -- temporary
+---@field state_color_str string[] -- indexed by matter_state
+---@field wood_texpos integer
+---@field boulder_texpos1 integer
+---@field boulder_texpos2 integer
+---@field rough_texpos1 integer
+---@field rough_texpos2 integer
+---@field bar_texpos integer
+---@field cheese_texpos1 integer
+---@field cheese_texpos2 integer
+---@field texflag integer
+
+df.material = {}
+
+---@return boolean
+function df.material.isGem() end
+
+---@return boolean
+function df.material.isStone() end

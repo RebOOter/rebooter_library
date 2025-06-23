@@ -1,0 +1,51 @@
+---@class df.creature_raw
+---@field creature_id string
+---@field name string[] -- count 3
+---@field general_baby_name string[] -- count 2
+---@field general_child_name string[] -- count 2
+---@field temp_single_name string -- since v0.43.01
+---@field creature_tile integer
+---@field creature_soldier_tile integer
+---@field alttile integer
+---@field soldier_alttile integer
+---@field glowtile integer
+---@field temperature1 integer
+---@field temperature2 integer
+---@field frequency integer
+---@field population_number integer[] -- count 2
+---@field cluster_number integer[] -- count 2
+---@field triggerable_group integer[] -- count 2
+---@field color integer[] -- count 3
+---@field glowcolor integer[] -- count 3
+---@field adultsize integer
+---@field prefstring string[]
+---@field sphere df.sphere_type[]
+---@field caste df.caste_raw[]
+---@field pop_ratio integer[]
+---@field flags df.creature_raw_flags[]
+---@field graphics df.creature_raw_graphics
+---@field speech_index integer[]
+---@field speech_token string[]
+---@field material df.material[]
+---@field tissue df.tissue[]
+---@field profession_name_singular string[] -- indexed by profession
+---@field profession_name_plural string[] -- indexed by profession
+---@field underground_layer_min integer
+---@field underground_layer_max integer
+---@field modifier_class df.genetic_modifier_type[]
+---@field modifier_num_patterns integer[] -- for color modifiers, == number of items in their pattern_* vectors
+---@field hive_product_number integer[]
+---@field hive_product_time integer[]
+---@field hive_product_item_type df.item_type[]
+---@field hive_product_item_subtype integer[]
+---@field hive_product_material df.material_vec_ref
+---@field hive_product_tmpstr1 string[]
+---@field hive_product_tmpstr2 string[]
+---@field hive_product_tmpstr3 string[]
+---@field hive_product_tmpstr4 string[]
+---@field hive_product_tmpstr5 string[]
+---@field source_hfid integer -- reference to historical_figure
+---@field source_enid integer -- reference to historical_entity, since v0.42.01
+---@field next_modifier_id integer
+---@field raws string[]
+---@field statue_texpos integer[] -- count 2, since v0.50.01

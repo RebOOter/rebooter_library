@@ -1,0 +1,11 @@
+---@class df.weapon_attack
+---@field edged boolean
+---@field contact integer
+---@field penetration integer
+---@field velocity_mult integer
+---@field verb_2nd string
+---@field verb_3rd string
+---@field noun string
+---@field prepare integer
+---@field recover integer
+---@field flags df.itemdef_attack_flag

@@ -1,0 +1,3 @@
+---@class df.item_drink: df.item_liquid
+---@field mat_type integer @ reference to material
+---@field mat_index integer

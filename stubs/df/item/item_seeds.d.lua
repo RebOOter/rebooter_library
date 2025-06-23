@@ -1,0 +1,5 @@
+---@class df.item_seeds: df.item_actual
+---@field mat_type integer @ reference to material
+---@field mat_index integer
+---@field grow_counter integer
+---@field planting_skill integer

@@ -1,0 +1,3 @@
+---@class df.item_liquipowder: df.item_actual
+---@field lp_flags df.item_liquipowder_flag
+---@field dimension integer

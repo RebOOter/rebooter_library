@@ -1,0 +1,3 @@
+---@class df.item_pants_graphics_infost
+---@field flags df.item_pants_graphics_flag
+---@field texpos integer

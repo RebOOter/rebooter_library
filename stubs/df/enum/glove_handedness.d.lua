@@ -1,0 +1,3 @@
+---@class df.glove_handedness: integer
+---@field RIGHT integer
+---@field LEFT integer

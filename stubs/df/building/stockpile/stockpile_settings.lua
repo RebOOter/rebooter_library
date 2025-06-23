@@ -45,7 +45,7 @@
 ---@class df.stockpile_parameter_animal
 ---@field empty_cages boolean
 ---@field empty_traps boolean
----@field enabled boolean[] # Index refers to creature
+---@field enabled integer[] # Index refers to creature
 
 ---@class df.stockpile_parameter_food
 ---@field meat boolean[] # Index refers to food-mat-by-idx Meat
@@ -159,9 +159,9 @@
 ---@field Bone integer
 
 ---@class df.stockpile_parameter_ammo
----@field type boolean[] # Index refers to world.raws.itemdefs.ammo
----@field other_mats boolean[] # Index refers to stockpile_ammo_mat
----@field mats boolean[] # Index refers to material-by-id
+---@field type integer[] # Index refers to world.raws.itemdefs.ammo
+---@field other_mats df.stockpile_ammo_mat # Index refers to stockpile_ammo_mat
+---@field mats integer[] # Index refers to material-by-id
 ---@field quality_core boolean[7] # Index refers to item_quality
 ---@field quality_total boolean[7] # Index refers to item_quality
 
@@ -285,7 +285,7 @@
 ---@field hands boolean[] # Index refers to world.raws.itemdefs.gloves
 ---@field legs boolean[] # Index refers to world.raws.itemdefs.pants
 ---@field shield boolean[] # Index refers to world.raws.itemdefs.shields
----@field other_mats boolean[] # Index refers to stockpile_armor_mat
+---@field other_mats df.stockpile_armor_mat # Index refers to stockpile_armor_mat
 ---@field mats boolean[] # Index refers to material-by-id
 ---@field quality_core boolean[7] # Index refers to item_quality
 ---@field quality_total boolean[7] # Index refers to item_quality

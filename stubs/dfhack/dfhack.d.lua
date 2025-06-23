@@ -5,6 +5,7 @@
 ---@field items dfhack.items
 ---@field gui dfhack.gui
 ---@field burrows dfhack.burrows
+---@field matinfo dfhack.matinfo
 dfhack = {}
 
 ---@method dfhack.printerr

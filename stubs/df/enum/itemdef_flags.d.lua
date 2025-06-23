@@ -1,0 +1,2 @@
+---@class df.itemdef_flags
+---@field GENERATED integer

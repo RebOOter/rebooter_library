@@ -1,0 +1,17 @@
+---@class df.shield_flags
+---@field SHAPED integer
+---@field SOFT_MAT integer
+---@field METAL integer
+---@field LEATHER integer
+---@field WOOD integer
+---@field GLASS integer
+---@field STONE integer
+---@field CERAMIC integer
+---@field BONE integer
+---@field SHELL integer
+---@field SHELL_SHAPED integer
+---@field TOWER integer
+---@field BUCKLER integer
+---@field STRUCTURAL_ELASTICITY_WOVEN_THREAD integer
+---@field STRUCTURAL_ELASTICITY_CHAIN_METAL integer
+---@field STRUCTURAL_ELASTICITY_PLATE_METAL integer

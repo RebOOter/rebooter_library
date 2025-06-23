@@ -1,0 +1,6 @@
+---@class df.item_glob: df.item_actual
+---@field mat_type integer @ reference to material
+---@field mat_index integer
+---@field rot_timer integer
+---@field glob_flags df.item_glob_flag
+---@field dimension integer

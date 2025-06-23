@@ -1,0 +1,18 @@
+---@class df.instrument_flags
+---@field HARD_MAT integer
+---@field SOFT_MAT integer
+---@field METAL_MAT integer
+---@field WOOD_MAT integer
+---@field GLASS_MAT integer
+---@field CERAMIC_MAT integer
+---@field SHELL_MAT integer
+---@field BONE_MAT integer
+---@field LEATHER_MAT integer
+---@field SILK_MAT integer
+---@field IS_STAND integer
+---@field IS_PAPER integer
+---@field IS_SHEET integer
+---@field TWO_HANDED integer
+---@field REEDS integer
+---@field PIPE integer
+---@field STORED_IN_CABINET integer

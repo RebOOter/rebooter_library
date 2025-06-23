@@ -1,0 +1,6 @@
+---@class df.item_food: df.item_crafted
+---@field subtype df.itemdef_foodst
+---@field entity integer @ reference to historical_entity
+---@field recipe_id integer
+---@field ingredients df.food_ingredientst[]
+---@field rot_timer integer

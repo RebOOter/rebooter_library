@@ -1,0 +1,1 @@
+---@class df.item_liquid: df.item_liquipowder

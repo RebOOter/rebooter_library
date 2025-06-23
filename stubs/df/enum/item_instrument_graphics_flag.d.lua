@@ -1,0 +1,7 @@
+---@class df.item_instrument_graphics_flag
+---@field material df.item_instrument_graphics_flag_material[2]
+---@field color_index integer[8]
+---@field quality integer[3]
+---@field variant integer[3]
+---@field shape integer[3]
+---@field part integer[3]

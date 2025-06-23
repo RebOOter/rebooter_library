@@ -1,0 +1,3 @@
+---@class df.item_toy_graphics_flag
+---@field material df.item_toy_graphics_flag_material[2]
+---@field color_index integer[8]

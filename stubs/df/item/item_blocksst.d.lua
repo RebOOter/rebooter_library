@@ -1,0 +1,3 @@
+---@class df.item_blocksst: df.item_actual
+---@field mat_type integer @ int16_t - material type, ref-target to material
+---@field mat_index integer @ int32_t - material index

@@ -1,0 +1,4 @@
+---@class df.item_glob_flag
+---@field no_auto_clean boolean
+---@field pressed boolean
+---@field paste boolean

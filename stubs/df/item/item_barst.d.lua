@@ -1,0 +1,5 @@
+---@class df.item_barst: df.item_actual
+---@field subtype integer @ supposedly used for coal
+---@field mat_type integer @ ref-target='material', aux-value='$$.mat_index'
+---@field mat_index integer
+---@field dimension integer @ init-value='150'

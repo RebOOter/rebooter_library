@@ -1,0 +1,9 @@
+---@class df.itemdef_siegeammost: df.itemdef
+---@field name string
+---@field name_plural string
+---@field value integer
+---@field size integer
+---@field material_size integer
+---@field flags df.siegeammo_flags[]
+---@field tile integer
+---@field texpos integer[4]

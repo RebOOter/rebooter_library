@@ -1,0 +1,3 @@
+---@class df.itemdef_trapcomp_graphics_infost
+---@field flags df.item_trapcomp_graphics_flag
+---@field texpos integer

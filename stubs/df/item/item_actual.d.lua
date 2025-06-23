@@ -1,5 +1,3 @@
----@diagnostic disable: missing-return
-
 ---@class df.item_actual: df.item
 ---@field stack_size integer @ init-value='1'
 ---@field history_info df.item_profilest|nil

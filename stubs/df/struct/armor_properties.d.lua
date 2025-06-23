@@ -1,0 +1,3 @@
+---@class df.armor_properties
+---@field flags df.armor_flags[]
+---@field layer_permit integer

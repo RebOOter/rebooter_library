@@ -1,0 +1,3 @@
+---@class df.item_powder_misc: df.item_powder
+---@field mat_type integer @ reference to material
+---@field mat_index integer

@@ -1,0 +1,10 @@
+---@class df.item_instrument_graphics_flag_material
+---@field WOOD integer
+---@field STONE integer
+---@field METAL integer
+---@field GLASS integer
+---@field CERAMIC integer
+---@field BONE integer
+---@field SHELL integer
+---@field LEATHER integer
+---@field SILK integer

@@ -1,5 +1,260 @@
 --@ module = true
 
+-------------------
+-- Lua Utilities --
+-------------------
+
+---@param tbl table
+---@return string[]
+function get_keys_as_strings(tbl)
+  local result = {}
+  for k, _ in pairs(tbl) do
+    table.insert(result, tostring(k))
+  end
+  return result
+end
+
+---------------------
+-- Item processing --
+---------------------
+
+---@param mats string[]
+---@param item df.item
+---@return boolean
+local function checkItemInMats(item, mats)
+    local token = string.lower(dfhack.matinfo.decode(item):getToken())
+    for _, mat in ipairs(mats) do
+        if string.find(token, mat) then
+            return true
+        end
+    end
+    return false
+end
+
+---@param item df.item_armorst | df.item_ammo | df.item_pantsst | df.item_helmst | df.item_shoesst | df.item_glovesst | df.item_shieldst | df.item_barst | df.item_blocksst
+---@param other_mats table
+---@param inorganic integer[]
+---@return boolean
+local function checkAllMaterials(item, other_mats, inorganic)
+    local mats = get_keys_as_strings(other_mats)
+    if checkItemInMats(item, mats) then
+        return true
+    end
+    if item.mat_type == 0 and inorganic[item.mat_index] == 1 then
+        return true
+    end
+    return false
+end
+
+---@param item df.item_armorst | df.item_ammo | df.item_pantsst | df.item_helmst | df.item_shoesst | df.item_glovesst | df.item_shieldst
+---@param type integer[]
+---@param other_mats table
+---@param inorganic integer[]
+---@return boolean
+local function checkComplexItem(item, type, other_mats, inorganic)
+    local type_check = false
+    local mat_check = false
+    if type[item.subtype.subtype] == 1 then
+        type_check = true
+    end
+    if checkAllMaterials(item, other_mats, inorganic) then
+        mat_check = true
+    end
+    if type_check and mat_check then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@param stockpile df.building_stockpile
+---@return boolean
+-- Check if item could be stored in the stockpile
+-- Pay attention that it won't check quality filters of the stockpile
+function RL.isItemCouldBeStored(item, stockpile)
+    print('Started to check item if it could be stored...')
+
+    -- Ammo category --
+    if df.item_ammost:is_instance(item) then
+        print('Item is ammo')
+        ---@cast item df.item_ammo
+        local ammo_settings = stockpile.settings.ammo
+        if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    -- Animal Category --
+    if df.item_cage:is_instance(item) then
+        print('Item is cage')
+        ---@cast item df.item_cage
+        local animals_settings = stockpile.settings.animals
+        if #item.general_refs == 0 then
+            if animals_settings.empty_cages then
+                return true
+            else
+                return false
+            end
+        else
+            for _, ref in pairs(item.general_refs) do
+                if (df.general_ref_contains_unitst:is_instance(ref)) then
+                    ---@cast ref df.general_ref_contains_unitst
+                    local unit = df.unit.find(ref.unit_id)
+                    if not unit then
+                        dfhack.printerr('Cannot find caged unit with id ' .. ref.unit_id)
+                        return false
+                    end
+                    if animals_settings.enabled[unit.race] == 1 then
+                        return true
+                    else
+                        return false
+                    end
+                end
+            end
+        end
+    end
+    -- is it possible that caged small animal will be the same as creature?
+    if df.item_animaltrapst:is_instance(item) then
+        print('Item is animal trap')
+        ---@cast item df.item_animaltrapst
+        local animals_settings = stockpile.settings.animals
+        if animals_settings.empty_traps then
+            return true
+        else
+            return false
+        end
+    end
+    -- Need to add:
+    -- 1. Usable / Unusable
+    -- Armor Category --
+    local armor_settings = stockpile.settings.armor
+    if (df.item_armorst:is_instance(item)) then
+        print('Item is armor')
+        ---@cast item df.item_armorst
+        if checkComplexItem(item, armor_settings.body, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if df.item_helmst:is_instance(item) then
+        print('Item is helm')
+        ---@cast item df.item_helmst
+        if checkComplexItem(item, armor_settings.head, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if df.item_shoesst:is_instance(item) then
+        print('Item is shoe')
+        ---@cast item df.item_shoesst
+        if checkComplexItem(item, armor_settings.feet, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if df.item_glovesst:is_instance(item) then
+        print('Item is glove')
+        ---@cast item df.item_glovesst
+        if checkComplexItem(item, armor_settings.hands, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if (df.item_pantsst:is_instance(item)) then
+        print('Item is pants')
+        ---@cast item df.item_pantsst
+        if checkComplexItem(item, armor_settings.legs, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if df.item_shieldst:is_instance(item) then
+        print('Item is shield')
+        ---@cast item df.item_shieldst
+        if checkComplexItem(item, armor_settings.shield, armor_settings.other_mats, armor_settings.mats) then
+            return true
+        else
+            return false
+        end
+    end
+
+    local bars_blocks_settings = stockpile.settings.bars_blocks
+    -- Bars/Blocks Category --
+    if df.item_barst:is_instance(item) then
+        print('Item is bar')
+        ---@cast item df.item_barst
+        if checkAllMaterials(item, bars_blocks_settings.bars_other_mats, bars_blocks_settings.bars_mats) then
+            return true
+        else
+            return false
+        end
+    end
+    if df.item_blocksst:is_instance(item) then
+        print('Item is block')
+        ---@cast item df.item_blocksst
+        if checkAllMaterials(item, bars_blocks_settings.blocks_other_mats, bars_blocks_settings.blocks_mats) then
+            return true
+        else
+            return false
+        end
+    end
+
+    -- Cloth Category --
+
+    -- Coins Category --
+
+    -- Finished goods Category --
+
+    -- Food Category --
+
+    -- Furniture/siege ammo Category --
+
+    -- Gems Category --
+
+    -- Leather Category --
+
+    -- Corpses Category --
+
+    -- Refuse Category --
+
+    -- Sheet Category --
+
+    -- Stone Category --
+    if df.item_boulderst:is_instance(item) then
+        print('Item is boulder')
+        ---@cast item df.item_boulder
+        local mats = stockpile.settings.stone.mats
+        if mats[item.mat_index] == 1 then
+            return true
+        else
+            return false
+        end
+    end
+
+    -- Weapon/traps comps Category --  
+
+    -- Wood Category --
+    if (df.item_woodst:is_instance(item)) then
+        print('Item is wood')
+        ---@cast item df.item_woodst
+        local mats = stockpile.settings.wood.mats
+        if mats[item.mat_index] == 1 then
+            return true
+        else
+            return false
+        end
+    end
+
+    print('Unkown item or not implemented type of item. Stop processing...')
+    return false
+end
+
 ---------------------
 -- Jobs processing --
 ---------------------

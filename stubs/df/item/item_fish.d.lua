@@ -1,0 +1,4 @@
+---@class df.item_fish: df.item_actual
+---@field race integer @ reference to creature_raw
+---@field caste integer @ reference to caste_raw
+---@field rot_timer integer

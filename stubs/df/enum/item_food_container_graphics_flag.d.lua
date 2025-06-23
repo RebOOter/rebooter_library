@@ -1,0 +1,8 @@
+---@class df.item_food_container_graphics_flag
+---@field contents_subtype integer[16]
+---@field color_index integer[8]
+---@field contents_color_index integer[8]
+---@field contents_variant integer[4]
+---@field contents_type df.item_food_container_graphics_contents_type[4]
+---@field type df.item_food_container_graphics_type[3]
+---@field subtype integer[16]

@@ -1,0 +1,3 @@
+---@class df.body_part_coverage
+---@field bp_enum integer
+---@field amount integer

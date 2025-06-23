@@ -1,0 +1,23 @@
+---@class df.item_trapcomp_graphics_type
+---@field MAIN integer
+---@field TRAP integer
+---@field UPRIGHT_1_TOP integer
+---@field UPRIGHT_2_TOP integer
+---@field UPRIGHT_3_TOP integer
+---@field UPRIGHT_4_TOP integer
+---@field UPRIGHT_5_TOP integer
+---@field UPRIGHT_6_TOP integer
+---@field UPRIGHT_7_TOP integer
+---@field UPRIGHT_8_TOP integer
+---@field UPRIGHT_9_TOP integer
+---@field UPRIGHT_10_TOP integer
+---@field UPRIGHT_1_BOTTOM integer
+---@field UPRIGHT_2_BOTTOM integer
+---@field UPRIGHT_3_BOTTOM integer
+---@field UPRIGHT_4_BOTTOM integer
+---@field UPRIGHT_5_BOTTOM integer
+---@field UPRIGHT_6_BOTTOM integer
+---@field UPRIGHT_7_BOTTOM integer
+---@field UPRIGHT_8_BOTTOM integer
+---@field UPRIGHT_9_BOTTOM integer
+---@field UPRIGHT_10_BOTTOM integer

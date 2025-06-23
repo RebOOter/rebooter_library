@@ -1,0 +1,6 @@
+---@class df.trapcomp_flags
+---@field IS_SCREW integer
+---@field IS_SPIKE integer
+---@field WOOD integer
+---@field METAL integer
+---@field HAS_EDGE_ATTACK integer

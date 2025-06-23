@@ -1,0 +1,2 @@
+---@class df.item_shieldst: df.item_constructed
+---@field subtype df.itemdef_shieldst

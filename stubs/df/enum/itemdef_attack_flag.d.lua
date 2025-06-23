@@ -1,0 +1,3 @@
+---@class df.itemdef_attack_flag
+---@field independent_multiattack boolean
+---@field bad_multiattack boolean

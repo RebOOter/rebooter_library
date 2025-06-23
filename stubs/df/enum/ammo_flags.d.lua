@@ -1,0 +1,2 @@
+---@class df.ammo_flags
+---@field HAS_EDGE_ATTACK integer

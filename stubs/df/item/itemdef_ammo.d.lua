@@ -1,0 +1,13 @@
+---@class df.itemdef_ammost: df.itemdef
+---@field id string
+---@field subtype integer
+---@field name string
+---@field name_plural string
+---@field adjective string
+---@field ammo_class string
+---@field flags df.ammo_flags[]
+---@field size integer @ divided by 10
+---@field value integer
+---@field attacks df.weapon_attack[]
+---@field texpos integer[16]
+---@field graphics_info df.itemdef_ammo_graphics_infost[]

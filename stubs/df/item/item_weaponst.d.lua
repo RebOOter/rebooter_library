@@ -1,0 +1,3 @@
+---@class df.item_weaponst: df.item_constructed
+---@field subtype df.itemdef_weaponst
+---@field sharpness integer

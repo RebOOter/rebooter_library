@@ -1,0 +1,25 @@
+---@class df.item_egg: df.item_actual
+---@field race integer @ reference to creature_raw
+---@field caste integer @ reference to caste_raw
+---@field rot_timer integer
+---@field egg_materials df.material_vec_ref
+---@field egg_flags df.item_egg_flag
+---@field incubation_counter integer @ increments when fertile in unforbidden nestbox, hatch at >= 100800 (3 months)
+---@field hatchling_civ_id integer @ reference to historical_entity
+---@field hatchling_population_id integer @ reference to entity_population
+---@field hatchling_breed_id integer @ reference to breed
+---@field hatchling_cultural_identity_id integer @ reference to cultural_identity
+---@field mothers_genes df.unit_genes @ object owned by egg item
+---@field mothers_caste integer @ reference to caste_raw
+---@field mother_hf integer @ reference to historical_figure
+---@field fathers_genes df.unit_genes @ object owned by egg item
+---@field fathers_caste integer @ reference to caste_raw, -1 if no father genes
+---@field father_hf integer @ reference to historical_figure
+---@field hatchling_flags1 df.unit_flags1 @ used primarily for bit_flag:tame
+---@field hatchling_flags2 df.unit_flags2 @ used primarily for bit_flag:roaming_wilderness_population_source
+---@field hatchling_flags3 df.unit_flags3 @ not normally used, most/all do not stick
+---@field hatchling_flags4 df.unit_flags4 @ not normally used, most/all do not stick
+---@field hatchling_training_level df.animal_training_level
+---@field hatchling_animal_population df.world_population_ref
+---@field hatchling_mother_id integer @ reference to unit
+---@field size integer
