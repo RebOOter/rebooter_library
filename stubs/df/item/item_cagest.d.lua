@@ -1,0 +1,1 @@
+---@class df.item_cagest: df.item_constructed

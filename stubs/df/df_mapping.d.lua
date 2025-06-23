@@ -25,7 +25,7 @@
 ---@field item_constructed df.item_constructed
 ---@field item_clothst df.item_clothst
 ---@field item_ammost df.item_ammo
----@field item_cage df.item_cage
+---@field item_cagest df.item_cagest
 ---@field item_shoesst df.item_shoesst
 ---@field item_glovesst df.item_glovesst
 ---@field item_armorst df.item_armorst

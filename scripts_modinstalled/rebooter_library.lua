@@ -39,6 +39,9 @@ end
 ---@param inorganic integer[]
 ---@return boolean
 local function checkAllMaterials(item, other_mats, inorganic)
+    if #other_mats == 0 or #inorganic == 0 then
+        return false
+    end
     local mats = get_keys_as_strings(other_mats)
     if checkItemInMats(item, mats) then
         return true
@@ -55,6 +58,9 @@ end
 ---@param inorganic integer[]
 ---@return boolean
 local function checkComplexItem(item, type, other_mats, inorganic)
+    if #type == 0 or #other_mats == 0 or #inorganic == 0 then
+        return false
+    end
     local type_check = false
     local mat_check = false
     if type[item.subtype.subtype] == 1 then
@@ -76,7 +82,6 @@ end
 -- Pay attention that it won't check quality filters of the stockpile
 function RL.isItemCouldBeStored(item, stockpile)
     print('Started to check item if it could be stored...')
-
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
         print('Item is ammo')
@@ -89,9 +94,9 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     -- Animal Category --
-    if df.item_cage:is_instance(item) then
+    if df.item_cagest:is_instance(item) then
         print('Item is cage')
-        ---@cast item df.item_cage
+        ---@cast item df.item_cagest
         local animals_settings = stockpile.settings.animals
         if #item.general_refs == 0 then
             if animals_settings.empty_cages then
@@ -100,6 +105,9 @@ function RL.isItemCouldBeStored(item, stockpile)
                 return false
             end
         else
+            if #animals_settings.enabled == 0 then
+                return false
+            end
             for _, ref in pairs(item.general_refs) do
                 if (df.general_ref_contains_unitst:is_instance(ref)) then
                     ---@cast ref df.general_ref_contains_unitst
@@ -118,16 +126,16 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     -- is it possible that caged small animal will be the same as creature?
-    if df.item_animaltrapst:is_instance(item) then
-        print('Item is animal trap')
-        ---@cast item df.item_animaltrapst
-        local animals_settings = stockpile.settings.animals
-        if animals_settings.empty_traps then
-            return true
-        else
-            return false
-        end
-    end
+    --if df.item_animaltrapst:is_instance(item) then
+    --    print('Item is animal trap')
+    --    ---@cast item df.item_animaltrapst
+    --    local animals_settings = stockpile.settings.animals
+    --    if animals_settings.empty_traps then
+    --        return true
+    --    else
+    --        return false
+    --    end
+    --end
     -- Need to add:
     -- 1. Usable / Unusable
     -- Armor Category --
@@ -233,6 +241,9 @@ function RL.isItemCouldBeStored(item, stockpile)
         print('Item is boulder')
         ---@cast item df.item_boulder
         local mats = stockpile.settings.stone.mats
+        if #mats == 0 then
+            return false
+        end
         if mats[item.mat_index] == 1 then
             return true
         else
@@ -247,6 +258,9 @@ function RL.isItemCouldBeStored(item, stockpile)
         print('Item is wood')
         ---@cast item df.item_woodst
         local mats = stockpile.settings.wood.mats
+        if #mats == 0 then
+            return false
+        end
         if mats[item.mat_index] == 1 then
             return true
         else
