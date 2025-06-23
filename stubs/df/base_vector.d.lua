@@ -1,8 +1,9 @@
 ---@class df.base_vector<T>: { [integer]: T }
-vector = {}
+local vector = {}
 
+---@param index integer
 ---@param element any
-function vector:insert(element) end
+function vector:insert(index, element) end
 
 ---@param index integer
 function vector:erase(index) end
