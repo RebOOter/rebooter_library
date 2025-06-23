@@ -76,7 +76,7 @@ local function checkComplexItem(item, type, other_mats, inorganic)
 end
 
 ---@param item df.item
----@param stockpile df.building_stockpile
+---@param stockpile df.building_stockpilest
 ---@return boolean
 -- Check if item could be stored in the stockpile
 -- Pay attention that it won't check quality filters of the stockpile

@@ -146,6 +146,8 @@
 ---@field item_statue_graphics_flag_material df.item_statue_graphics_flag_material
 ---@field item_statue_graphics_infost df.item_statue_graphics_infost
 ---@field squad df.squad
+---@field building df.building
+---@field building_stockpilest df.building_stockpilest
 ---@field global df.global
 df = {}
 
