@@ -1,0 +1,4 @@
+---@class df.item_corpsest: df.item_body_component
+---@field texpos integer[3][2]
+---@field texpos_currently_in_use boolean[3][2]
+---@field sheet_icon_texpos integer

@@ -107,37 +107,37 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
     -- Animal Category --
-    if df.item_cagest:is_instance(item) then
-        RL.print_log_mod(GLOBAL_KEY, 'Item is cage')
-        ---@cast item df.item_cagest
-        local animals_settings = stockpile.settings.animals
-        if #item.general_refs == 0 then
-            if animals_settings.empty_cages then
-                return true
-            else
-                return false
-            end
-        else
-            if #animals_settings.enabled == 0 then
-                return false
-            end
-            for _, ref in pairs(item.general_refs) do
-                if (df.general_ref_contains_unitst:is_instance(ref)) then
-                    ---@cast ref df.general_ref_contains_unitst
-                    local unit = df.unit.find(ref.unit_id)
-                    if not unit then
-                        dfhack.printerr('Cannot find caged unit with id ' .. ref.unit_id)
-                        return false
-                    end
-                    if animals_settings.enabled[unit.race] == 1 then
-                        return true
-                    else
-                        return false
-                    end
-                end
-            end
-        end
-    end
+    --if df.item_cagest:is_instance(item) then
+    --    RL.print_log_mod(GLOBAL_KEY, 'Item is cage')
+    --    ---@cast item df.item_cagest
+    --    local animals_settings = stockpile.settings.animals
+    --    if #item.general_refs == 0 then
+    --        if animals_settings.empty_cages then
+    --            return true
+    --        else
+    --            return false
+    --        end
+    --    else
+    --        if #animals_settings.enabled == 0 then
+    --            return false
+    --        end
+    --        for _, ref in pairs(item.general_refs) do
+    --            if (df.general_ref_contains_unitst:is_instance(ref)) then
+    --                ---@cast ref df.general_ref_contains_unitst
+    --                local unit = df.unit.find(ref.unit_id)
+    --                if not unit then
+    --                    dfhack.printerr('Cannot find caged unit with id ' .. ref.unit_id)
+    --                    return false
+    --                end
+    --                if animals_settings.enabled[unit.race] == 1 then
+    --                    return true
+    --                else
+    --                    return false
+    --                end
+    --            end
+    --        end
+    --    end
+    --end
     -- is it possible that caged small animal will be the same as creature?
     --if df.item_animaltrapst:is_instance(item) then
     --    RL.print_log_mod(GLOBAL_KEY, 'Item is animal trap')
@@ -244,25 +244,40 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Leather Category --
 
     -- Corpses Category --
-
-    -- Refuse Category --
-
-    -- Sheet Category --
-
-    -- Stone Category --
-    if df.item_boulderst:is_instance(item) then
-        RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
-        ---@cast item df.item_boulder
-        local mats = stockpile.settings.stone.mats
-        if #mats == 0 then
+    if df.item_corpsest:is_instance(item) then
+        RL.print_log_mod(GLOBAL_KEY, 'Item is corpse')
+        ---@cast item df.item_corpsest
+        local corpses = stockpile.settings.corpses.corpses
+        if #corpses == 0 then
             return false
         end
-        if mats[item.mat_index] == 1 then
+        if corpses[item.race] == 1 then
             return true
         else
             return false
         end
     end
+
+    -- Refuse Category --
+    -- Probably don't need to handle corpses here
+
+    -- Sheet Category --
+
+    -- Stone Category --
+    -- Better to turn it off until wheelbarrow will be implemented
+    --if df.item_boulderst:is_instance(item) then
+    --    RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
+    --    ---@cast item df.item_boulder
+    --    local mats = stockpile.settings.stone.mats
+    --    if #mats == 0 then
+    --        return false
+    --    end
+    --    if mats[item.mat_index] == 1 then
+    --        return true
+    --    else
+    --        return false
+    --    end
+    --end
 
     -- Weapon/traps comps Category --  
 
