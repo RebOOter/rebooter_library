@@ -9,6 +9,7 @@
 ---@field buildings dfhack.building
 ---@field onStateChange function[]
 ---@field world dfhack.world
+---@field persistent dfhack.persistent
 dfhack = {}
 
 ---@method dfhack.printerr
