@@ -1,5 +1,8 @@
 --@ module = true
 
+---@class RebooterLibrary
+RL = {}
+
 -------------------
 -- Lua Utilities --
 -------------------
@@ -258,9 +261,6 @@ end
 ---------------------
 -- Jobs processing --
 ---------------------
-
----@class RebooterLibrary
-RL = {}
 
 ---@param unit df.unit
 ---@return boolean
