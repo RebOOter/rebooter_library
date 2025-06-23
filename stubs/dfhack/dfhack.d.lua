@@ -22,4 +22,9 @@ function dfhack.printerr(string) end
 ---@return integer?
 function dfhack.timeout(time, type, func) end
 
+---@param id integer
+---@param new_callback function
+---@return function?
+function dfhack.timeout_active(id, new_callback) end
+
 _G.dfhack = dfhack
