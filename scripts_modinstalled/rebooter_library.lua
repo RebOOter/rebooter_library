@@ -380,6 +380,41 @@ function RL.createJobAndAssignUnit(job_type, building, burrow, item)
     return job
 end
 
+-------------------------
+-- Building processing --
+-------------------------
+
+---@param building df.building
+---@return df.coord[]
+function RL.collectAllTiles(building)
+    local all_tiles = {}
+    for y = building.y1, building.y2 do
+        for x = building.x1, building.x2 do
+            -- d_b
+            local found_b = dfhack.buildings.findAtTile(x, y, building.z)
+            if (found_b.id == building.id) then
+                table.insert(all_tiles, {
+                    x = x, y = y, z = building.z
+                })
+            end
+        end
+    end
+    return all_tiles
+end
+
+---@param stockpile df.building_stockpilest
+---@return df.coord | boolean
+function RL.stockpileHasFreeTile(stockpile)
+    local tiles = RL.collectAllTiles(stockpile)
+    for _, tile in pairs(tiles) do
+        local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
+        if not flags.item then
+            return {x = tile.x, y = tile.y, z = tile.z}
+        end
+    end
+    return false
+end
+
 ----------------------
 -- Units processing --
 ----------------------
