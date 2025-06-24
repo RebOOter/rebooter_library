@@ -1,6 +1,6 @@
 ---@class df.building_stockpilest : df.building
 ---@field settings df.stockpile_settings
----@field storage stockpile_storage_infost
+---@field storage df.stockpile_storage_infost  -- Stores container (barrels, bins) information
 ---@field links stockpile_links
 ---@field stockpile_flag building_stockpile_flag
 ---@field stockpile_number integer

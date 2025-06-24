@@ -19,6 +19,45 @@ function get_keys_as_strings(tbl)
     return result
 end
 
+---@param tbl table
+---@param value any
+---@return boolean
+function check_if_any(tbl, value)
+    local any = false
+    for _, elem in pairs(tbl) do
+        if elem == value then
+            any = true
+        end
+    end
+    return any
+end
+
+---@param tbl table
+---@param value any
+---@return boolean
+function check_all_same(tbl, value)
+    local all = true
+    if #tbl == 0 then
+        return false
+    end
+    for _, elem in pairs(tbl) do
+        if elem ~= value then
+            all = false
+        end
+    end
+    return all
+end
+
+---@param tbl table
+---@return table
+function make_all_keys_lower(tbl)
+    local new_array = {}
+    for _, item in pairs(tbl) do
+        table.insert(new_array, string.lower(item))
+    end
+    return new_array
+end
+
 -----------------------
 -- Logging Utilities --
 -----------------------
@@ -34,12 +73,23 @@ end
 -- Item processing --
 ---------------------
 
+---@param types table<string, integer>
+local function converTypesToIntegers(types)
+    local result = {}
+    for str_index, value in pairs(types) do
+        local index = dfhack.items.findType(str_index)
+        result[index] = value
+    end
+    return result
+end
+
 ---@param mats string[]
 ---@param item df.item
 ---@return boolean
 local function checkItemInMats(item, mats)
     local token = string.lower(dfhack.matinfo.decode(item):getToken())
-    for _, mat in ipairs(mats) do
+    local lowered_mats = make_all_keys_lower(mats)
+    for _, mat in ipairs(lowered_mats) do
         if string.find(token, mat) then
             return true
         end
@@ -47,7 +97,7 @@ local function checkItemInMats(item, mats)
     return false
 end
 
----@param item df.item_armorst | df.item_ammo | df.item_pantsst | df.item_helmst | df.item_shoesst | df.item_glovesst | df.item_shieldst | df.item_barst | df.item_blocksst
+---@param item df.item_constructed
 ---@param other_mats table
 ---@param inorganic integer[]
 ---@return boolean
@@ -63,6 +113,10 @@ local function checkAllMaterials(item, other_mats, inorganic)
         return true
     end
     return false
+end
+
+local function checkFurniture()
+    
 end
 
 ---@param item df.item_armorst | df.item_ammo | df.item_pantsst | df.item_helmst | df.item_shoesst | df.item_glovesst | df.item_shieldst
@@ -98,13 +152,13 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is ammo')
-        ---@cast item df.item_ammo
-        local ammo_settings = stockpile.settings.ammo
-        if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_ammo
+        --local ammo_settings = stockpile.settings.ammo
+        --if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     -- Animal Category --
     --if df.item_cagest:is_instance(item) then
@@ -155,78 +209,78 @@ function RL.isItemCouldBeStored(item, stockpile)
     local armor_settings = stockpile.settings.armor
     if (df.item_armorst:is_instance(item)) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is armor')
-        ---@cast item df.item_armorst
-        if checkComplexItem(item, armor_settings.body, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_armorst
+        --if checkComplexItem(item, armor_settings.body, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if df.item_helmst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is helm')
-        ---@cast item df.item_helmst
-        if checkComplexItem(item, armor_settings.head, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_helmst
+        --if checkComplexItem(item, armor_settings.head, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if df.item_shoesst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is shoe')
-        ---@cast item df.item_shoesst
-        if checkComplexItem(item, armor_settings.feet, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_shoesst
+        --if checkComplexItem(item, armor_settings.feet, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if df.item_glovesst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is glove')
-        ---@cast item df.item_glovesst
-        if checkComplexItem(item, armor_settings.hands, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_glovesst
+        --if checkComplexItem(item, armor_settings.hands, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if (df.item_pantsst:is_instance(item)) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is pants')
-        ---@cast item df.item_pantsst
-        if checkComplexItem(item, armor_settings.legs, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_pantsst
+        --if checkComplexItem(item, armor_settings.legs, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if df.item_shieldst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is shield')
-        ---@cast item df.item_shieldst
-        if checkComplexItem(item, armor_settings.shield, armor_settings.other_mats, armor_settings.mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_shieldst
+        --if checkComplexItem(item, armor_settings.shield, armor_settings.other_mats, armor_settings.mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
 
     local bars_blocks_settings = stockpile.settings.bars_blocks
     -- Bars/Blocks Category --
     if df.item_barst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is bar')
-        ---@cast item df.item_barst
-        if checkAllMaterials(item, bars_blocks_settings.bars_other_mats, bars_blocks_settings.bars_mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_barst
+        --if checkAllMaterials(item, bars_blocks_settings.bars_other_mats, bars_blocks_settings.bars_mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
     if df.item_blocksst:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is block')
-        ---@cast item df.item_blocksst
-        if checkAllMaterials(item, bars_blocks_settings.blocks_other_mats, bars_blocks_settings.blocks_mats) then
-            return true
-        else
-            return false
-        end
+        -----@cast item df.item_blocksst
+        --if checkAllMaterials(item, bars_blocks_settings.blocks_other_mats, bars_blocks_settings.blocks_mats) then
+        --    return true
+        --else
+        --    return false
+        --end
     end
 
     -- Cloth Category --
@@ -238,6 +292,26 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Food Category --
 
     -- Furniture/siege ammo Category --
+    local furniture_settings = stockpile.settings.furniture
+    if item:isFurniture(false) and not dfhack.items.getContainedItems(item) then
+        local item_type_name = df.item_type[item:getType()]
+        RL.print_log_mod(GLOBAL_KEY, 'Item ' .. item.id .. ' is furniture with type ' .. item_type_name)
+        ---@cast item df.item_floodgatest
+        local formatted_types = converTypesToIntegers(furniture_settings.type)
+        if formatted_types[item:getType()] == 1 then
+            if checkAllMaterials(item, furniture_settings.other_mats, furniture_settings.mats) then
+                local coord = RL.stockpileHasFreeTile(stockpile)
+                return coord
+            else
+                RL.print_log_mod(GLOBAL_KEY, item_type_name .. ' with material '
+                    .. item.mat_type .. ' ' .. item.mat_index .. ' is not allowed to be collected. Skip...')
+                return false
+            end
+        else
+            RL.print_log_mod(GLOBAL_KEY, item_type_name .. ' is not allowed to be collected')
+            return false
+        end
+    end
 
     -- Gems Category --
 
@@ -267,20 +341,20 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Sheet Category --
 
     -- Stone Category --
-    -- Better to turn it off until wheelbarrow will be implemented
-    --if df.item_boulderst:is_instance(item) then
-    --    RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
-    --    ---@cast item df.item_boulder
-    --    local mats = stockpile.settings.stone.mats
-    --    if #mats == 0 then
-    --        return false
-    --    end
-    --    if mats[item.mat_index] == 1 then
-    --        return true
-    --    else
-    --        return false
-    --    end
-    --end
+    if df.item_boulderst:is_instance(item) then
+        RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
+        ---@cast item df.item_boulder
+        local mats = stockpile.settings.stone.mats
+        if #mats == 0 then
+            return false
+        end
+        if mats[item.mat_index] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or false
+        else
+            return false
+        end
+    end
 
     -- Weapon/traps comps Category --  
 
@@ -311,12 +385,12 @@ end
 ---@param coord df.coord
 ---@return boolean
 function RL.isCoordUsedByOtherJobs(coord)
-    RL.print_log_mod(GLOBAL_KEY, 'Check if coord used by other jobs...')
+    --RL.print_log_mod(GLOBAL_KEY, 'Check if coord used by other jobs...')
     local job_next = df.global.world.jobs.list.next
     while job_next do
         local job = job_next.item
         if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
-            RL.print_log_mod(GLOBAL_KEY, 'Coord is used by other job. Skip...')
+            --RL.print_log_mod(GLOBAL_KEY, 'Coord is used by other job. Skip...')
             return true
         end
         job_next = job_next.next
@@ -385,6 +459,7 @@ end
 ---@return df.job
 function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     local job = df.job:new()
+    local wheelbarrow_item
     dfhack.job.linkIntoWorld(job, true)
     job.job_type = job_type
 
@@ -393,12 +468,25 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     job.pos.z = job_pos.z
     dfhack.job.addGeneralRef(job, df.general_ref_type.BUILDING_HOLDER, building.id)
     dfhack.job.attachJobItem(job, item, df.job_role_type.Hauled, 0, -1)
+    ---@cast building df.building_stockpilest
+    if (df.building_stockpilest:is_instance(building) and building.storage.max_wheelbarrows > 0) then
+        wheelbarrow_item = RL.findWheelbarrow(building)
+        if wheelbarrow_item then
+            dfhack.job.attachJobItem(job, wheelbarrow_item, df.job_role_type.PushHaulVehicle, 0, -1)
+        else
+            return job
+        end
+    end
     local unit = RL.findAvailableLaborer(building, burrow)
     if unit then
         dfhack.job.addWorker(job, unit)
-        dfhack.units.setPathGoal(unit, item.pos, df.unit_path_goal.StoreItem)
-        job.items[0].flags.is_fetching = true
-        job.flags.fetching = true
+        if (df.building_stockpilest:is_instance(building) and building.storage.max_wheelbarrows > 0) then
+            dfhack.units.setPathGoal(unit, wheelbarrow_item.pos, df.unit_path_goal.SeekItemForStorage)
+        else
+            dfhack.units.setPathGoal(unit, item.pos, df.unit_path_goal.StoreItem)
+            job.items[0].flags.is_fetching = true
+            job.flags.fetching = true
+        end
     end
     return job
 end
@@ -410,7 +498,7 @@ end
 ---@param building df.building
 ---@return df.coord[]
 function RL.collectAllTiles(building)
-    RL.print_log_mod(GLOBAL_KEY, 'Collecting tiles for building    '..building.id)
+    --RL.print_log_mod(GLOBAL_KEY, 'Collecting tiles for building '..building.id)
     local all_tiles = {}
     for y = building.y1, building.y2 do
         for x = building.x1, building.x2 do
@@ -425,14 +513,28 @@ function RL.collectAllTiles(building)
             end
         end
     end
-    RL.print_log_mod(GLOBAL_KEY, 'Collected ' .. #all_tiles .. ' tiles for building    ' .. building.id)
+    --RL.print_log_mod(GLOBAL_KEY, 'Collected ' .. #all_tiles .. ' tiles for building ' .. building.id)
     return all_tiles
+end
+
+---@param stockpile df.building_stockpilest
+---@return df.item_toolst | nil
+function RL.findWheelbarrow(stockpile)
+    local tool_ids = stockpile.storage.container_item_id
+    for _, id in pairs(tool_ids) do
+        local item = df.item.find(id)
+        ---@cast item df.item_toolst
+        if not item then return nil end
+        if df.item_type.TOOL == item:getType() and item.subtype.subtype == 17 then
+            return item
+        end
+    end
 end
 
 ---@param stockpile df.building_stockpilest
 ---@return df.coord | boolean
 function RL.stockpileHasFreeTile(stockpile)
-    RL.print_log_mod(GLOBAL_KEY, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
+    --RL.print_log_mod(GLOBAL_KEY, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
     local tiles = RL.collectAllTiles(stockpile)
     for _, tile in pairs(tiles) do
         local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
@@ -448,9 +550,13 @@ end
 ---@return boolean
 ---Checks if stockpile has place for any possible material
 function RL.stockpileHasAnyAvailableSpace(stockpile)
-    RL.print_log_mod(GLOBAL_KEY, 'Checking if stockpile has any available space')
+    --RL.print_log_mod(GLOBAL_KEY, 'Checking if stockpile has any available space')
     if #stockpile.settings.wood.mats > 0
-        or #stockpile.settings.corpses.corpses > 0 then
+        or #stockpile.settings.corpses.corpses > 0
+        or (#stockpile.settings.furniture.type > 0
+            and #stockpile.settings.furniture.mats > 0
+            and check_if_any(stockpile.settings.furniture.other_mats, 1))
+        or #stockpile.settings.stone.mats > 0 then
         if RL.stockpileHasFreeTile(stockpile) then
             return true
         else
