@@ -5,3 +5,4 @@
 ---@field stockpile_flag building_stockpile_flag
 ---@field stockpile_number integer
 ---@field linked_stops hauling_stop[]
+---@field find fun(id: integer): df.building_stockpilest
