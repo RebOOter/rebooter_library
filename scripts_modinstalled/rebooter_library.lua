@@ -245,16 +245,18 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Corpses Category --
     if df.item_corpsest:is_instance(item) then
-        RL.print_log_mod(GLOBAL_KEY, 'Item is corpse')
+        RL.print_log_mod(GLOBAL_KEY, 'Item ' .. item.id .. ' is corpse')
         ---@cast item df.item_corpsest
         local corpses = stockpile.settings.corpses.corpses
         if #corpses == 0 then
+            RL.print_log_mod(GLOBAL_KEY, 'Stockpile will not collect corpses. Skip...')
             return false
         end
         if corpses[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or false
         else
+            RL.print_log_mod(GLOBAL_KEY, 'Corpse with type ' .. item.race .. ' is not allowed to be collected. Skip...')
             return false
         end
     end
@@ -314,6 +316,7 @@ function RL.isCoordUsedByOtherJobs(coord)
     while job_next do
         local job = job_next.item
         if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
+            RL.print_log_mod(GLOBAL_KEY, 'Coord is used by other job. Skip...')
             return true
         end
         job_next = job_next.next

@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-return, unused-local
 ---@class df.item: df.base_class
 ---@field pos df.coord
----@field flags item_flags
+---@field flags df.item_flags
 ---@field flags2 item_flags2
 ---@field age integer
 ---@field id integer

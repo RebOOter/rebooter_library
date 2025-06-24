@@ -1,0 +1,31 @@
+---@class df.item_flags
+---@field on_ground boolean @ Item on ground
+---@field in_job boolean @ Item currently being used in a job
+---@field hostile boolean @ Item owned by hostile
+---@field in_inventory boolean @ Item in a creature, workshop or container inventory
+---@field removed boolean @ completely invisible and with no position
+---@field in_building boolean @ Part of a building (including mechanisms, bodies in coffins)
+---@field container boolean @ Set on anything that contains or contained items?
+---@field dead_dwarf boolean @ Dwarfs dead body or body part
+---@field rotten boolean @ Rotten food
+---@field spider_web boolean @ Thread in spider web
+---@field construction boolean @ Material used in construction
+---@field encased boolean @ Item encased in ice or obsidian
+---@field murder boolean @ Implies murder - used in fell moods
+---@field foreign boolean @ Item is imported
+---@field trader boolean @ Item ownwed by trader
+---@field owned boolean @ Item is owned by a dwarf
+---@field garbage_collect boolean @ Marked for deallocation by DF it seems
+---@field artifact boolean @ Artifact
+---@field forbid boolean @ Forbidden item
+---@field already_uncategorized boolean @ bay12: NONGLOBAL_DELETE
+---@field dump boolean @ Designated for dumping
+---@field on_fire boolean @ Indicates if item is on fire, Will Set Item On Fire if Set!
+---@field melt boolean @ Designated for melting, if applicable
+---@field hidden boolean @ Hidden item
+---@field use_recorded boolean @ transient in unit.used_items update
+---@field artifact_mood boolean @ created by mood/named existing item
+---@field temps_computed boolean @ melting/boiling/ignite/etc. points
+---@field weight_computed boolean
+---@field top_open boolean
+---@field from_worldgen boolean @ bay12: DO_NOT_RETAIN_IN_CREATION_ZONE
