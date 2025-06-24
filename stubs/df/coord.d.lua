@@ -1,4 +1,4 @@
----@class df.coord
+---@class df.coord: df.base_class
 ---@field x integer
 ---@field y integer
 ---@field z integer

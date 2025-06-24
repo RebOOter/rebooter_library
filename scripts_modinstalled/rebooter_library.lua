@@ -94,7 +94,7 @@ end
 -- Check if item could be stored in the stockpile and return coordinates where to put this item
 -- Pay attention that it won't check quality filters of the stockpile
 function RL.isItemCouldBeStored(item, stockpile)
-    RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
+    --RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
         RL.print_log_mod(GLOBAL_KEY, 'Item is ammo')
@@ -252,7 +252,8 @@ function RL.isItemCouldBeStored(item, stockpile)
             return false
         end
         if corpses[item.race] == 1 then
-            return true
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or false
         else
             return false
         end
@@ -297,7 +298,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
 
-    RL.print_log_mod(GLOBAL_KEY, 'Unkown item or not implemented type of item. Stop processing...')
+    --RL.print_log_mod(GLOBAL_KEY, 'Unkown item or not implemented type of item. Stop processing...')
     return false
 end
 
@@ -308,12 +309,14 @@ end
 ---@param coord df.coord
 ---@return boolean
 function RL.isCoordUsedByOtherJobs(coord)
+    RL.print_log_mod(GLOBAL_KEY, 'Check if coord used by other jobs...')
     local job_next = df.global.world.jobs.list.next
     while job_next do
         local job = job_next.item
         if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
             return true
         end
+        job_next = job_next.next
     end
     return false
 end
@@ -382,7 +385,9 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     dfhack.job.linkIntoWorld(job, true)
     job.job_type = job_type
 
-    job.pos = job_pos
+    job.pos.x = job_pos.x
+    job.pos.y = job_pos.y
+    job.pos.z = job_pos.z
     dfhack.job.addGeneralRef(job, df.general_ref_type.BUILDING_HOLDER, building.id)
     dfhack.job.attachJobItem(job, item, df.job_role_type.Hauled, 0, -1)
     local unit = RL.findAvailableLaborer(building, burrow)
@@ -402,29 +407,51 @@ end
 ---@param building df.building
 ---@return df.coord[]
 function RL.collectAllTiles(building)
+    RL.print_log_mod(GLOBAL_KEY, 'Collecting tiles for building    '..building.id)
     local all_tiles = {}
     for y = building.y1, building.y2 do
         for x = building.x1, building.x2 do
             -- d_b
             local found_b = dfhack.buildings.findAtTile(x, y, building.z)
-            if (found_b.id == building.id) then
-                table.insert(all_tiles, {
-                    x = x, y = y, z = building.z
-                })
+            if found_b then
+                if found_b.id == building.id then
+                    table.insert(all_tiles, {
+                        x = x, y = y, z = building.z
+                    })
+                end
             end
         end
     end
+    RL.print_log_mod(GLOBAL_KEY, 'Collected ' .. #all_tiles .. ' tiles for building    ' .. building.id)
     return all_tiles
 end
 
 ---@param stockpile df.building_stockpilest
 ---@return df.coord | boolean
 function RL.stockpileHasFreeTile(stockpile)
+    RL.print_log_mod(GLOBAL_KEY, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
     local tiles = RL.collectAllTiles(stockpile)
     for _, tile in pairs(tiles) do
         local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
-        if not flags.item and RL.isCoordUsedByOtherJobs(tile) then
-            return {x = tile.x, y = tile.y, z = tile.z}
+        if not flags.item and not RL.isCoordUsedByOtherJobs(tile) then
+            return { x = tile.x, y = tile.y, z = tile.z }
+        end
+    end
+    return false
+end
+
+
+---@param stockpile df.building_stockpilest
+---@return boolean
+---Checks if stockpile has place for any possible material
+function RL.stockpileHasAnyAvailableSpace(stockpile)
+    RL.print_log_mod(GLOBAL_KEY, 'Checking if stockpile has any available space')
+    if #stockpile.settings.wood.mats > 0
+        or #stockpile.settings.corpses.corpses > 0 then
+        if RL.stockpileHasFreeTile(stockpile) then
+            return true
+        else
+            return false
         end
     end
     return false
