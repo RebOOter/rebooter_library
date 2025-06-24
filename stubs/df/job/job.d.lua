@@ -5,7 +5,7 @@
 ---@field posting_index integer
 ---@field job_type df.job_type
 ---@field job_subtype integer
----@field pos coord
+---@field pos df.coord
 ---@field completion_timer integer
 ---@field maxdur integer
 ---@field flags df.job_flags

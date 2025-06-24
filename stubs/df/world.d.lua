@@ -1,0 +1,176 @@
+---@class df.world
+---@field event df.event_handlerst
+---@field effects df.effect_handlerst
+---@field coin_batches df.coinbatch_handlerst
+---@field populations df.wilderpop_handlerst
+---@field manager_orders df.workquota_handlerst
+---@field mandates df.mandate_handlerst
+---@field entities df.entity_handlerst
+---@field units df.unit_handlerst
+---@field unit_chunks df.unit_chunk_handlerst
+---@field art_image_chunks df.art_image_chunk_handlerst
+---@field nemesis df.nemesis_handlerst
+---@field items df.item_handlerst
+---@field artifacts df.artifact_handlerst
+---@field jobs df.job_handler
+---@field projectiles df.proj_handlerst
+---@field buildings df.building_handler
+---@field machines df.machine_handler
+---@field flow_guides df.flow_guide_handlerst
+---@field stockpile df.storage_handlerst
+---@field plants df.veg_handlerst
+---@field enemy_status_cache df.unit_reaction_handlerst
+---@field schedules df.schedule_handlerst
+---@field squads df.squad_handlerst
+---@field formations df.formation_handlerst
+---@field activities df.activity_handlerst
+---@field status df.announcement_handlerst
+---@field interaction_instances df.interaction_instance_handlerst
+---@field written_contents df.written_content_handlerst
+---@field identities df.identity_handlerst
+---@field incidents df.incident_handlerst
+---@field crimes df.crime_handlerst
+---@field vehicles df.vehicle_handlerst
+---@field armies df.army_handlerst
+---@field army_controllers df.army_controller_handlerst
+---@field army_tracking_info df.army_tracking_info_handlerst
+---@field cultural_identities df.cultural_identity_handlerst
+---@field agreements df.agreement_handlerst
+---@field poetic_forms df.poetic_form_handlerst
+---@field musical_forms df.musical_form_handlerst
+---@field dance_forms df.dance_form_handlerst
+---@field scales df.scale_handlerst
+---@field rhythms df.rhythm_handlerst
+---@field occupations df.occupation_handlerst
+---@field belief_systems df.belief_system_handlerst
+---@field image_sets df.image_set_handlerst
+---@field divination_sets df.divination_set_handlerst
+---@field selected_building df.building
+---@field selected_stockpile_type df.stockpile_category
+---@field update_selected_building boolean
+---@field building_width integer
+---@field building_height integer
+---@field selected_direction df.screw_pump_direction[4]
+---@field map.map_blocks df.map_block[]
+---@field map.block_index df.map_block[][][][]
+---@field map.map_block_columns df.map_block_column[]
+---@field map.column_index df.map_block_column[][][]
+---@field map.x_count_block integer
+---@field map.y_count_block integer
+---@field map.z_count_block integer
+---@field map.x_count integer
+---@field map.y_count integer
+---@field map.z_count integer
+---@field map.region_x integer
+---@field map.region_y integer
+---@field map.region_z integer
+---@field map.distance_lookup integer[53][53] @ Appears to be precomputed rounded integer distances
+---@field profession_skills.primary df.job_skill[][]
+---@field profession_skills.secondary df.job_skill[][]
+---@field math.approx {cos: integer, sin: integer}[40] @ 10 * cosine/sine of the index in units of 1/40 of a circle, rounded towards 0
+---@field math.cos number[181] @ 100 * cosine of the index in degrees
+---@field math.hypot number[11][11] @ square root of the sum of the squares of the indices
+---@field map_extras.rotation integer
+---@field map_extras.z_level_flags df.z_level_flags[]
+---@field map_extras.inactive_spoor_bse df.block_square_event_spoorst[]
+---@field map_extras.inactive_spoor_bse_abs_smm_x integer[]
+---@field map_extras.inactive_spoor_bse_abs_smm_y integer[]
+---@field map_extras.inactive_spoor_bse_abs_smm_z integer[]
+---@field world_data df.world_data
+---@field worldgen_status df.world_generatorst
+---@field orphaned_flow_pool df.flow_reuse_pool
+---@field raws.material_templates df.material_template_handlerst
+---@field raws.inorganics df.inorganic_material_definition_handlerst
+---@field raws.plants df.plant_material_definition_handlerst
+---@field raws.tissue_templates df.tissue_template_handlerst
+---@field raws.body_detail_plans df.body_detail_plan_handlerst
+---@field raws.creaturebody df.creaturebody_handlerst
+---@field raws.creature_variations df.creature_variation_handlerst
+---@field raws.creatures df.creature_handler
+---@field raws.itemdefs df.itemdef_handlerst
+---@field raws.entities df.entity_def_handlerst
+---@field raws.language df.language_handlerst
+---@field raws.descriptors df.descriptor_handlerst
+---@field raws.reactions df.reaction_handlerst
+---@field raws.buildings df.building_def_handlerst
+---@field raws.interactions df.interaction_handlerst
+---@field raws.text_set df.text_set_handlerst
+---@field raws.music df.music_handlerst
+---@field raws.sound df.sound_handlerst
+---@field raws.mat_table df.special_mat_table
+---@field area_grasses.world_tiles df.coord2d_path @ local_wilderpop
+---@field area_grasses.layer_grasses df.grass_selectionst[] @ one per layer per world tile
+---@field flow_engine.rnd_16 integer @ flow_direction
+---@field flow_engine.rnd_256 integer @ flow_index
+---@field flow_engine.rnd_pos integer @ flow_index_count
+---@field flow_engine.rnd_x integer[16]
+---@field flow_engine.rnd_y integer[16]
+---@field flow_engine.block_idx integer @ refers to $$._global.map.map_blocks[$]
+---@field flow_engine.sink_checked df.coord_path
+---@field flow_engine.sink_checked_timer integer[]
+---@field building_uses df.building_use_controllerst
+---@field flags df.world_flags
+---@field original_save_version df.save_version @ DF version on which the world was first created
+---@field worldgen.version string
+---@field worldgen.next_unit_chunk_id integer
+---@field worldgen.next_unit_chunk_offset integer
+---@field worldgen.next_art_image_chunk_id integer
+---@field worldgen.next_art_image_chunk_offset integer
+---@field worldgen.worldgen_parms df.worldgen_parms
+---@field history_rng df.hash_rngst
+---@field history df.world_history
+---@field entity_populations df.entity_population[]
+---@field daily_events df.world_yearly_schedulest
+---@field random_object_info df.random_object_infost
+---@field fake_world_info df.fake_world_infost
+---@field family_info df.family_infost
+---@field viewport df.map_viewport
+---@field artifact_history_suppression_count integer
+---@field reindex_pathfinding boolean @ forces map_block.passable to be recomputed
+---@field frame_counter integer @ increases by 1 every time . is pressed
+---@field orphaned_flows df.flow_info[] @ flows that are not tied to a map_block
+---@field pathfinder.heap df.open_list_binary_heapst
+---@field pathfinder.pathstart integer
+---@field pathfinder.pathclear integer
+---@field pathfinder.direction_start integer
+---@field pathfinder.direction_clear integer
+---@field pathfinder.next_levelmap integer
+---@field pathfinder.cur_veg_move_stage integer
+---@field pathfinder.preparing_map boolean
+---@field save_version integer
+---@field cur_savegame.save_dir string
+---@field cur_savegame.world_header df.shared_world_headerst
+---@field cur_savegame.civ_history_complete boolean
+---@field cur_savegame.must_end_civ_history boolean
+---@field rod_loader df.rod_loaderst
+---@field object_loader df.object_loaderst
+---@field temp_pop_breeding_start integer
+---@field features.wg_market_site df.world_site[]
+---@field features.map_features df.feature_init[]
+---@field features.feature_x integer[]
+---@field features.feature_y integer[]
+---@field features.feature_local_idx integer[] @ same as map_block.local_feature
+---@field features.feature_global_idx integer[] @ ref-target='world_underground_region'
+---@field features.newpop_feature df.feature_init[]
+---@field features.newpop_ax integer[]
+---@field features.newpop_ay integer[]
+---@field features.newpop_dx integer[]
+---@field features.newpop_dy integer[]
+---@field features.newpop_feature_ind integer[]
+---@field features.newpop_feature_layer integer[]
+---@field features.newpop_feature_layer_sq integer[]
+---@field features.newpop_layer_depth integer[]
+---@field features.newpop_sx integer[]
+---@field features.newpop_sy integer[]
+---@field features.newpop_min_z integer[]
+---@field features.newpop_mid_z integer[]
+---@field features.newpop_max_z integer[]
+---@field features.newpop_from_saved_pop boolean[]
+---@field allow_announcements boolean @ announcements will not be processed at all if false
+---@field suppress_minevent_announcements boolean
+---@field updating_region boolean
+---@field arena df.arenast
+---@field dungeon df.dungeonst
+---@field attack_chance_info df.attack_chance_infost
+---@field active_tutorial df.active_tutorialst
+df.world = {}

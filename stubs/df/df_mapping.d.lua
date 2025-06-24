@@ -20,6 +20,7 @@
 ---@field item_barst df.item_barst
 ---@field item_blocksst df.item_blocksst
 ---@field item_woodst df.item_woodst
+---@field item_corpsest df.item_corpsest
 ---@field item_boulderst df.item_boulder
 ---@field item_crafted df.item_crafted
 ---@field item_constructed df.item_constructed

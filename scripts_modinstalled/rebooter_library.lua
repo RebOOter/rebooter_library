@@ -90,8 +90,8 @@ end
 
 ---@param item df.item
 ---@param stockpile df.building_stockpilest
----@return boolean
--- Check if item could be stored in the stockpile
+---@return df.coord | boolean
+-- Check if item could be stored in the stockpile and return coordinates where to put this item
 -- Pay attention that it won't check quality filters of the stockpile
 function RL.isItemCouldBeStored(item, stockpile)
     RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
@@ -290,7 +290,8 @@ function RL.isItemCouldBeStored(item, stockpile)
             return false
         end
         if mats[item.mat_index] == 1 then
-            return true
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or false
         else
             return false
         end
@@ -303,6 +304,19 @@ end
 ---------------------
 -- Jobs processing --
 ---------------------
+
+---@param coord df.coord
+---@return boolean
+function RL.isCoordUsedByOtherJobs(coord)
+    local job_next = df.global.world.jobs.list.next
+    while job_next do
+        local job = job_next.item
+        if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
+            return true
+        end
+    end
+    return false
+end
 
 ---@param unit df.unit
 ---@return boolean
@@ -359,15 +373,16 @@ function RL.itemHasJob(item)
 end
 
 ---@param job_type df.job_type
+---@param job_pos df.coord
 ---@param building df.building
 ---@param item df.item
 ---@return df.job
-function RL.createJobAndAssignUnit(job_type, building, burrow, item)
+function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     local job = df.job:new()
     dfhack.job.linkIntoWorld(job, true)
     job.job_type = job_type
 
-    job.pos = xyz2pos(building.centerx, building.centery, building.z)
+    job.pos = job_pos
     dfhack.job.addGeneralRef(job, df.general_ref_type.BUILDING_HOLDER, building.id)
     dfhack.job.attachJobItem(job, item, df.job_role_type.Hauled, 0, -1)
     local unit = RL.findAvailableLaborer(building, burrow)
@@ -408,7 +423,7 @@ function RL.stockpileHasFreeTile(stockpile)
     local tiles = RL.collectAllTiles(stockpile)
     for _, tile in pairs(tiles) do
         local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
-        if not flags.item then
+        if not flags.item and RL.isCoordUsedByOtherJobs(tile) then
             return {x = tile.x, y = tile.y, z = tile.z}
         end
     end

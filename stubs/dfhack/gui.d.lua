@@ -7,6 +7,10 @@ gui = {}
 ---@return df.building
 function gui.getSelectedStockpile(silent) end
 
+---@param silent boolean | nil
+---@return df.item
+function gui.getSelectedItem(silent) end
+
 ---@param skip_dismissed boolean
 ---@param viewscreen string | nil
 ---@return df.viewscreen
