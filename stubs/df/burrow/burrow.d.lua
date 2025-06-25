@@ -4,9 +4,9 @@
 ---@field tile integer
 ---@field fg_color integer
 ---@field bg_color integer
----@field block_x integer[]
----@field block_y integer[]
----@field block_z integer[]
+---@field block_x df.base_vector<integer, integer>
+---@field block_y df.base_vector<integer, integer>
+---@field block_z df.base_vector<integer, integer>
 ---@field units integer[]
 ---@field flags df.burrow_flag
 ---@field solid_texpos integer
