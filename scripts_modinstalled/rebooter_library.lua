@@ -58,6 +58,14 @@ function make_all_keys_lower(tbl)
     return new_array
 end
 
+function count_table(table)
+    local counter = 0
+    for _, _ in pairs(table) do
+        counter = counter + 1
+    end
+    return counter
+end
+
 -----------------------
 -- Logging Utilities --
 -----------------------
