@@ -2,13 +2,16 @@
 ---@class df.base_class
 local base_class = {}
 
----@param object df.base_class
+---@generic T
+---@param object T
 ---@return boolean
 function base_class:is_instance(object) end
 
----@return df.base_class
+---@generic T
+---@return T
 function base_class:new() end
 
----@param obj df.base_class
----@return df.base_class
+---@generic T
+---@param obj T
+---@return T
 function base_class:assign(obj) end
