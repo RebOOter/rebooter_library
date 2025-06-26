@@ -439,44 +439,45 @@ function RL.isItemCouldBeStored(item, stockpile)
     -- Refuse Category --
     -- Probably don't need to handle corpses here
     -- And item types as well
-    if RL.isRefuseBodyPart(item) then
+    local refuse = stockpile.settings.refuse
+    if RL.isRefuseBodyPart(item) and #refuse.body_parts > 0 and df.item_corpsepiecest:is_instance(item) then
         ---@cast item df.item_corpsepiecest
         if stockpile.settings.refuse.body_parts[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isTooth(item) then
+    if RL.isTooth(item) and #refuse.teeth > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.teeth[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isSkull(item) then
+    if RL.isSkull(item) and #refuse.skulls > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.skulls[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isBone(item) then
+    if RL.isBone(item) and #refuse.bones > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.bones[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isShell(item) then
+    if RL.isShell(item) and #refuse.shells > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.shells[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isHorn(item) or RL.isHoof(item) then
+    if (RL.isHorn(item) or RL.isHoof(item)) and #refuse.horns > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.horns[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         end
     end
-    if RL.isWool(item) or RL.isHair(item) then
+    if (RL.isWool(item) or RL.isHair(item)) and #refuse.hair > 0 and df.item_corpsepiecest:is_instance(item) then
         if stockpile.settings.refuse.hair[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
