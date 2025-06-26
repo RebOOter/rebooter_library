@@ -90,7 +90,7 @@
 ---@field tendons_heal integer
 ---@field ligaments_heal integer
 ---@field weight massst
----@field burrows integer[]
+---@field burrows df.base_vector<integer, integer>
 ---@field inactive_burrows integer[]
 ---@field vision_cone unit_vision_arcst
 ---@field occupations occupation[]
