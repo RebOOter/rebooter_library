@@ -10,8 +10,8 @@ function units.isDead(unit) end
 ---@return string
 function units.getReadableName(unit) end
 
----@param includeVisitors boolean
----@param includeChildren boolean
+---@param includeVisitors boolean?
+---@param includeChildren boolean?
 ---@return df.unit[]
 function units.getCitizens(includeVisitors, includeChildren) end
 
