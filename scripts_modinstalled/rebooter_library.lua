@@ -666,6 +666,21 @@ function RL.collectAllTiles(building)
     return all_tiles
 end
 
+---@param building df.building
+---@return df.coord | nil
+function RL.findAnyTile(building)
+    for y = building.y1, building.y2 do
+        for x = building.x1, building.x2 do
+            local found_b = dfhack.buildings.findAtTile(x, y, building.z)
+            if found_b then
+                if found_b.id == building.id then
+                    return { x = x, y = y, z = building.z }
+                end
+            end
+        end
+    end
+end
+
 ---@param stockpile df.building_stockpilest
 ---@return df.item_toolst | nil
 function RL.findWheelbarrow(stockpile)
