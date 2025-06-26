@@ -35,6 +35,7 @@
 ---@field item_chairst df.item_chairst
 ---@field item_coffinst df.item_coffinst
 ---@field item_corpsest df.item_corpsest
+---@field item_corpsepiecest df.item_corpsepiecest
 ---@field item_constructed df.item_constructed
 ---@field item_crafted df.item_crafted
 ---@field item_clothst df.item_clothst

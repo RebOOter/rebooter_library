@@ -96,7 +96,7 @@ end
 ---@return boolean
 local function checkItemInMats(item, mats)
     local token = string.lower(dfhack.matinfo.decode(item):getToken())
-    local lowered_mats = make_all_keys_lower(mats)
+    local lowered_mats = RL.make_all_keys_lower(mats)
     for _, mat in ipairs(lowered_mats) do
         if string.find(token, mat) then
             return true
@@ -114,7 +114,7 @@ local function checkAllMaterials(item, other_mats, inorganic)
         return false
     end
     -- Because organic material could not be found by id
-    local mats = get_keys_as_strings(other_mats)
+    local mats = RL.get_keys_as_strings(other_mats)
     if checkItemInMats(item, mats) then
         return true
     end
@@ -146,6 +146,98 @@ local function checkComplexItem(item, type, other_mats, inorganic)
         mat_check = true
     end
     if type_check and mat_check then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isRefuseBodyPart(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'SCALE') or string.find(token, 'FEATHER')
+        or string.find(token, 'CARTILAGE') or string.find(token, 'CLAW')
+        or string.find(token, 'NERVE') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isTooth(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'TOOTH') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isSkull(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'SKULL') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isBone(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'BONE') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isShell(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'SHELL') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isHorn(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'HORN') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isHoof(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'HOOF') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isHair(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'HAIR') then
+        return true
+    end
+    return false
+end
+
+---@param item df.item
+---@return boolean
+function RL.isWool(item)
+    local token = dfhack.matinfo.decode(item):getToken()
+    if string.find(token, 'WOOL') then
         return true
     end
     return false
@@ -346,6 +438,50 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Refuse Category --
     -- Probably don't need to handle corpses here
+    -- And item types as well
+    if RL.isRefuseBodyPart(item) then
+        ---@cast item df.item_corpsepiecest
+        if stockpile.settings.refuse.body_parts[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isTooth(item) then
+        if stockpile.settings.refuse.teeth[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isSkull(item) then
+        if stockpile.settings.refuse.skulls[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isBone(item) then
+        if stockpile.settings.refuse.bones[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isShell(item) then
+        if stockpile.settings.refuse.shells[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isHorn(item) or RL.isHoof(item) then
+        if stockpile.settings.refuse.horns[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
+    if RL.isWool(item) or RL.isHair(item) then
+        if stockpile.settings.refuse.hair[item.race] == 1 then
+            local coord = RL.stockpileHasFreeTile(stockpile)
+            return coord and coord or nil
+        end
+    end
 
     -- Sheet Category --
 
@@ -466,7 +602,7 @@ end
 ---@param job_pos df.coord
 ---@param building df.building
 ---@param item df.item
----@return df.job
+---@return df.job | nil
 function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     RL.print_log_mod(GLOBAL_KEY, 'Starting to create job...')
     local job = df.job:new()
@@ -485,7 +621,8 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
         if wheelbarrow_item then
             dfhack.job.attachJobItem(job, wheelbarrow_item, df.job_role_type.PushHaulVehicle, 0, -1)
         else
-            return job
+            dfhack.job.removeJob(job)
+            return nil
         end
     end
     local unit = RL.findAvailableLaborer(building, burrow)
@@ -537,10 +674,11 @@ function RL.findWheelbarrow(stockpile)
         local item = df.item.find(id)
         ---@cast item df.item_toolst
         if not item then return nil end
-        if df.item_type.TOOL == item:getType() and item.subtype.subtype == 17 then
+        if df.item_type.TOOL == item:getType() and item.subtype.subtype == 17 and not RL.itemHasJob(item) then
             return item
         end
     end
+    return nil
 end
 
 ---@param stockpile df.building_stockpilest
@@ -566,9 +704,11 @@ function RL.stockpileHasAnyAvailableSpace(stockpile)
     if #stockpile.settings.wood.mats > 0
         or #stockpile.settings.corpses.corpses > 0
         or (#stockpile.settings.furniture.type > 0
-            and #stockpile.settings.furniture.mats > 0
-            and check_if_any(stockpile.settings.furniture.other_mats, 1))
-        or #stockpile.settings.stone.mats > 0 then
+            and (#stockpile.settings.furniture.mats > 0
+            or RL.check_if_any(stockpile.settings.furniture.other_mats, 1)))
+        or #stockpile.settings.stone.mats > 0
+        or (#stockpile.settings.refuse.body_parts > 0
+            or #stockpile.settings.refuse.teeth > 0) then
         if RL.stockpileHasFreeTile(stockpile) then
             return true
         else

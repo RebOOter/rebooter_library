@@ -20,3 +20,6 @@ function job.attachJobItem(job, item, role, filter_idx, insert_idx) end
 ---@param job df.job
 ---@param new_id integer | boolean
 function job.linkIntoWorld(job, new_id) end
+
+---@param job df.job
+function job.removeJob(job) end

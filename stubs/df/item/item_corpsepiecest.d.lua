@@ -1,0 +1,1 @@
+---@class df.item_corpsepiecest: df.item_body_component
