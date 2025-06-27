@@ -128,14 +128,15 @@ function iterable_proxy:replaceKeyArray(array)
     return self
 end
 
----@return any | nil
+---@return any, any | nil
 function iterable_proxy:next()
     local result = self.key_array[self.iterable_array[self.current_index]]
+    local key = self.iterable_array[self.current_index]
     if not result then
         return nil
     end
     self.current_index = self.current_index + 1
-    return result
+    return key, result
 end
 
 ---@param key any

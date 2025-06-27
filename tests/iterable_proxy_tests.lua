@@ -58,23 +58,40 @@ local function test_iterable_proxy()
     assert_equal(#empty_proxy.iterable_array, 0, "Empty proxy should have empty iterable_array")
     assert_equal(empty_proxy.current_index, -1, "Empty proxy should have current_index of -1")
 
-    -- Test next() method
+    -- Test next() method which now returns key, value pairs
+    local keys = {}
     local values = {}
-    local val = proxy:next()
-    table.insert(values, val)
-    val = proxy:next()
-    table.insert(values, val)
-    val = proxy:next()
+
+    local key, val = proxy:next()
+    table.insert(keys, key)
     table.insert(values, val)
 
-    -- Sort values since iteration order is not guaranteed
+    key, val = proxy:next()
+    table.insert(keys, key)
+    table.insert(values, val)
+
+    key, val = proxy:next()
+    table.insert(keys, key)
+    table.insert(values, val)
+
+    -- Sort both keys and values for consistent testing (since iteration order is not guaranteed)
+    table.sort(keys)
     table.sort(values)
+
+    -- Check that we got the expected keys
+    assert_equal(keys[1], "a", "First key should be 'a'")
+    assert_equal(keys[2], "b", "Second key should be 'b'")
+    assert_equal(keys[3], "c", "Third key should be 'c'")
+
+    -- Check that we got the expected values
     assert_equal(values[1], 1, "First value should be 1")
     assert_equal(values[2], 2, "Second value should be 2")
     assert_equal(values[3], 3, "Third value should be 3")
 
-    -- Test next() returns nil when at the end
-    assert_nil(proxy:next(), "next() should return nil when at the end")
+    -- Test next() returns nil, nil when at the end
+    local key, val = proxy:next()
+    assert_nil(key, "next() should return nil key when at the end")
+    assert_nil(val, "next() should return nil value when at the end")
 
     -- Test reset() method
     proxy:reset()
@@ -112,6 +129,18 @@ local function test_iterable_proxy()
     proxy:replaceKeyArray(replacement)
     assert_equal(#proxy.iterable_array, 3, "replaceKeyArray() should update iterable_array size")
     assert_equal(proxy.current_index, 1, "replaceKeyArray() should reset current_index to 1")
+
+    -- Test that next() returns correct key-value pairs after replacement
+    local keyValuePairs = {}
+    while true do
+        local k, v = proxy:next()
+        if not k then break end
+        keyValuePairs[k] = v
+    end
+
+    assert_equal(keyValuePairs.x, 10, "Should get correct value for key 'x'")
+    assert_equal(keyValuePairs.y, 20, "Should get correct value for key 'y'")
+    assert_equal(keyValuePairs.z, 30, "Should get correct value for key 'z'")
 
     -- Test removing the last element
     local single_proxy = rl.createIterableProxy({single = "value"})
