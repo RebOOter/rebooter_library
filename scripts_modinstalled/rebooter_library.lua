@@ -106,6 +106,8 @@ function iterable_proxy:new(array)
     for key, _ in pairs(array) do
         table.insert(it_array, key)
     end
+    ---@generic K, V
+    ---@type rl.iterable_proxy<K, V>
     return setmetatable({
         iterable_array = it_array,
         key_array = array,
@@ -133,6 +135,8 @@ function iterable_proxy:newSameFromIterable(array, value)
     if #it_array == 0 then
         index = -1
     end
+    ---@generic K, V
+    ---@type rl.iterable_proxy<K, V>
     return setmetatable({
         iterable_array = it_array,
         key_array = new_array,
