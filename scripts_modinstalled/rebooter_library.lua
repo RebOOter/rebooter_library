@@ -3,6 +3,7 @@
 GLOBAL_KEY = 'rebooter_library'
 
 ---@class RebooterLibrary
+---@field logger table
 RL = {}
 
 -------------------
@@ -76,8 +77,10 @@ RL.LOG_LEVEL_ENUM = {
     INFO = 1,
     DEBUG = 2,
 }
-
-RL.CURRENT_LOG_LEVEL = RL.LOG_LEVEL_ENUM.INFO
+---@class rl.logger
+---@field current_log_level rl.log_level
+logger = {}
+logger._index = logger
 
 ---@param key string
 ---@param message string
@@ -86,11 +89,21 @@ function RL.print_log_mod(key, message)
     print(result)
 end
 
-function RL.print_log_level(key, message_level, message)
-    if RL.CURRENT_LOG_LEVEL >= message_level then
+function logger:print_log_level(key, message_level, message)
+    if self.current_log_level >= message_level then
         local result = '[' .. key .. '] ' .. message
         print(result)
     end
+end
+
+function RL.createLogger(log_level)
+
+    local instance = {
+        current_log_level = log_level
+    }
+
+    setmetatable(instance, logger)
+    return instance
 end
 
 ---------------------
