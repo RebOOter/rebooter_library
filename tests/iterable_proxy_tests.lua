@@ -191,6 +191,37 @@ local function test_iterable_proxy()
     assert_equal(#single_proxy.iterable_array, 0, "Removing last element should result in empty array")
     assert_equal(single_proxy.current_index, -1, "Removing last element should set current_index to -1")
 
+    -- Test getIndex method
+    local indexed_test_table = {a = 1, b = 2, c = 3}
+    local indexed_proxy = rl.createIterableProxy(indexed_test_table)
+
+    -- Get all keys from the iterable_array
+    local key1 = indexed_proxy:getIndex(1)
+    local key2 = indexed_proxy:getIndex(2)
+    local key3 = indexed_proxy:getIndex(3)
+
+    -- Sort the keys to ensure consistent testing
+    local sorted_keys = {key1, key2, key3}
+    table.sort(sorted_keys)
+
+    -- Verify we got the expected keys
+    assert_equal(sorted_keys[1], "a", "getIndex(1-3) should return 'a' after sorting")
+    assert_equal(sorted_keys[2], "b", "getIndex(1-3) should return 'b' after sorting")
+    assert_equal(sorted_keys[3], "c", "getIndex(1-3) should return 'c' after sorting")
+
+    -- Test getIndex with out-of-bounds index
+    local out_of_bounds = indexed_proxy:getIndex(4)
+    assert_nil(out_of_bounds, "getIndex with out-of-bounds index should return nil")
+
+    -- Test getIndex with negative index
+    local negative_index = indexed_proxy:getIndex(-1)
+    assert_nil(negative_index, "getIndex with negative index should return nil")
+
+    -- Test getIndex with empty proxy
+    local empty_index_proxy = rl.createEmptyIterableProxy()
+    local empty_result = empty_index_proxy:getIndex(1)
+    assert_nil(empty_result, "getIndex on empty proxy should return nil")
+
     print("\n=== All iterable_proxy tests passed! ===\n")
 end
 

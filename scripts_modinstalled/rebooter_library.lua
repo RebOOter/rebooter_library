@@ -216,6 +216,15 @@ function iterable_proxy:clear()
     self.current_index = -1
 end
 
+---@param index integer
+function iterable_proxy:getIndex(index)
+    local result = self.iterable_array[index]
+    if not result then
+        return nil
+    end
+    return result
+end
+
 
 ---@return boolean
 function iterable_proxy:isClear()
