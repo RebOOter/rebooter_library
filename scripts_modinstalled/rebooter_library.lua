@@ -67,6 +67,137 @@ function RL.count_table(table)
     return counter
 end
 
+---@class rl.iterable_proxy
+---@field iterable_array table<integer, any>
+---@field key_array table<any, any>
+---@field current_index integer
+iterable_proxy = {}
+iterable_proxy.__index = iterable_proxy
+
+
+---@param array table<any, any>
+---@return rl.iterable_proxy | nil
+function RL.createIterableProxy(array)
+    return iterable_proxy:new(array)
+end
+
+---@return rl.iterable_proxy
+function RL.createEmptyIterableProxy()
+    return iterable_proxy:newEmpty()
+end
+
+---@param array table<any, any>
+---@return rl.iterable_proxy | nil
+function iterable_proxy:new(array)
+    local it_array = {}
+    if not array then
+        return nil
+    end
+    for key, _ in pairs(array) do
+        table.insert(it_array, key)
+    end
+    return setmetatable({
+        iterable_array = it_array,
+        key_array = array,
+        current_index = 1
+    }, iterable_proxy)
+end
+
+---@return rl.iterable_proxy
+function iterable_proxy:newEmpty()
+    return setmetatable({
+        iterable_array = {},
+        key_array = {},
+        current_index = -1
+    }, iterable_proxy)
+end
+
+---@param array table<any, any>
+---@return rl.iterable_proxy
+function iterable_proxy:replaceKeyArray(array)
+    local new_iterable = {}
+    if not array then
+        return self
+    end
+    for key, _ in pairs(array) do
+        table.insert(new_iterable, key)
+    end
+    self.iterable_array = new_iterable
+    self.key_array = array
+    self.current_index = 1
+    return self
+end
+
+---@return any | nil
+function iterable_proxy:next()
+    local result = self.key_array[self.iterable_array[self.current_index]]
+    if not result then
+        return nil
+    end
+    self.current_index = self.current_index + 1
+    return result
+end
+
+---@param key any
+---@param value any
+function iterable_proxy:add(key, value)
+    self.key_array[key] = value
+    table.insert(self.iterable_array, key)
+end
+
+function iterable_proxy:reset()
+    self.current_index = 1
+end
+
+---@param key any
+function iterable_proxy:removeByKey(key)
+    if not self.key_array[key] then
+        return
+    end
+    self.key_array[key] = nil
+
+    for i, k in ipairs(self.iterable_array) do
+        if k == key then
+            table.remove(self.iterable_array, i)
+            if i < self.current_index then
+                self.current_index = self.current_index - 1
+            end
+            break
+        end
+    end
+    
+    if #self.iterable_array == 0 then
+        self.current_index = -1
+    end
+end
+
+function iterable_proxy:clear()
+    self.key_array = {}
+    self.iterable_array = {}
+    self.current_index = -1
+end
+
+
+---@return boolean
+function iterable_proxy:isClear()
+    if self.current_index == -1 then
+        return true
+    else
+        return false
+    end
+end
+
+---@param tbl table
+---@return table
+-- Creatte a iterable sequence of element base on input array's keys
+-- to make it possible to iterate them without any pain
+function RL.make_iterable_table(tbl)
+    local result = {}
+    for key, _ in pairs(tbl) do
+        table.insert(result, key)
+    end
+    return result
+end
 -----------------------
 -- Logging Utilities --
 -----------------------
@@ -80,7 +211,7 @@ RL.LOG_LEVEL_ENUM = {
 ---@class rl.logger
 ---@field current_log_level rl.log_level
 logger = {}
-logger._index = logger
+logger.__index = logger
 
 ---@param key string
 ---@param message string
