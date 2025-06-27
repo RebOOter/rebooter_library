@@ -52,11 +52,21 @@ local function test_iterable_proxy()
     local nil_proxy = rl.createIterableProxy(nil)
     assert_nil(nil_proxy, "Creating proxy with nil should return nil")
 
+    -- Test creating same-value proxy with nil array
+    local nil_same_proxy = rl.createSameFromIterableIterableProxy(nil, "value")
+    assert_nil(nil_same_proxy, "Creating same-value proxy with nil array should return nil")
+
     -- Test creating an empty iterable proxy
     local empty_proxy = rl.createEmptyIterableProxy()
     assert_equal(#empty_proxy.key_array, 0, "Empty proxy should have empty key_array")
     assert_equal(#empty_proxy.iterable_array, 0, "Empty proxy should have empty iterable_array")
     assert_equal(empty_proxy.current_index, -1, "Empty proxy should have current_index of -1")
+
+    -- Test creating same-value proxy with empty array
+    local empty_array = {}
+    local empty_same_proxy = rl.createSameFromIterableIterableProxy(empty_array, "value")
+    assert_equal(#empty_same_proxy.iterable_array, 0, "Same-value proxy with empty array should have empty iterable_array")
+    assert_equal(empty_same_proxy.current_index, -1, "Same-value proxy with empty array should have current_index of -1")
 
     -- Test next() method which now returns key, value pairs
     local keys = {}
@@ -141,6 +151,39 @@ local function test_iterable_proxy()
     assert_equal(keyValuePairs.x, 10, "Should get correct value for key 'x'")
     assert_equal(keyValuePairs.y, 20, "Should get correct value for key 'y'")
     assert_equal(keyValuePairs.z, 30, "Should get correct value for key 'z'")
+
+    -- Test createSameFromIterableIterableProxy function
+    local source_array = { 20, 30, 40}
+    local fixed_value = "fruit"
+    local same_value_proxy = rl.createSameFromIterableIterableProxy(source_array, fixed_value)
+
+    -- Verify the structure of the created proxy
+    assert_equal(#same_value_proxy.iterable_array, 3, "iterable_array should have 3 elements")
+    assert_equal(same_value_proxy.current_index, 1, "current_index should be initialized to 1")
+
+    -- Check that all keys have the same value
+    local key1, val1 = same_value_proxy:next()
+    assert_equal(val1, fixed_value, "First value should be the fixed value")
+
+    local key2, val2 = same_value_proxy:next()
+    assert_equal(val2, fixed_value, "Second value should be the fixed value")
+
+    local key3, val3 = same_value_proxy:next()
+    assert_equal(val3, fixed_value, "Third value should be the fixed value")
+
+    -- Check that the keys match the source array
+    same_value_proxy:reset()
+    local collected_keys = {}
+    while true do
+        local k, v = same_value_proxy:next()
+        if not k then break end
+        table.insert(collected_keys, k)
+    end
+
+    table.sort(collected_keys)
+    assert_equal(collected_keys[1], 20, "First key should be '20'")
+    assert_equal(collected_keys[2], 30, "Second key should be '30'")
+    assert_equal(collected_keys[3], 40, "Third key should be '40'")
 
     -- Test removing the last element
     local single_proxy = rl.createIterableProxy({single = "value"})

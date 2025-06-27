@@ -86,6 +86,13 @@ function RL.createEmptyIterableProxy()
     return iterable_proxy:newEmpty()
 end
 
+---@param array table<integer, any>
+---@param value any
+---@return rl.iterable_proxy | nil
+function RL.createSameFromIterableIterableProxy(array, value)
+    return iterable_proxy:newSameFromIterable(array, value)
+end
+
 ---@param array table<any, any>
 ---@return rl.iterable_proxy | nil
 function iterable_proxy:new(array)
@@ -100,6 +107,32 @@ function iterable_proxy:new(array)
         iterable_array = it_array,
         key_array = array,
         current_index = 1
+    }, iterable_proxy)
+end
+
+---@param array table<integer, any>
+---@param value any
+---@return rl.iterable_proxy | nil
+function iterable_proxy:newSameFromIterable(array, value)
+    local new_array = {}
+    local it_array = {}
+    local index = 1
+    if not array or not value then
+        return nil
+    end
+    for _, key in ipairs(array) do
+        new_array[key] = value
+    end
+    for _, key in pairs(array) do
+        table.insert(it_array, key)
+    end
+    if #it_array == 0 then
+        index = -1
+    end
+    return setmetatable({
+        iterable_array = it_array,
+        key_array = new_array,
+        current_index = index
     }, iterable_proxy)
 end
 
@@ -166,10 +199,15 @@ function iterable_proxy:removeByKey(key)
             break
         end
     end
-    
+
     if #self.iterable_array == 0 then
         self.current_index = -1
     end
+end
+
+---@return table<integer, any>
+function iterable_proxy:getIterableArray()
+    return self.iterable_array
 end
 
 function iterable_proxy:clear()
