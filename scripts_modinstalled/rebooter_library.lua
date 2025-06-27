@@ -224,12 +224,6 @@ function iterable_proxy:getIterableArray()
     return self.iterable_array
 end
 
-function iterable_proxy:clear()
-    self.key_array = {}
-    self.iterable_array = {}
-    self.current_index = -1
-end
-
 ---@generic K
 ---@param index integer
 ---@return K
@@ -241,6 +235,22 @@ function iterable_proxy:getIndex(index)
     return result
 end
 
+---@generic K, V
+---@param key K
+---@return V
+function iterable_proxy:getValueByKey(key)
+    local result = self.key_array[key]
+    if not result then
+        return nil
+    end
+    return result
+end
+
+function iterable_proxy:clear()
+    self.key_array = {}
+    self.iterable_array = {}
+    self.current_index = -1
+end
 
 ---@return boolean
 function iterable_proxy:isClear()
