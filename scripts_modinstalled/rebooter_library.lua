@@ -89,6 +89,10 @@ function RL.print_log_mod(key, message)
     print(result)
 end
 
+
+---@param key string
+---@param message_level rl.log_level
+---@param message string
 function logger:print_log_level(key, message_level, message)
     if self.current_log_level >= message_level then
         local result = '[' .. key .. '] ' .. message
@@ -96,6 +100,8 @@ function logger:print_log_level(key, message_level, message)
     end
 end
 
+---@param log_level rl.log_level
+---@return rl.logger
 function RL.createLogger(log_level)
 
     local instance = {
