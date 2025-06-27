@@ -172,12 +172,12 @@ function iterable_proxy:replaceKeyArray(array)
 end
 
 ---@generic K, V
----@return K, V | nil
+---@return K, V | nil, nil
 function iterable_proxy:next()
     local result = self.key_array[self.iterable_array[self.current_index]]
     local key = self.iterable_array[self.current_index]
     if not result then
-        return nil
+        return nil, nil
     end
     self.current_index = self.current_index + 1
     return key, result
@@ -194,6 +194,9 @@ function iterable_proxy:add(key, value)
         end
     end
     table.insert(self.iterable_array, key)
+    if self.current_index == -1 then
+        self.current_index = 1
+    end
 end
 
 function iterable_proxy:reset()
@@ -232,12 +235,17 @@ end
 ---@generic K
 ---@param index integer
 ---@return K
-function iterable_proxy:getIndex(index)
+function iterable_proxy:getKeyByIndex(index)
     local result = self.iterable_array[index]
     if not result then
         return nil
     end
     return result
+end
+
+---@return integer
+function iterable_proxy:getIndex()
+    return self.current_index
 end
 
 ---@generic K, V
@@ -251,6 +259,10 @@ function iterable_proxy:getValueByKey(key)
     return result
 end
 
+function iterable_proxy:lenght()
+    return #self.iterable_array
+end
+
 function iterable_proxy:clear()
     self.key_array = {}
     self.iterable_array = {}
@@ -259,7 +271,7 @@ end
 
 ---@return boolean
 function iterable_proxy:isClear()
-    if self.current_index == -1 then
+    if self.current_index == -1 and #self.iterable_array == 0 then
         return true
     else
         return false
