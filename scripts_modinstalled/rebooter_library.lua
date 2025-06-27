@@ -67,16 +67,17 @@ function RL.count_table(table)
     return counter
 end
 
----@class rl.iterable_proxy
----@field iterable_array table<integer, any>
----@field key_array table<any, any>
+---@generic K, V
+---@class rl.iterable_proxy<K, V>
+---@field iterable_array table<integer, `K`>
+---@field key_array table<`K`, `V`>
 ---@field current_index integer
 iterable_proxy = {}
 iterable_proxy.__index = iterable_proxy
 
-
----@param array table<any, any>
----@return rl.iterable_proxy | nil
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V> | nil
 function RL.createIterableProxy(array)
     return iterable_proxy:new(array)
 end
@@ -86,15 +87,17 @@ function RL.createEmptyIterableProxy()
     return iterable_proxy:newEmpty()
 end
 
----@param array table<integer, any>
----@param value any
----@return rl.iterable_proxy | nil
+---@generic K, V
+---@param array table<integer, K>
+---@param value V
+---@return rl.iterable_proxy<K, V> | nil
 function RL.createSameFromIterableIterableProxy(array, value)
     return iterable_proxy:newSameFromIterable(array, value)
 end
 
----@param array table<any, any>
----@return rl.iterable_proxy | nil
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V> | nil
 function iterable_proxy:new(array)
     local it_array = {}
     if not array then
@@ -110,9 +113,10 @@ function iterable_proxy:new(array)
     }, iterable_proxy)
 end
 
----@param array table<integer, any>
----@param value any
----@return rl.iterable_proxy | nil
+---@generic K, V
+---@param array table<integer, K>
+---@param value V
+---@return rl.iterable_proxy<K, V> | nil
 function iterable_proxy:newSameFromIterable(array, value)
     local new_array = {}
     local it_array = {}
@@ -136,7 +140,8 @@ function iterable_proxy:newSameFromIterable(array, value)
     }, iterable_proxy)
 end
 
----@return rl.iterable_proxy
+---@generic K, V
+---@return rl.iterable_proxy<K, V>
 function iterable_proxy:newEmpty()
     return setmetatable({
         iterable_array = {},
@@ -145,8 +150,9 @@ function iterable_proxy:newEmpty()
     }, iterable_proxy)
 end
 
----@param array table<any, any>
----@return rl.iterable_proxy
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V>
 function iterable_proxy:replaceKeyArray(array)
     local new_iterable = {}
     if not array then
@@ -161,7 +167,8 @@ function iterable_proxy:replaceKeyArray(array)
     return self
 end
 
----@return any, any | nil
+---@generic K, V
+---@return K, V | nil
 function iterable_proxy:next()
     local result = self.key_array[self.iterable_array[self.current_index]]
     local key = self.iterable_array[self.current_index]
@@ -172,8 +179,9 @@ function iterable_proxy:next()
     return key, result
 end
 
----@param key any
----@param value any
+---@generic K, V
+---@param key K
+---@param value V
 function iterable_proxy:add(key, value)
     self.key_array[key] = value
     table.insert(self.iterable_array, key)
@@ -183,7 +191,8 @@ function iterable_proxy:reset()
     self.current_index = 1
 end
 
----@param key any
+---@generic K
+---@param key K
 function iterable_proxy:removeByKey(key)
     if not self.key_array[key] then
         return
@@ -205,7 +214,8 @@ function iterable_proxy:removeByKey(key)
     end
 end
 
----@return table<integer, any>
+---@generic K
+---@return table<integer, K>
 function iterable_proxy:getIterableArray()
     return self.iterable_array
 end
@@ -216,7 +226,9 @@ function iterable_proxy:clear()
     self.current_index = -1
 end
 
+---@generic K
 ---@param index integer
+---@return K
 function iterable_proxy:getIndex(index)
     local result = self.iterable_array[index]
     if not result then
