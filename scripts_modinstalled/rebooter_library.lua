@@ -70,11 +70,27 @@ end
 -- Logging Utilities --
 -----------------------
 
+---@enum rl.log_level
+RL.LOG_LEVEL_ENUM = {
+    NONE = 0,
+    INFO = 1,
+    DEBUG = 2,
+}
+
+RL.CURRENT_LOG_LEVEL = RL.LOG_LEVEL_ENUM.INFO
+
 ---@param key string
 ---@param message string
 function RL.print_log_mod(key, message)
     local result = '[' .. key .. '] ' .. message
     print(result)
+end
+
+function RL.print_log_level(key, message_level, message)
+    if RL.CURRENT_LOG_LEVEL >= message_level then
+        local result = '[' .. key .. '] ' .. message
+        print(result)
+    end
 end
 
 ---------------------
