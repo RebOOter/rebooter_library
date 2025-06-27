@@ -188,6 +188,11 @@ end
 ---@param value V
 function iterable_proxy:add(key, value)
     self.key_array[key] = value
+    for _, itr_key in ipairs(self.iterable_array) do
+        if itr_key == key then
+            return
+        end
+    end
     table.insert(self.iterable_array, key)
 end
 
