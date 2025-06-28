@@ -511,7 +511,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     --RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
-        logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG 'Item is ammo')
+        lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG 'Item is ammo')
         -----@cast item df.item_ammo
         --local ammo_settings = stockpile.settings.ammo
         --if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
@@ -663,12 +663,12 @@ function RL.isItemCouldBeStored(item, stockpile)
                 local coord = RL.stockpileHasFreeTile(stockpile)
                 return coord
             else
-                logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' with material '
+                lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' with material '
                     .. item.mat_type .. ' ' .. item.mat_index .. ' is not allowed to be collected. Skip...')
                 return nil
             end
         else
-            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' is not allowed to be collected')
+            lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' is not allowed to be collected')
             return nil
         end
     end
@@ -679,18 +679,18 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Corpses Category --
     if df.item_corpsest:is_instance(item) then
-        logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item ' .. item.id .. ' is corpse')
+        lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item ' .. item.id .. ' is corpse')
         ---@cast item df.item_corpsest
         local corpses = stockpile.settings.corpses.corpses
         if #corpses == 0 then
-            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Stockpile will not collect corpses. Skip...')
+            lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Stockpile will not collect corpses. Skip...')
             return nil
         end
         if corpses[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         else
-            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Corpse with type ' .. item.race .. ' is not allowed to be collected. Skip...')
+            lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Corpse with type ' .. item.race .. ' is not allowed to be collected. Skip...')
             return nil
         end
     end
@@ -747,7 +747,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Stone Category --
     if df.item_boulderst:is_instance(item) then
-        --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is boulder')
+        --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is boulder')
         ---@cast item df.item_boulder
         local mats = stockpile.settings.stone.mats
         if #mats == 0 then
@@ -765,7 +765,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Wood Category --
     if (df.item_woodst:is_instance(item)) then
-        --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is wood')
+        --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is wood')
         ---@cast item df.item_woodst
         local mats = stockpile.settings.wood.mats
         if #mats == 0 then
@@ -779,7 +779,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
 
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Unkown item or not implemented type of item. Stop processing...')
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Unkown item or not implemented type of item. Stop processing...')
     return nil
 end
 
@@ -790,12 +790,12 @@ end
 ---@param coord df.coord
 ---@return boolean
 function RL.isCoordUsedByOtherJobs(coord)
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Check if coord used by other jobs...')
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Check if coord used by other jobs...')
     local job_next = df.global.world.jobs.list.next
     while job_next do
         local job = job_next.item
         if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
-            --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Coord is used by other job. Skip...')
+            --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Coord is used by other job. Skip...')
             return true
         end
         job_next = job_next.next
@@ -866,7 +866,7 @@ end
 ---@param item df.item
 ---@return df.job | nil
 function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
-    logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Starting to create job...')
+    lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Starting to create job...')
     local job = df.job:new()
     local wheelbarrow_item
     dfhack.job.linkIntoWorld(job, true)
@@ -898,7 +898,7 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
             job.flags.fetching = true
         end
     end
-    logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Job is created')
+    lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Job is created')
     return job
 end
 
@@ -909,7 +909,7 @@ end
 ---@param building df.building
 ---@return df.coord[]
 function RL.collectAllTiles(building)
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collecting tiles for building '..building.id)
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collecting tiles for building '..building.id)
     local all_tiles = {}
     for y = building.y1, building.y2 do
         for x = building.x1, building.x2 do
@@ -924,7 +924,7 @@ function RL.collectAllTiles(building)
             end
         end
     end
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collected ' .. #all_tiles .. ' tiles for building ' .. building.id)
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collected ' .. #all_tiles .. ' tiles for building ' .. building.id)
     return all_tiles
 end
 
@@ -961,7 +961,7 @@ end
 ---@param stockpile df.building_stockpilest
 ---@return df.coord | nil
 function RL.stockpileHasFreeTile(stockpile)
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
     local tiles = RL.collectAllTiles(stockpile)
     for _, tile in pairs(tiles) do
         local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
@@ -977,7 +977,7 @@ end
 ---@return boolean
 ---Checks if stockpile has place for any possible material
 function RL.stockpileHasAnyAvailableSpace(stockpile)
-    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking if stockpile has any available space')
+    --lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking if stockpile has any available space')
     if #stockpile.settings.wood.mats > 0
         or #stockpile.settings.corpses.corpses > 0
         or (#stockpile.settings.furniture.type > 0
