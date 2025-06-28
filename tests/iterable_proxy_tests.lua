@@ -56,6 +56,10 @@ local function test_iterable_proxy()
     local nil_same_proxy = rl.createSameFromIterableIterableProxy(nil, "value")
     assert_nil(nil_same_proxy, "Creating same-value proxy with nil array should return nil")
 
+    -- Test creating same-value proxy with nil value
+    local nil_value_proxy = rl.createSameFromIterableIterableProxy({1, 2, 3}, nil)
+    assert_nil(nil_value_proxy, "Creating same-value proxy with nil value should return nil")
+
     -- Test creating an empty iterable proxy
     local empty_proxy = rl.createEmptyIterableProxy()
     assert_equal(#empty_proxy.key_array, 0, "Empty proxy should have empty key_array")
@@ -112,6 +116,12 @@ local function test_iterable_proxy()
     assert_equal(#proxy.iterable_array, 4, "add() should increase iterable_array size")
     assert_equal(proxy.key_array["d"], 4, "add() should set the value in key_array")
 
+    -- Test add with duplicate key
+    local initial_size = #proxy.iterable_array
+    proxy:add("d", 5)  -- Update value of existing key
+    assert_equal(#proxy.iterable_array, initial_size, "add() should not increase size when key already exists")
+    assert_equal(proxy.key_array["d"], 5, "add() should update value for existing key")
+
     -- Test isClear() method
     assert_false(proxy:isClear(), "isClear() should return false for non-empty proxy")
     assert_true(empty_proxy:isClear(), "isClear() should return true for empty proxy")
@@ -139,6 +149,13 @@ local function test_iterable_proxy()
     proxy:replaceKeyArray(replacement)
     assert_equal(#proxy.iterable_array, 3, "replaceKeyArray() should update iterable_array size")
     assert_equal(proxy.current_index, 1, "replaceKeyArray() should reset current_index to 1")
+
+    -- Test replaceKeyArray with nil
+    local original_proxy = rl.createIterableProxy({a = 1, b = 2})
+    local original_array = original_proxy.iterable_array
+    local result = original_proxy:replaceKeyArray(nil)
+    assert_equal(result, original_proxy, "replaceKeyArray with nil should return self")
+    assert_equal(original_proxy.iterable_array, original_array, "replaceKeyArray with nil should not change iterable_array")
 
     -- Test that next() returns correct key-value pairs after replacement
     local keyValuePairs = {}
@@ -191,36 +208,70 @@ local function test_iterable_proxy()
     assert_equal(#single_proxy.iterable_array, 0, "Removing last element should result in empty array")
     assert_equal(single_proxy.current_index, -1, "Removing last element should set current_index to -1")
 
-    -- Test getIndex method
+    -- Test getKeyByIndex method
     local indexed_test_table = {a = 1, b = 2, c = 3}
     local indexed_proxy = rl.createIterableProxy(indexed_test_table)
 
     -- Get all keys from the iterable_array
-    local key1 = indexed_proxy:getIndex(1)
-    local key2 = indexed_proxy:getIndex(2)
-    local key3 = indexed_proxy:getIndex(3)
+    local key1 = indexed_proxy:getKeyByIndex(1)
+    local key2 = indexed_proxy:getKeyByIndex(2)
+    local key3 = indexed_proxy:getKeyByIndex(3)
 
     -- Sort the keys to ensure consistent testing
     local sorted_keys = {key1, key2, key3}
     table.sort(sorted_keys)
 
     -- Verify we got the expected keys
-    assert_equal(sorted_keys[1], "a", "getIndex(1-3) should return 'a' after sorting")
-    assert_equal(sorted_keys[2], "b", "getIndex(1-3) should return 'b' after sorting")
-    assert_equal(sorted_keys[3], "c", "getIndex(1-3) should return 'c' after sorting")
+    assert_equal(sorted_keys[1], "a", "getKeyByIndex(1-3) should return 'a' after sorting")
+    assert_equal(sorted_keys[2], "b", "getKeyByIndex(1-3) should return 'b' after sorting")
+    assert_equal(sorted_keys[3], "c", "getKeyByIndex(1-3) should return 'c' after sorting")
 
-    -- Test getIndex with out-of-bounds index
-    local out_of_bounds = indexed_proxy:getIndex(4)
-    assert_nil(out_of_bounds, "getIndex with out-of-bounds index should return nil")
+    -- Test getKeyByIndex with out-of-bounds index
+    local out_of_bounds = indexed_proxy:getKeyByIndex(4)
+    assert_nil(out_of_bounds, "getKeyByIndex with out-of-bounds index should return nil")
 
-    -- Test getIndex with negative index
-    local negative_index = indexed_proxy:getIndex(-1)
-    assert_nil(negative_index, "getIndex with negative index should return nil")
+    -- Test getKeyByIndex with negative index
+    local negative_index = indexed_proxy:getKeyByIndex(-1)
+    assert_nil(negative_index, "getKeyByIndex with negative index should return nil")
 
-    -- Test getIndex with empty proxy
+    -- Test getKeyByIndex with empty proxy
     local empty_index_proxy = rl.createEmptyIterableProxy()
-    local empty_result = empty_index_proxy:getIndex(1)
-    assert_nil(empty_result, "getIndex on empty proxy should return nil")
+    local empty_result = empty_index_proxy:getKeyByIndex(1)
+    assert_nil(empty_result, "getKeyByIndex on empty proxy should return nil")
+
+    -- Test getIndex method
+    local index_proxy = rl.createIterableProxy({a = 1, b = 2, c = 3})
+    assert_equal(index_proxy:getIndex(), 1, "getIndex should return current_index value")
+    index_proxy:next()
+    assert_equal(index_proxy:getIndex(), 2, "getIndex should return updated current_index value")
+    index_proxy:clear()
+    assert_equal(index_proxy:getIndex(), -1, "getIndex should return -1 for empty proxy")
+
+    -- Test getValueByKey method
+    local value_proxy = rl.createIterableProxy({a = 1, b = 2, c = 3})
+    assert_equal(value_proxy:getValueByKey("a"), 1, "getValueByKey should return correct value")
+    assert_equal(value_proxy:getValueByKey("b"), 2, "getValueByKey should return correct value")
+    assert_equal(value_proxy:getValueByKey("c"), 3, "getValueByKey should return correct value")
+    assert_nil(value_proxy:getValueByKey("d"), "getValueByKey should return nil for non-existent key")
+
+    -- Test correctly spelled length method
+    local correct_length_proxy = rl.createIterableProxy({a = 1, b = 2, c = 3})
+    assert_equal(correct_length_proxy:length(), 3, "length should return the number of elements")
+    correct_length_proxy:add("d", 4)
+    assert_equal(correct_length_proxy:length(), 4, "length should update after adding elements")
+    correct_length_proxy:removeByKey("a")
+    assert_equal(correct_length_proxy:length(), 3, "length should update after removing elements")
+    correct_length_proxy:clear()
+    assert_equal(correct_length_proxy:length(), 0, "length should be 0 after clearing")
+
+    -- Test getIterableArray method
+    local array_proxy = rl.createIterableProxy({a = 1, b = 2, c = 3})
+    local iterable_array = array_proxy:getIterableArray()
+    assert_equal(#iterable_array, 3, "getIterableArray should return array with all keys")
+    table.sort(iterable_array)
+    assert_equal(iterable_array[1], "a", "getIterableArray should contain all keys")
+    assert_equal(iterable_array[2], "b", "getIterableArray should contain all keys")
+    assert_equal(iterable_array[3], "c", "getIterableArray should contain all keys")
 
     print("\n=== All iterable_proxy tests passed! ===\n")
 end
