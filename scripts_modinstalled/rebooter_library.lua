@@ -3,6 +3,7 @@
 GLOBAL_KEY = 'rebooter_library'
 
 ---@class RebooterLibrary
+---@field logger table
 RL = {}
 
 -------------------
@@ -66,6 +67,229 @@ function RL.count_table(table)
     return counter
 end
 
+---@generic K, V
+---@class rl.iterable_proxy<K, V>
+---@field iterable_array table<integer, `K`>
+---@field key_array table<`K`, `V`>
+---@field current_index integer
+iterable_proxy = {}
+iterable_proxy.__index = iterable_proxy
+
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V> | nil
+function RL.createIterableProxy(array)
+    return iterable_proxy:new(array)
+end
+
+---@return rl.iterable_proxy
+function RL.createEmptyIterableProxy()
+    return iterable_proxy:newEmpty()
+end
+
+---@generic K, V
+---@param array table<integer, K>
+---@param value V
+---@return rl.iterable_proxy<K, V> | nil
+function RL.createSameFromIterableIterableProxy(array, value)
+    return iterable_proxy:newSameFromIterable(array, value)
+end
+
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V> | nil
+function iterable_proxy:new(array)
+    local it_array = {}
+    if not array then
+        return nil
+    end
+    for key, _ in pairs(array) do
+        table.insert(it_array, key)
+    end
+    ---@generic K, V
+    ---@type rl.iterable_proxy<K, V>
+    return setmetatable({
+        iterable_array = it_array,
+        key_array = array,
+        current_index = 1
+    }, iterable_proxy)
+end
+
+---@generic K, V
+---@param array table<integer, K>
+---@param value V
+---@return rl.iterable_proxy<K, V> | nil
+function iterable_proxy:newSameFromIterable(array, value)
+    local new_array = {}
+    local it_array = {}
+    local index = 1
+    if not array or not value then
+        return nil
+    end
+    for _, key in ipairs(array) do
+        new_array[key] = value
+    end
+    for _, key in pairs(array) do
+        table.insert(it_array, key)
+    end
+    if #it_array == 0 then
+        index = -1
+    end
+    ---@generic K, V
+    ---@type rl.iterable_proxy<K, V>
+    return setmetatable({
+        iterable_array = it_array,
+        key_array = new_array,
+        current_index = index
+    }, iterable_proxy)
+end
+
+---@generic K, V
+---@return rl.iterable_proxy<K, V>
+function iterable_proxy:newEmpty()
+    return setmetatable({
+        iterable_array = {},
+        key_array = {},
+        current_index = -1
+    }, iterable_proxy)
+end
+
+---@generic K, V
+---@param array table<K, V>
+---@return rl.iterable_proxy<K, V>
+function iterable_proxy:replaceKeyArray(array)
+    local new_iterable = {}
+    if not array then
+        return self
+    end
+    for key, _ in pairs(array) do
+        table.insert(new_iterable, key)
+    end
+    self.iterable_array = new_iterable
+    self.key_array = array
+    self.current_index = 1
+    return self
+end
+
+---@generic K, V
+---@return K, V | nil, nil
+function iterable_proxy:next()
+    local result = self.key_array[self.iterable_array[self.current_index]]
+    local key = self.iterable_array[self.current_index]
+    if not result then
+        return nil, nil
+    end
+    self.current_index = self.current_index + 1
+    return key, result
+end
+
+---@generic K, V
+---@param key K
+---@param value V
+function iterable_proxy:add(key, value)
+    self.key_array[key] = value
+    for _, itr_key in ipairs(self.iterable_array) do
+        if itr_key == key then
+            return
+        end
+    end
+    table.insert(self.iterable_array, key)
+    if self.current_index == -1 then
+        self.current_index = 1
+    end
+end
+
+function iterable_proxy:reset()
+    self.current_index = 1
+end
+
+---@generic K
+---@param key K
+function iterable_proxy:removeByKey(key)
+    if not self.key_array[key] then
+        return
+    end
+    self.key_array[key] = nil
+
+    for i, k in ipairs(self.iterable_array) do
+        if k == key then
+            table.remove(self.iterable_array, i)
+            if i < self.current_index then
+                self.current_index = self.current_index - 1
+            end
+            break
+        end
+    end
+
+    if #self.iterable_array == 0 then
+        self.current_index = -1
+    end
+end
+
+---@generic K
+---@return table<integer, K>
+function iterable_proxy:getIterableArray()
+    return self.iterable_array
+end
+
+---@generic K
+---@param index integer
+---@return K
+function iterable_proxy:getKeyByIndex(index)
+    local result = self.iterable_array[index]
+    if not result then
+        return nil
+    end
+    return result
+end
+
+---@return integer
+function iterable_proxy:getIndex()
+    return self.current_index
+end
+
+---@generic K, V
+---@param key K
+---@return V
+function iterable_proxy:getValueByKey(key)
+    local result = self.key_array[key]
+    if not result then
+        return nil
+    end
+    return result
+end
+
+---@return integer
+function iterable_proxy:length()
+    return #self.iterable_array
+end
+
+function iterable_proxy:clear()
+    self.key_array = {}
+    self.iterable_array = {}
+    self.current_index = -1
+end
+
+---@return boolean
+function iterable_proxy:isClear()
+    if self.current_index == -1 and #self.iterable_array == 0 then
+        return true
+    else
+        return false
+    end
+end
+
+---@param tbl table
+---@return table
+-- Creatte a iterable sequence of element base on input array's keys
+-- to make it possible to iterate them without any pain
+function RL.make_iterable_table(tbl)
+    local result = {}
+    for key, _ in pairs(tbl) do
+        table.insert(result, key)
+    end
+    return result
+end
 -----------------------
 -- Logging Utilities --
 -----------------------
@@ -76,8 +300,10 @@ RL.LOG_LEVEL_ENUM = {
     INFO = 1,
     DEBUG = 2,
 }
-
-RL.CURRENT_LOG_LEVEL = RL.LOG_LEVEL_ENUM.INFO
+---@class rl.logger
+---@field current_log_level rl.log_level
+logger = {}
+logger.__index = logger
 
 ---@param key string
 ---@param message string
@@ -86,12 +312,29 @@ function RL.print_log_mod(key, message)
     print(result)
 end
 
-function RL.print_log_level(key, message_level, message)
-    if RL.CURRENT_LOG_LEVEL >= message_level then
+
+---@param key string
+---@param message_level rl.log_level
+---@param message string
+function logger:print_log_level(key, message_level, message)
+    if self.current_log_level >= message_level then
         local result = '[' .. key .. '] ' .. message
         print(result)
     end
 end
+
+---@param log_level rl.log_level
+---@return rl.logger
+function RL.createLogger(log_level)
+    local instance = {
+        current_log_level = log_level
+    }
+
+    setmetatable(instance, logger)
+    return instance
+end
+
+lib_logger = RL.createLogger(RL.LOG_LEVEL_ENUM.INFO)
 
 ---------------------
 -- Item processing --
@@ -268,7 +511,7 @@ function RL.isItemCouldBeStored(item, stockpile)
     --RL.print_log_mod(GLOBAL_KEY, 'Started to check item if it could be stored...')
     -- Ammo category --
     if df.item_ammost:is_instance(item) then
-        RL.print_log_mod(GLOBAL_KEY, 'Item is ammo')
+        logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG 'Item is ammo')
         -----@cast item df.item_ammo
         --local ammo_settings = stockpile.settings.ammo
         --if checkComplexItem(item, ammo_settings.type, ammo_settings.other_mats, ammo_settings.mats) then
@@ -420,12 +663,12 @@ function RL.isItemCouldBeStored(item, stockpile)
                 local coord = RL.stockpileHasFreeTile(stockpile)
                 return coord
             else
-                RL.print_log_mod(GLOBAL_KEY, item_type_name .. ' with material '
+                logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' with material '
                     .. item.mat_type .. ' ' .. item.mat_index .. ' is not allowed to be collected. Skip...')
                 return nil
             end
         else
-            RL.print_log_mod(GLOBAL_KEY, item_type_name .. ' is not allowed to be collected')
+            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, item_type_name .. ' is not allowed to be collected')
             return nil
         end
     end
@@ -436,18 +679,18 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Corpses Category --
     if df.item_corpsest:is_instance(item) then
-        RL.print_log_mod(GLOBAL_KEY, 'Item ' .. item.id .. ' is corpse')
+        logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item ' .. item.id .. ' is corpse')
         ---@cast item df.item_corpsest
         local corpses = stockpile.settings.corpses.corpses
         if #corpses == 0 then
-            RL.print_log_mod(GLOBAL_KEY, 'Stockpile will not collect corpses. Skip...')
+            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Stockpile will not collect corpses. Skip...')
             return nil
         end
         if corpses[item.race] == 1 then
             local coord = RL.stockpileHasFreeTile(stockpile)
             return coord and coord or nil
         else
-            RL.print_log_mod(GLOBAL_KEY, 'Corpse with type ' .. item.race .. ' is not allowed to be collected. Skip...')
+            logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Corpse with type ' .. item.race .. ' is not allowed to be collected. Skip...')
             return nil
         end
     end
@@ -504,7 +747,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Stone Category --
     if df.item_boulderst:is_instance(item) then
-        --RL.print_log_mod(GLOBAL_KEY, 'Item is boulder')
+        --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is boulder')
         ---@cast item df.item_boulder
         local mats = stockpile.settings.stone.mats
         if #mats == 0 then
@@ -522,7 +765,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 
     -- Wood Category --
     if (df.item_woodst:is_instance(item)) then
-        --RL.print_log_mod(GLOBAL_KEY, 'Item is wood')
+        --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Item is wood')
         ---@cast item df.item_woodst
         local mats = stockpile.settings.wood.mats
         if #mats == 0 then
@@ -536,7 +779,7 @@ function RL.isItemCouldBeStored(item, stockpile)
         end
     end
 
-    --RL.print_log_mod(GLOBAL_KEY, 'Unkown item or not implemented type of item. Stop processing...')
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Unkown item or not implemented type of item. Stop processing...')
     return nil
 end
 
@@ -547,12 +790,12 @@ end
 ---@param coord df.coord
 ---@return boolean
 function RL.isCoordUsedByOtherJobs(coord)
-    --RL.print_log_mod(GLOBAL_KEY, 'Check if coord used by other jobs...')
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Check if coord used by other jobs...')
     local job_next = df.global.world.jobs.list.next
     while job_next do
         local job = job_next.item
         if job.pos.x == coord.x and job.pos.y == coord.y and job.pos.z == coord.z then
-            --RL.print_log_mod(GLOBAL_KEY, 'Coord is used by other job. Skip...')
+            --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Coord is used by other job. Skip...')
             return true
         end
         job_next = job_next.next
@@ -569,6 +812,8 @@ function RL.unitIsAvailable(unit)
     elseif #unit.individual_drills > 0 then
         return false
     elseif unit.flags1.caged or unit.flags1.chained then
+        return false
+    elseif unit.counters.soldier_mood ~= -1 then
         return false
     elseif unit.military.squad_id ~= -1 then
         local squad = df.squad.find(unit.military.squad_id)
@@ -621,7 +866,7 @@ end
 ---@param item df.item
 ---@return df.job | nil
 function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
-    RL.print_log_mod(GLOBAL_KEY, 'Starting to create job...')
+    logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Starting to create job...')
     local job = df.job:new()
     local wheelbarrow_item
     dfhack.job.linkIntoWorld(job, true)
@@ -653,7 +898,7 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
             job.flags.fetching = true
         end
     end
-    RL.print_log_mod(GLOBAL_KEY, 'Job is created')
+    logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Job is created')
     return job
 end
 
@@ -664,7 +909,7 @@ end
 ---@param building df.building
 ---@return df.coord[]
 function RL.collectAllTiles(building)
-    --RL.print_log_mod(GLOBAL_KEY, 'Collecting tiles for building '..building.id)
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collecting tiles for building '..building.id)
     local all_tiles = {}
     for y = building.y1, building.y2 do
         for x = building.x1, building.x2 do
@@ -679,7 +924,7 @@ function RL.collectAllTiles(building)
             end
         end
     end
-    --RL.print_log_mod(GLOBAL_KEY, 'Collected ' .. #all_tiles .. ' tiles for building ' .. building.id)
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Collected ' .. #all_tiles .. ' tiles for building ' .. building.id)
     return all_tiles
 end
 
@@ -716,7 +961,7 @@ end
 ---@param stockpile df.building_stockpilest
 ---@return df.coord | nil
 function RL.stockpileHasFreeTile(stockpile)
-    --RL.print_log_mod(GLOBAL_KEY, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking stockpile ' .. stockpile.id .. ' for free tiles')
     local tiles = RL.collectAllTiles(stockpile)
     for _, tile in pairs(tiles) do
         local _, flags = dfhack.maps.getTileFlags(tile.x, tile.y, tile.z)
@@ -732,7 +977,7 @@ end
 ---@return boolean
 ---Checks if stockpile has place for any possible material
 function RL.stockpileHasAnyAvailableSpace(stockpile)
-    --RL.print_log_mod(GLOBAL_KEY, 'Checking if stockpile has any available space')
+    --logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Checking if stockpile has any available space')
     if #stockpile.settings.wood.mats > 0
         or #stockpile.settings.corpses.corpses > 0
         or (#stockpile.settings.furniture.type > 0

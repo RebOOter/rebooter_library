@@ -11,6 +11,10 @@ function gui.getSelectedStockpile(silent) end
 ---@return df.item
 function gui.getSelectedItem(silent) end
 
+---@param silent boolean | nil
+---@return df.unit
+function gui.getSelectedUnit(silent) end
+
 ---@param skip_dismissed boolean
 ---@param viewscreen string | nil
 ---@return df.viewscreen

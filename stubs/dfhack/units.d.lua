@@ -7,6 +7,10 @@ units = {}
 function units.isDead(unit) end
 
 ---@param unit df.unit
+---@return boolean
+function units.isSane(unit) end
+
+---@param unit df.unit
 ---@return string
 function units.getReadableName(unit) end
 
