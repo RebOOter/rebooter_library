@@ -23,3 +23,7 @@ function units.getCitizens(includeVisitors, includeChildren) end
 ---@param pos df.coord
 ---@param goalType df.unit_path_goal
 function units.setPathGoal(unit, pos, goalType) end
+
+---@param role_name string
+---@return df.unit
+function units.getUnitByNobleRole(role_name) end
