@@ -24,3 +24,6 @@ function gui.getDFViewscreen(skip_dismissed, viewscreen) end
 ---@param viewscreen df.viewscreen
 ---@return boolean
 function gui.matchFocusString(focus_string, viewscreen) end
+
+---@param text string
+function gui.showAnnouncement(text) end
