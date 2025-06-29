@@ -1,0 +1,14 @@
+---@class df.mandate
+---@field unit df.unit
+---@field mode df.mandate_type
+---@field item_type df.item_type
+---@field item_subtype integer
+---@field mat_type integer
+---@field mat_index integer
+---@field amount_total integer
+---@field amount_remaining integer
+---@field timeout_counter integer # counts once per 10 frames
+---@field timeout_limit integer # once counter passes limit, mandate ends
+---@field punishment df.punishmentst
+---@field punish_multiple boolean # mega_punish, likely dates back to 23a Mining mandates
+---@field flags df.mandate_flag
