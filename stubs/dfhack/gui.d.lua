@@ -20,6 +20,8 @@ function gui.getSelectedUnit(silent) end
 ---@return df.viewscreen
 function gui.getDFViewscreen(skip_dismissed, viewscreen) end
 
+function gui.getCurViewscreen() end
+
 ---@param focus_string string
 ---@param viewscreen df.viewscreen?
 ---@return boolean
