@@ -1,0 +1,15 @@
+---@class df.job_material_category
+---@field plant boolean # plant
+---@field wood boolean # wood log
+---@field cloth boolean # cloth
+---@field silk boolean # silk
+---@field leather boolean # leather
+---@field bone boolean # bone
+---@field shell boolean # shell
+---@field wood2 boolean # wood material
+---@field soap boolean # soap
+---@field tooth boolean # tooth
+---@field horn boolean # horn
+---@field pearl boolean # pearl
+---@field yarn boolean # yarn
+---@field strand boolean # strand
