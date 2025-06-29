@@ -928,10 +928,61 @@ end
 
 ---@param order_template df.manager_order_template
 ---@return integer
-function countAvailableItems(order_template)
-    if order_template.mat_type > -1 and order_template.mat_index > -1 then
-        local bars = df.global.world.items.other
+function RL.countAvailableItemsForOrderTemplate(order_template)
+    local counter = 0
+    local bars = df.global.world.items.other.BAR
+    local boulders = df.global.world.items.other.BOULDER
+    local woods = df.global.world.items.other.WOOD
+    local corpse_pieces = df.global.world.items.other.CORPSEPIECE
+    local leather = df.global.world.items.other.SKIN_TANNED
+
+    if order_template.mat_index > -1 and order_template.mat_type > -1 then
+        for _, bar in pairs(bars) do
+            if bar.mat_type == order_template.mat_type
+                and bar.mat_index == order_template.mat_index
+                and not bar.flags.construction then
+                counter = counter + 1
+            end
+        end
     end
+    if order_template.mat_type == 0 and order_template.mat_index == -1 then
+        for _, boulder in pairs(boulders) do
+            if not boulder.flags.construction
+                and not boulder.flags.forbid
+                and dfhack.maps.getWalkableGroup(boulder.pos) > 0 then
+                counter = counter + 1
+            end
+        end
+    end
+    if order_template.material_category.wood then
+        for _, wood in pairs(woods) do
+            if not wood.flags.construction
+                and not wood.flags.in_building
+                and not wood.flags.in_inventory
+                and not wood.flags.in_job then
+                counter = counter + 1
+            end
+        end
+    end
+    if order_template.material_category.bone then
+        for _, piece in pairs(corpse_pieces) do
+            if rl.isBone(piece) then
+                counter = counter + 1
+            end
+        end
+    end
+    if order_template.material_category.leather then
+        counter = #leather
+    end
+    if order_template.material_category.shell then
+        for _, piece in pairs(corpse_pieces) do
+            if rl.isShell(piece) then
+                counter = counter + 1
+            end
+        end
+    end
+    
+    return counter
 end
 
 -------------------------
