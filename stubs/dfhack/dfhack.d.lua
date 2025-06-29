@@ -11,6 +11,7 @@
 ---@field world dfhack.world
 ---@field persistent dfhack.persistent
 ---@field internal dfhack.internal
+---@field screen dfhack.screen
 dfhack = {}
 
 ---@method dfhack.printerr
