@@ -323,6 +323,30 @@ function logger:print_log_level(key, message_level, message)
     end
 end
 
+---@param key string
+---@param message_level rl.log_level
+---@param message string 
+---@param object table
+function logger:printall_lo_level(key, message_level, message, object)
+    if self.current_log_level >= message_level then
+        local result = '[' .. key .. '] ' .. message
+        print(result)
+        printall(object)
+    end
+end
+
+---@oaram key string
+---@param message_level rl.log_level
+---@param message string
+---@param object table
+function logger:printall_recurse_log_level(key, message_level, message, object)
+    if self.current_log_level >= message_level then
+        local result = '[' .. key .. '] ' .. message
+        print(result)
+        printall_recurse(object)
+    end
+end
+
 ---@param log_level rl.log_level
 ---@return rl.logger
 function RL.createLogger(log_level)

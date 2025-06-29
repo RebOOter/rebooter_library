@@ -30,3 +30,9 @@ function dfhack.timeout(time, type, func) end
 function dfhack.timeout_active(id, new_callback) end
 
 _G.dfhack = dfhack
+
+---@param object table
+function printall(object) end
+
+---@param object table
+function printall_recurse(object) end
