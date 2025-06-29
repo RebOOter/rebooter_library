@@ -327,7 +327,7 @@ end
 ---@param message_level rl.log_level
 ---@param message string 
 ---@param object table
-function logger:printall_lo_level(key, message_level, message, object)
+function logger:printall_log_level(key, message_level, message, object)
     if self.current_log_level >= message_level then
         local result = '[' .. key .. '] ' .. message
         print(result)
