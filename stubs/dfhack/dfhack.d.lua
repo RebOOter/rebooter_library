@@ -10,6 +10,7 @@
 ---@field onStateChange function[]
 ---@field world dfhack.world
 ---@field persistent dfhack.persistent
+---@field internal dfhack.internal
 dfhack = {}
 
 ---@method dfhack.printerr

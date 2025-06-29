@@ -15,13 +15,13 @@ function gui.getSelectedItem(silent) end
 ---@return df.unit
 function gui.getSelectedUnit(silent) end
 
----@param skip_dismissed boolean
+---@param skip_dismissed boolean?
 ---@param viewscreen string | nil
 ---@return df.viewscreen
 function gui.getDFViewscreen(skip_dismissed, viewscreen) end
 
 ---@param focus_string string
----@param viewscreen df.viewscreen
+---@param viewscreen df.viewscreen?
 ---@return boolean
 function gui.matchFocusString(focus_string, viewscreen) end
 

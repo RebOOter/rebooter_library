@@ -1,4 +1,4 @@
----@class df.manager_order
+---@class df.manager_order: df.base_class
 ---@field id integer
 ---@field job_type df.job_type
 ---@field item_type df.item_type
