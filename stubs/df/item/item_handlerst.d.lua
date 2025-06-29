@@ -1,0 +1,5 @@
+---@class df.item_handlerst
+---@field all df.base_vector<df.item>
+---@field other df.items_other
+---@field temp_save df.base_vector<df.item> # has-bad-pointers=true
+---@field temp_save_compat df.base_vector<integer>

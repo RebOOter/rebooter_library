@@ -808,7 +808,7 @@ function RL.isItemCouldBeStored(item, stockpile)
 end
 
 ---------------------
--- Jobs processing --
+-- Job processing --
 ---------------------
 
 ---@param coord df.coord
@@ -924,6 +924,14 @@ function RL.createJobAndAssignUnit(job_type, job_pos, building, burrow, item)
     end
     lib_logger:print_log_level(GLOBAL_KEY, RL.LOG_LEVEL_ENUM.DEBUG, 'Job is created')
     return job
+end
+
+---@param order_template df.manager_order_template
+---@return integer
+function countAvailableItems(order_template)
+    if order_template.mat_type > -1 and order_template.mat_index > -1 then
+        local bars = df.global.world.items.other
+    end
 end
 
 -------------------------
