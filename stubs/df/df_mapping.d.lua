@@ -10,6 +10,7 @@
 ---@field job df.job
 ---@field announcement_alert_type df.announcement_alert_type
 ---@field manager_order df.manager_order
+---@field manager_order_template df.manager_order_template
 ---@field job_role_type df.job_role_type
 ---@field job_type df.job_type
 ---@field material df.material
@@ -188,6 +189,8 @@
 ---@field global df.global
 ---@field main_interface df.main_interface
 ---@field burrow df.burrow
+---@field create_work_order_interfacest df.create_work_order_interfacest
+---@field graphic df.graphic
 df = {}
 
 _G.df = df

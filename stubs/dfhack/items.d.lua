@@ -14,7 +14,7 @@ function items.getContainedItems(item) end
 ---@return string
 function items.getReadableDescription(item) end
 
----@param type integer
+---@param type df.item_type
 ---@param sub_type integer
 -- Need to add return
 function items.getSubtypeDef(type, sub_type) end

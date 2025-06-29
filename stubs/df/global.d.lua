@@ -2,3 +2,4 @@
 ---@field world df.world
 ---@field plotinfo df.plotinfo
 ---@field game df.gamest
+---@field gps df.graphic

@@ -1,0 +1,92 @@
+---@class df.graphic
+---@field viewport df.base_vector<df.graphic_viewportst>
+---@field main_viewport df.graphic_viewportst
+---@field lower_viewport df.graphic_viewportst[8]
+---@field map_port df.base_vector<df.graphic_map_portst>
+---@field main_map_port df.graphic_map_portst
+---@field viewport_zoom_factor integer
+---@field screenx integer
+---@field screeny integer
+---@field screenf df.curses_color
+---@field screenb df.curses_color
+---@field screenbright boolean
+---@field use_old_16_colors boolean # use F:B:BR instead of straight RGB
+---@field screen_color_r integer
+---@field screen_color_g integer
+---@field screen_color_b integer
+---@field screen_color_br integer
+---@field screen_color_bg integer
+---@field screen_color_bb integer
+---@field ccolor number[16][3] # The curses-RGB mapping used for non-curses display modes
+---@field uccolor integer[16][3] # The curses-RGB mapping used for non-curses display modes
+---@field color integer[18][3]
+---@field mouse_x integer # tile offset
+---@field mouse_y integer # tile offset
+---@field precise_mouse_x integer # pixel offset
+---@field precise_mouse_y integer # pixel offset
+---@field screen_pixel_x integer
+---@field screen_pixel_y integer
+---@field tile_pixel_x integer
+---@field tile_pixel_y integer
+---@field screen integer[] # uint8_t array
+---@field screen_limit integer # pointer to last element of screen
+---@field screentexpos integer[] # long array
+---@field screentexpos_lower integer[] # long array
+---@field screentexpos_anchored integer[] # long array
+---@field screentexpos_anchored_x integer[] # long array
+---@field screentexpos_anchored_y integer[] # long array
+---@field screentexpos_flag integer[] # uint32_t array
+---@field top_in_use boolean # we assume top is not in use unless a flag is set, and reprint the screen when it goes away, to avoid cell by cell checks
+---@field screen_top integer[] # uint8_t array
+---@field screen_top_limit integer
+---@field screentexpos_top_lower integer[] # long array
+---@field screentexpos_top_anchored integer[] # long array
+---@field screentexpos_top integer[] # long array
+---@field screentexpos_top_anchored_x integer[] # long array
+---@field screentexpos_top_anchored_y integer[] # long array
+---@field screentexpos_top_flag integer[] # uint32_t array
+---@field display_title boolean
+---@field display_background integer
+---@field last_display_background integer
+---@field screentexpos_refresh_buffer integer[] # int32_t array
+---@field refresh_buffer_val integer
+---@field main_thread_requesting_reshape boolean # set to true by main thread, set to false by graphics thread
+---@field main_thread_requesting_reshape_activate_map_port boolean # set to true by main thread, set to false by graphics thread
+---@field clipx integer[2] # long array
+---@field clipy integer[2] # long array
+---@field tex df.cached_texturest[11]
+---@field texblits df.base_vector<df.texblitst>
+---@field rect_id integer # long
+---@field print_time df.large_integer[100]
+---@field print_index integer # long
+---@field display_frames integer
+---@field frame_display_sx integer
+---@field frame_display_dy integer
+---@field force_full_display_count integer
+---@field do_clean_tile_cache integer # true by main, false by graphics
+---@field do_post_init_texture_clear integer # true by main, false by graphics
+---@field original_rect integer
+---@field dimx integer
+---@field dimy integer
+---@field black_background_texpos integer[1] # long array
+---@field texture_indices1 integer[120]
+---@field texpos_custom_symbol df.base_vector<integer>
+---@field texture_indices2 integer[11015]
+---@field graphical_interface df.interface_setst
+---@field classic_interface df.interface_setst
+---@field texture_indices3 integer[13787]
+---@field texpos_boulder df.base_vector<integer>
+---@field texture_indices4 integer[4460]
+---@field texpos_item_barrel_top df.base_vector<integer>[7]
+---@field texture_indices5 integer[128]
+---@field texpos_item_bin_top df.base_vector<integer>[21]
+---@field texture_indices6 integer[436]
+---@field texpos_item_statue_artifact df.base_vector<integer>
+---@field texture_indices7 integer[7977]
+---@field texpos_site_map df.base_vector<integer>[81]
+---@field texture_indices8 integer[101]
+---@field texpos_site_map_hillock df.base_vector<integer>[4]
+---@field texture_indices9 integer[276]
+---@field texpos_map_drawn df.base_vector<integer>[73]
+---@field texture_indices10 integer[6845]
+df.graphic = {}

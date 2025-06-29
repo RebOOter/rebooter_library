@@ -1,0 +1,12 @@
+---@class df.create_work_order_interfacest
+---@field open boolean
+---@field forced_bld_id integer
+---@field jminfo_master df.base_vector<df.manager_order_template>
+---@field building df.base_vector<df.cwo_buildingst>
+---@field scroll_position_building integer
+---@field scrolling_building boolean
+---@field selected_building_index integer
+---@field scroll_position_job integer
+---@field scrolling_job boolean
+---@field job_filter string
+---@field entering_job_filter boolean

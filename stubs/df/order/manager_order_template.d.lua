@@ -1,0 +1,15 @@
+---@class df.manager_order_template
+---@field job_type df.job_type
+---@field reaction_name string
+---@field item_type df.item_type
+---@field item_subtype integer # refers-to='(item-subtype-target $$._parent.item_type $)'
+---@field mat_type integer # ref-target='material'
+---@field mat_index integer
+---@field specflag df.job_spec_flags
+---@field specdata df.job_spec_data
+---@field material_category df.job_material_category
+---@field match_value integer
+---@field name string
+---@field compare_str string
+---@field on boolean
+df.manager_order_template = {}
