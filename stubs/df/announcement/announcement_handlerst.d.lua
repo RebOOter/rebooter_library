@@ -1,22 +1,22 @@
 ---@class df.announcement_handlerst
----@field reports df.base_vector<integer, df.report> # global
----@field announcements df.base_vector<integer, df.report> # display
----@field popups df.base_vector<integer, df.popup_message>
+---@field reports df.base_vector<df.report> # global
+---@field announcements df.base_vector<df.report> # display
+---@field popups df.base_vector<df.popup_message>
 ---@field mega_text df.markup_text_boxst
 ---@field mega_portrait_hfid integer
 ---@field next_report_id integer
 ---@field flags df.report_flag
 ---@field current_numeric_unid integer[9]
----@field mission_reports df.base_vector<integer, df.mission_report>
----@field spoils_reports df.base_vector<integer, df.spoils_report>
----@field interrogation_reports df.base_vector<integer, df.interrogation_report>
----@field announcement_alert df.base_vector<integer, df.announcement_alertst>
----@field alert_button_announcement_id df.base_vector<integer, integer> # entries are report ids
+---@field mission_reports df.base_vector<df.mission_report>
+---@field spoils_reports df.base_vector<df.spoils_report>
+---@field interrogation_reports df.base_vector<df.interrogation_report>
+---@field announcement_alert df.base_vector<df.announcement_alertst>
+---@field alert_button_announcement_id df.base_vector<integer> # entries are report ids
 ---@field display_timer integer # bay12: announcetime
 ---@field slots df.combat_event_listst
 ---@field temp_flag df.announcement_temp_flag
 ---@field adv_scroll_position integer
 ---@field adv_scrolling boolean
 ---@field adv_highest_scroll_position integer
----@field adv_announcement df.base_vector<integer, df.adv_announcementst>
+---@field adv_announcement df.base_vector<df.adv_announcementst>
 ---@field announcement_mutex any # bay12: mtx

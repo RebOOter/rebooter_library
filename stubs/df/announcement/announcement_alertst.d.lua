@@ -1,5 +1,5 @@
 ---@class df.announcement_alertst
 ---@field type df.announcement_alert_type
----@field announcement_id df.base_vector<integer, integer> # ref-target='report'
----@field report_unid df.base_vector<integer, integer> # ref-target='unit'
----@field report_unit_announcement_category df.base_vector<integer, df.unit_report_type> # vector must be same length as report_unid
+---@field announcement_id df.base_vector<integer> # ref-target='report'
+---@field report_unid df.base_vector<integer> # ref-target='unit'
+---@field report_unit_announcement_category df.base_vector<df.unit_report_type> # vector must be same length as report_unid
