@@ -966,7 +966,7 @@ function RL.countAvailableItemsForOrderTemplate(order_template)
     end
     if order_template.material_category.bone then
         for _, piece in pairs(corpse_pieces) do
-            if rl.isBone(piece) then
+            if RL.isBone(piece) then
                 counter = counter + 1
             end
         end
@@ -976,12 +976,12 @@ function RL.countAvailableItemsForOrderTemplate(order_template)
     end
     if order_template.material_category.shell then
         for _, piece in pairs(corpse_pieces) do
-            if rl.isShell(piece) then
+            if RL.isShell(piece) then
                 counter = counter + 1
             end
         end
     end
-    
+
     return counter
 end
 
