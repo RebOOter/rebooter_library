@@ -1,0 +1,23 @@
+---@class df.manager_order
+---@field id integer
+---@field job_type df.job_type
+---@field item_type df.item_type
+---@field item_subtype integer
+---@field reaction_name string
+---@field mat_type integer
+---@field mat_index integer
+---@field specflag df.job_spec_flags
+---@field specdata df.job_spec_data
+---@field material_category df.job_material_category
+---@field art_spec df.job_art_specifier
+---@field amount_left integer
+---@field amount_total integer
+---@field status df.manager_order_status
+---@field frequency df.workquota_frequency_type
+---@field finished_year integer
+---@field finished_year_tick integer
+---@field workshop_id integer
+---@field max_workshops integer
+---@field item_conditions df.manager_order_condition_item[]
+---@field order_conditions df.manager_order_condition_order[]
+---@field items df.job_reqst

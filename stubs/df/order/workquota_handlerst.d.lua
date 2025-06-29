@@ -1,0 +1,3 @@
+---@class df.workquota_handlerst
+---@field all df.base_vector<integer, df.manager_order>  -- Vector of all manager orders
+---@field manager_order_next_id integer  -- Next ID to assign to new manager orders
