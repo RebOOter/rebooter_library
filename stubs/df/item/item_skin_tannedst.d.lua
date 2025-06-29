@@ -1,0 +1,4 @@
+---@class df.item_skin_tannedst: df.item_actual
+---@field mat_type integer @ ref-target='material' aux-value='$$.mat_index'
+---@field mat_index integer
+---@field rot_timer integer @ even though leather does not rot

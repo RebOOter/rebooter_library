@@ -11,3 +11,7 @@ function maps.canWalkBetween(pos1, pos2) end
 ---@param pos df.coord
 ---@return table, table
 function maps.getTileFlags(pos) end
+
+---@param pos df.coord
+---@return number
+function maps.getWalkableGroup(pos) end

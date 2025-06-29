@@ -1,3 +1,3 @@
----@class df.item_boulder: df.item_actual
----@field mat_type integer @ reference to material
+---@class df.item_boulderst: df.item_actual
+---@field mat_type integer @ ref-target='material' aux-value='$$.mat_index'
 ---@field mat_index integer
