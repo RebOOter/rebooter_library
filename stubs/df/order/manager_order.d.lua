@@ -18,6 +18,6 @@
 ---@field finished_year_tick integer
 ---@field workshop_id integer
 ---@field max_workshops integer
----@field item_conditions df.manager_order_condition_item[]
----@field order_conditions df.manager_order_condition_order[]
+---@field item_conditions df.base_vector<df.manager_order_condition_item>
+---@field order_conditions df.base_vector<df.manager_order_condition_order>
 ---@field items df.job_reqst
