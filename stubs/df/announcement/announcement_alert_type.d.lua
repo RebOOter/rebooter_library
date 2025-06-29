@@ -1,5 +1,5 @@
 ---@enum df.announcement_alert_type
-announcement_alert_type = {
+df.announcement_alert_type = {
   NONE = -1,
   GENERAL = 0,
   ERA_CHANGE = 1,
