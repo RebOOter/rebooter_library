@@ -16,3 +16,8 @@
 ---@field activity_id integer # ref-target='activity_entry'
 ---@field activity_event_id integer # ref-target='activity_event'
 ---@field speaker_id integer # ref-target='unit', unit speaking the conversation
+report = {}
+
+---@param id integer
+---@return df.report|nil
+function report.find(id) end
