@@ -9,6 +9,7 @@
 ---@field incident df.incident
 ---@field job df.job
 ---@field announcement_alert_type df.announcement_alert_type
+---@field report df.report
 ---@field manager_order df.manager_order
 ---@field manager_order_template df.manager_order_template
 ---@field job_role_type df.job_role_type

@@ -29,3 +29,6 @@ function gui.matchFocusString(focus_string, viewscreen) end
 
 ---@param text string
 function gui.showAnnouncement(text) end
+
+---@param pos df.coord
+function gui.pauseRecenter(pos) end
