@@ -1,0 +1,4 @@
+---@class df.unit_report_type
+---@field Combat table<integer, integer>
+---@field Sparring table<integer, integer>
+---@field Hunting table<integer, integer>

@@ -1,0 +1,4 @@
+---@class df.unit_reports
+---@field log df.unit_report_type @ indexed by unit_report_type - arrays of report IDs
+---@field last_year integer[3] @ indexed by unit_report_type - may contain garbage when corresponding log vector is empty
+---@field last_year_tick integer[3] @ indexed by unit_report_type - may contain garbage when corresponding log vector is empty

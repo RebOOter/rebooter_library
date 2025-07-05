@@ -38,7 +38,7 @@
 ---@field activities integer[]
 ---@field ignored_activities integer[]
 ---@field animal unit_animal
----@field opponent unit_opponent
+---@field opponent df.unit_opponent
 ---@field mood integer
 ---@field moodstage integer
 ---@field pregnancy_timer integer

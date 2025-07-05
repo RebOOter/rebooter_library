@@ -1,0 +1,4 @@
+---@class df.unit_opponent
+---@field unit_id integer @ ref-target='unit' - ID of the opponent unit being tracked
+---@field unit_pos df.coord @ coordinates of the opponent
+---@field timer integer @ timer value, possibly for how long to track/flee from the opponent
