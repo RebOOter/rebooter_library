@@ -81,7 +81,7 @@
 ---@field status2 unit_status2
 ---@field syndrome_advancement unit_syndrome_advancement
 ---@field syndromes unit_syndromes
----@field reports unit_reports
+---@field reports df.unit_reports
 ---@field health unit_health_info
 ---@field used_items unit_item_use[]
 ---@field enemy unit_enemy
