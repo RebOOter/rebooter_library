@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-return
 ---@class dfhack
 ---@field maps dfhack.maps
 ---@field job dfhack.job
@@ -28,6 +29,9 @@ function dfhack.timeout(time, type, func) end
 ---@param new_callback function | nil
 ---@return function?
 function dfhack.timeout_active(id, new_callback) end
+
+---@return string
+function dfhack.script_help() end
 
 _G.dfhack = dfhack
 
