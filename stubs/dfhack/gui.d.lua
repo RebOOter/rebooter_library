@@ -32,3 +32,6 @@ function gui.showAnnouncement(text) end
 
 ---@param pos df.coord
 function gui.pauseRecenter(pos) end
+
+---@param str string
+function gui.writeToGamelog(str) end
