@@ -33,6 +33,15 @@ function dfhack.timeout_active(id, new_callback) end
 ---@return string
 function dfhack.script_help() end
 
+---@param command string
+---@param ... string
+---@overload fun(command: string[])
+---@overload fun(command: table)
+function dfhack.run_command(command, ...) end
+
+---@return integer
+function dfhack.getTickCount() end
+
 _G.dfhack = dfhack
 
 ---@param object table
